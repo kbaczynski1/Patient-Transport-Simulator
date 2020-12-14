@@ -1,0 +1,133 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{polski}
+\usepackage{latexsym}
+\usepackage{enumitem}
+
+\title{\huge AiSD - laboratorium \\ \Large Projekt zespołowy - specyfikacja funckjonalna}
+\author{Kacper Baczyński, Michał Kiełczykowski, Marek Knosala, Edward Sucharda}
+
+\begin{document}
+
+\maketitle
+
+\section{Wtęp}
+
+W tym dokumencie opisany został sposób korzytsania z programu, który jest celem projektu zespołowego na labolatorium przedmiotu Algorytmy i Struktury Danych prowadzonego przez Pawła Zawadzkiego w roku akademickim 2020/2021 na Wydziale Elektrycznym Politechniki Warszawskiej. Program służy do symulacji działania zespołu karetek przewożących pacjentów do szpitali. Każdy szpital ma swoją liczbę łóżek i informację ile z nich jest jeszcze wolnych. Więc nie zawsze szpital może przyjąć nowego pacjenta.
+
+Szpitale mają swoje współrzędne kartezjańskie i leżą na terenie pewnego państwa. Granice tego państwa wyznacza największy wypukły wielokąt o wierchałkach opartch na szpitalach lub obiektu. Jedyna funkcjonalność obiektu to ewentualne poszerzenie granic państwa. Wybrane pary szpitali są połączone drogami, które leżą na prostej łączące współrzędne początkowego i końcowego szpitala. Gdy dwie przecinają się to jest tam skrzyżowanie. Tak więc droga z jednego szpitala do drugiego może byż bezpośrednia (prosta droga z jednego punktu na mapie do drugiego) lub pośrednia, czyli taka która zawiera zmianę drogi przy przejeździe przez skrzyżowanie lub przy przejeździe przez jakiś szpital.
+
+Gdy tylko pojawia się jakiś pacjent na terenie państwa natychmiast znajduje sie przy nim karetka i wyrusza do najbliższego szpitala w linii prostej obierając kierunek prosto na szpital, gdyż chwilowo nie musi się poruszać po drogach. Jeżeli szpital, do którego dotarła nie ma wolnych łóżek to karetka musi podróżować do kolejnego szpitala po drogach. Zawsze gdy szpital jest pełny karetka wybiera ten szpital do którego droga bezpośrednia lub pośrednia jest najkrótsza aż znajdzie szpital, który może przyjąć pacjenta. Karetka nie sprawdza dwa razy tego samego szpitala. Gdy karetka odwiedza ostatni szpital i również ten nie ma wolnych łóżek to wtedy ustawia się w kolejce do tego szpitala czekając aż się zwolni łóżko.
+
+Poniżej znajduje się krótka specyfikacja funckjonalna, w ktorej podane zostały paramtery wejściowe, sposób uruchomienia, wygląd i działanie interfejsu graficznego oraz opis możliwych nieprawdłowych użyć i odpowiadające im komunikaty.
+
+\section{Obowiązkowy plik wejściowy}
+
+Obowiązkowym plikiem wejściowym jest plik w formacie .txt, który składa się z trzech sekcji: szpitale, obiekty oraz drogi. Sekcje są w kolejności jak podano. Każda sekcja rozpoczyna się nagłówkiem, czyli jedną linijką tekstu składającą się ze znaku "\#" oraz nazwy sekcji. W dalszej części sekcji są wiersze z danymi dotyczące danej sekcji.
+
+Każda z sekcji ma swój unikalny porządek danych. W przypadku szpitali każdy wiersz składa się z:
+\begin{itemize}
+\item id szpitala, które musi być unikalną, nieujemną liczbą całkowitą
+\item nazwy szpitala, która jest dowolnym ciągiem znaków za wyjątkiem znaku "$\mid$"
+\item współrzędenj w osi \textit{x}, która oznacza położenie w tej osi danego szpitala, która musi być całkowita
+\item współrzędenj w osi \textit{y}, która oznacza położenie w tej osi danego szpitala, która musi być całkowita
+\item liczby łóżek w szpitalu, która musi być liczbą dodatnią całkowitą
+\item liczby wolnych łóżek w szpitalu, która musi być liczbą nieujemną całkowitą
+\end{itemize}
+W przypadku obiektów każdy wiersz składa się z:
+\begin{itemize}
+\item id obiketu, które musi być unikalną, nieujemną liczbą całkowitą
+\item nazwy obiektu, która jest dowolnym ciągiem znaków za wyjątkiem znaku "$\mid$"
+\item współrzędenj w osi \textit{x}, która oznacza położenie w tej osi danego szpitala, która musi być całkowita
+\item współrzędenj w osi \textit{y}, która oznacza położenie w tej osi danego szpitala, która musi być całkowita
+\end{itemize}
+W przypadku połączeń dróg każdy wiersz składa się z:
+\begin{itemize}
+\item id drogi, które musi być unikalną, nieujemną liczbą całkowitą
+\item id szpitala, które musi istenieć w sekcji szpitali
+\item id szpitala, który musi istenieć w sekcji szpitali
+\item odległości między szpitalami z poprzednich dwóch punktów, która musi być liczbą całkowitą, dodatnią
+\end{itemize}
+
+Każdy obiekt w linijce jest oddzielony od kolejnego dowolną liczbą spacji przed i po dokładnie jednym znaku "$\mid$". Po ostanim obiekcie jak i przed pierwszym nie ma znaku "$\mid$", ale może być dowolnie dużo spacji. W pliku niedozwolone są puste linie. Każda sekcja musi zawierać dane z przynajmniej jednym wierszem.
+
+Przykładowy plik wejściowy umieszczono poniżej:
+\begin{description}[style=multiline,leftmargin=3cm]
+\item \# Szpitale
+\item 1 $\mid$ Szpital Wojewódzki nr 997 $\mid$ 10 $\mid$ 10 $\mid$ 1000 $\mid$ 100
+\item 2 $\mid$ Krakowski Szpital Kliniczny $\mid$ 100 $\mid$ 120 $\mid$ 999 $\mid$ 99
+\item 3 $\mid$ Pierwszy Szpital im. Prezesa RP $\mid$ 120 $\mid$ 130 $\mid$ 99 $\mid$ 0
+\item 4 $\mid$ Drugi Szpital im. Naczelnika RP $\mid$ 10 $\mid$ 140 $\mid$ 70 $\mid$ 1
+\item 5 $\mid$ Trzeci Szpital im. Króla RP $\mid$ 140 $\mid$ 10 $\mid$ 996 $\mid$ 0
+\item \# Obiekty 
+\item 1 $\mid$ Pomnik Wikipedii $\mid$ -1 $\mid$ 50
+\item 2 $\mid$ Pomnik Fryderyka Chopina $\mid$ 110 $\mid$ 55
+\item 3 $\mid$ Pomnik Anonimowego Przechodnia $\mid$ 40 $\mid$ 70
+\item \# Drogi
+\item 1 $\mid$ 1 $\mid$ 2 $\mid$ 700
+\item 2 $\mid$ 1 $\mid$ 4 $\mid$ 550
+\item 3 $\mid$ 1 $\mid$ 5 $\mid$ 800
+\item 4 $\mid$ 2 $\mid$ 3 $\mid$ 300
+\item 5 $\mid$ 2 $\mid$ 4 $\mid$ 550
+\item 6 $\mid$ 3 $\mid$ 5 $\mid$ 600
+\item 7 $\mid$ 4 $\mid$ 5 $\mid$ 750
+\end{description}
+
+\section{Opcjonalny plik wejściowy}
+
+Oprócz obowiązkowego pliku wejściowego można też podać drugi plik opcjonalny. To czy podaje się go jako wejście programu zależy od tego czy chce się wprowawdzić do programu pacjentów z pliku tekstowego czy za pomocą interfejsu graficznego. Ten plik wejściowy musi być w formacie .txt i składać się z jedego nagłówka i jednej sekcji. Nagłówek ma strukturę jak w pliku obowiązokowym. Sekcja natomiast na składa się z uporzątkowanych wierszy według następującej kolejności:
+\begin{itemize}
+\item id pacjenta, które musi być unikalną, nieujemną liczbą całkowitą
+\item współrzędenj w osi \textit{x}, która oznacza położenie w tej osi danego pacjenta, która musi być całkowita
+\item współrzędenj w osi \textit{y}, która oznacza położenie w tej osi danego pacjenta, która musi być całkowita
+\end{itemize}
+Przykładowy plik wygląda następująco:
+\begin{description}[style=multiline,leftmargin=3cm]
+\item \# Pacjenci
+\item 1 $\mid$ 20 $\mid$ 20
+\item 2 $\mid$ 99 $\mid$ 105
+\item 3 $\mid$ 23 $\mid$ 40
+\end{description}
+
+\section{Uruchomienie programu}
+
+Program można uruchomić z terminala. Aby to zrobić trzeba zainstalować na komputerze oprogramowanie języka Java najlepiej w aktualnej wersji. Gdy ten wymóg jest już spełniony należy w lokalizacji pliku ProjektZespolowy.jar otworzyć temrminal i wpisać komendę: \\
+\\
+\textsl{java -jar ProjektZespolowy.jar  \textless lokalizacja obowiązkowego pliku wejściowego\textgreater"\textless nazwa obowiązkowego pliku wejściowego\textgreater"}\\
+\\jeśli nie chcemy podawać pacjentów z pliku tylko z interfejsu graficznego. W przeciwnym wypadku należy wpisać komendę: \\ \\
+\textsl{java -jar ProjektZespolowy.jar  \textless lokalizacja obowiązkowego pliku wejściowego\textgreater"\textless nazwa obowiązkowego pliku wejściowego\textgreater"  \textless lokalizacja opcjonalnego pliku wejściowego\textgreater"\textless nazwa opcjonalnego pliku wejściowego\textgreater"}\\ \\
+Dzięki użyciu cudzysłowia jak we wzorze program się uruchomi nawet, gdy w nazwie pliku wejściowego znajdują się spacje lub znaki specjalne. Poniżej pokazano dwie komendy. Pierszą bez pliku opcjonalnego a drugą z plikiem opcjonalnym: \\ \\
+\textbf{java -jar ProjektZespolowy.jar /home/"SzpitaleObiektyDrogi.txt"} \\ \\ \textbf{java -jar ProjektZespolowy.jar /home/"SzpitaleObiektyDrogi.txt" \\ /home/"Pacjenci.txt"}
+
+\section{Interfejs Graficzny - działanie programu}
+
+
+\section{Wynik błędnego działania programu}
+Gdy plik wejściowy jest niezgodny z opisem z rozdziału 2. lub zostanie podana błędna ścieżka do tego pliku lub on nie istnieje, to program nie wykona swojego zadania a w terminalu pojawi się błąd. Rodzaj komunikatu będzie zależał od tego co zostało źle zrobione. Poniżej wypunktowano możliwe błędy i ich komunikaty:
+\begin{itemize}
+\item brak parametru w komendzie uruchamiającej program w postaci ścieżki do pliku wejściowego:\\ \textbf{Error: not given input file name}
+\item brak pilku wejściowego lub niepoprawna ścieżka dostępu do niego:\\ 			\textbf{Error: input file not found}
+\item błędny znak w pliku tekstowym: \\ \textbf{Error in line \textless numer linii\textgreater: incorrect char in input file}
+\item brak nagłówka rozpoczynającego się znakiem \# :\\ \textbf{Error in line \textless numer linii\textgreater: no section header}
+\item brak danych (jakiejkolwiek linii) w którejś sekcji: \\ \textbf{Error in line \textless numer linii\textgreater: no data in this section}
+\item brak jednej z pozycji w danych: \\ \textbf{Error in line \textless numer linii\textgreater: missing data}
+\item znak "$\mid$" po ostatniej spodziewanej pozycji danych: \\ \textbf{Error in line \textless numer linii\textgreater: to many $\mid$ chars}
+\item niezgodny typ danych: \\ \textbf{Error in line \textless numer linii\textgreater: unexpected type of data}
+\item liczba jest ujemna gdy wymagana jest nieujemna: \\ \textbf{Error in line \textless numer linii\textgreater: the given value should not be negative}
+\item liczba jest niedodatnia, gdy wymagana jest dodatnia: \\ \textbf{Error in line \textless numer linii\textgreater: the given value should be positive}
+\item id nie jest unikalne: \\ \textbf{Error in line \textless numer linii\textgreater : the id is not unique }
+\item w połączeniach jest użyte id, które nie istnieje: \\ \textbf{Error in line \textless numer linii\textgreater: the id does not fit any object}
+\item w połączeniach użyto dwukrotnie (lub więcej) tej samej kombinacji id apteki i producenta: \\ \textbf{Error in line \textless numer linii\textgreater : connection between this pharmacy and manufacturer has been already set}
+\item koszt jednej szczepionki jest podany z trzema lub więcej cyframi po przecinku: \\ \textbf{Error in line \textless numer linii\textgreater: the cost of one vaccine is incorrect}
+\item liczba połączeń nie równa się iloczynowi liczby aptek i producentów: \\ \textbf{Error: missing connections between pharmacy and manufacturer}
+\end{itemize}
+
+\section{Źródła}
+Wykorzystane przykłady pliku wejściowych są wersją plików stworzonych przez Pawła Zawadzkiego z Wydziału Elektrycznego Politechniki Warszawskiej w 2020 roku.
+
+\end{document}{article}
+
+
