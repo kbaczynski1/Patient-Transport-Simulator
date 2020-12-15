@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.11.5)  14 DEC 2020 13:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.11.5)  15 DEC 2020 19:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -161,6 +161,30 @@ Package: enumitem 2019/06/20 v3.9 Customized lists
 \enit@count@id=\count187
 \enitdp@description=\count188
 )
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks23
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen145
+\Gin@req@width=\dimen146
+)
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count189
@@ -169,69 +193,92 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 (./SF.aux)
 \openout1 = `SF.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+ (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count190
+\scratchdimen=\dimen147
+\scratchbox=\box49
+\nofMPsegments=\count191
+\nofMParguments=\count192
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count193
+\MPscratchDim=\dimen148
+\MPnumerator=\count194
+\makeMPintoPDFobject=\count195
+\everyMPtoPDFconversion=\toks25
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 LaTeX Font Info:    Trying to load font information for OML+plm on input line 1
-5.
- (/usr/share/texlive/texmf-dist/tex/latex/polski/omlplm.fd
+6.
+
+(/usr/share/texlive/texmf-dist/tex/latex/polski/omlplm.fd
 File: omlplm.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
 LaTeX Font Info:    Trying to load font information for OMS+plsy on input line 
-15.
+16.
 
 (/usr/share/texlive/texmf-dist/tex/latex/polski/omsplsy.fd
 File: omsplsy.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
 LaTeX Font Info:    Trying to load font information for OMX+plex on input line 
-15.
+16.
 
 (/usr/share/texlive/texmf-dist/tex/latex/polski/omxplex.fd
 File: omxplex.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <12> on input line 15.
+(Font)              <12> on input line 16.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <8> on input line 15.
+(Font)              <8> on input line 16.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <6> on input line 15.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 15.
+(Font)              <6> on input line 16.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 16.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 15.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 16.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 15
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 16
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Overfull \hbox (60.85706pt too wide) in paragraph at lines 15--15
+Overfull \hbox (60.85706pt too wide) in paragraph at lines 16--16
  [][] 
  []
 
 
-Overfull \hbox (0.11177pt too wide) in paragraph at lines 19--20
+Overfull \hbox (0.11177pt too wide) in paragraph at lines 20--21
 \OT4/cmr/m/n/10 Da-nych pro-wa-dzo-ne-go przez Paw-ªa Za-wadz-kie-go w ro-ku ak
 a-de-mic-kim 2020/2021
  []
@@ -240,91 +287,70 @@ a-de-mic-kim 2020/2021
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <10> on input line 34.
+(Font)              <10> on input line 35.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <7> on input line 34.
+(Font)              <7> on input line 35.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <5> on input line 34.
- [2] [3]
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 9
-9.
+(Font)              <5> on input line 35.
+ [2]
+Underfull \hbox (badness 10000) in paragraph at lines 98--101
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
+ []
+
+[3]
+<./images/startowy_widok.png, id=19, 894.34125pt x 563.10374pt>
+File: ./images/startowy_widok.png Graphic file (type png)
+<use ./images/startowy_widok.png>
+Package pdftex.def Info: ./images/startowy_widok.png  used on input line 107.
+(pdftex.def)             Requested size: 345.0pt x 217.22093pt.
+<./images/widok_z_mapa.png, id=21, 1150.2975pt x 563.10374pt>
+File: ./images/widok_z_mapa.png Graphic file (type png)
+<use ./images/widok_z_mapa.png>
+Package pdftex.def Info: ./images/widok_z_mapa.png  used on input line 115.
+(pdftex.def)             Requested size: 345.0pt x 168.88087pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[4 <./images/startowy_widok.png>] [5 <./images/widok_z_mapa.png>]
+<./images/widok_symulacji.png, id=31, 1162.3425pt x 581.17125pt>
+File: ./images/widok_symulacji.png Graphic file (type png)
+<use ./images/widok_symulacji.png>
+Package pdftex.def Info: ./images/widok_symulacji.png  used on input line 133.
+(pdftex.def)             Requested size: 345.0pt x 172.49931pt.
+ [6 <./images/widok_symulacji.png>]
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 1
+45.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `OML/cmr/m/sl' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 99.
-
-Underfull \hbox (badness 10000) in paragraph at lines 97--104
-
- []
-
-
-Overfull \hbox (33.38963pt too wide) in paragraph at lines 97--104
-\OT4/cmr/m/sl/10 java -jar Pro-jekt-Ze-spo-lo-wy.jar \OML/cmm/m/it/10 <\OT4/cmr
-/m/sl/10 lo-ka-li-za-cja obo-wi¡z-ko-we-go pli-ku wej-±cio-we-go\OML/cmm/m/it/1
-0 >\OT4/cmr/m/sl/10 "\OML/cmm/m/it/10 <\OT4/cmr/m/sl/10 nazwa
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 97--104
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 97--104
-
- []
-
-
-Overfull \hbox (33.38963pt too wide) in paragraph at lines 97--104
-\OT4/cmr/m/sl/10 java -jar Pro-jekt-Ze-spo-lo-wy.jar \OML/cmm/m/it/10 <\OT4/cmr
-/m/sl/10 lo-ka-li-za-cja obo-wi¡z-ko-we-go pli-ku wej-±cio-we-go\OML/cmm/m/it/1
-0 >\OT4/cmr/m/sl/10 "\OML/cmm/m/it/10 <\OT4/cmr/m/sl/10 nazwa
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 97--104
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 97--104
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 97--104
-
- []
-
 LaTeX Font Info:    Font shape `OML/cmr/bx/n' in size <10> not available
-(Font)              Font shape `OML/cmm/b/it' tried instead on input line 113.
-[4] [5] (./SF.aux) ) 
+(Font)              Font shape `OML/cmm/b/it' tried instead on input line 145.
+
+[7] [8] (./SF.aux) ) 
 Here is how much of TeX's memory you used:
- 2171 strings out of 483107
- 29013 string characters out of 5964401
- 258834 words of memory out of 5000000
- 17179 multiletter control sequences out of 15000+600000
+ 2953 strings out of 483107
+ 39937 string characters out of 5964401
+ 271187 words of memory out of 5000000
+ 17923 multiletter control sequences out of 15000+600000
  546867 words of font info for 70 fonts, out of 8000000 for 9000
  56 hyphenation exceptions out of 8191
- 30i,6n,27p,777b,240s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 30i,6n,27p,1251b,238s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plrm.enc}
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plit.enc}{/usr/share/texlive/
 texmf-dist/fonts/enc/dvips/pl/plms.enc} </home/edsuch21/.texlive2019/texmf-var/
 fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/pl/plbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plbx12.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/pl/plr12.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/pl/plr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/pl/plsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plsy10.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plti10.pfb>
-Output written on SF.pdf (5 pages, 88273 bytes).
+/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/pl/plbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plb
+x12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/pl/plr12.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/pl/plr17.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/pl/plsl10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/pl
+sy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plti10.pfb>
+Output written on SF.pdf (8 pages, 181077 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
- 49 compressed objects within 1 object stream
+ 82 PDF objects out of 1000 (max. 8388607)
+ 55 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
