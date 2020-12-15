@@ -15,11 +15,11 @@
 
 \maketitle
 
-\section{Wtęp}
+\section{Wstęp}
 
 W tym dokumencie opisany został sposób korzytsania z programu, który jest celem projektu zespołowego na labolatorium przedmiotu Algorytmy i Struktury Danych prowadzonego przez Pawła Zawadzkiego w roku akademickim 2020/2021 na Wydziale Elektrycznym Politechniki Warszawskiej. Program służy do symulacji działania zespołu karetek przewożących pacjentów do szpitali. Każdy szpital ma swoją liczbę łóżek i informację ile z nich jest jeszcze wolnych. Więc nie zawsze szpital może przyjąć nowego pacjenta.
 
-Szpitale mają swoje współrzędne kartezjańskie i leżą na terenie pewnego państwa. Granice tego państwa wyznacza największy wypukły wielokąt o wierchałkach opartch na szpitalach lub obiektu. Jedyna funkcjonalność obiektu to ewentualne poszerzenie granic państwa. Wybrane pary szpitali są połączone drogami, które leżą na prostej łączące współrzędne początkowego i końcowego szpitala. Gdy dwie przecinają się to jest tam skrzyżowanie. Tak więc droga z jednego szpitala do drugiego może byż bezpośrednia (prosta droga z jednego punktu na mapie do drugiego) lub pośrednia, czyli taka która zawiera zmianę drogi przy przejeździe przez skrzyżowanie lub przy przejeździe przez jakiś szpital.
+Szpitale mają swoje współrzędne kartezjańskie i leżą na terenie pewnego państwa. Granice tego państwa wyznacza największy wypukły wielokąt o wierzchołkach opartych na szpitalach lub obiektach. Jedyna funkcjonalność obiektu to ewentualne poszerzenie granic państwa. Wybrane pary szpitali są połączone drogami, które leżą na prostej łączące współrzędne początkowego i końcowego szpitala. Gdy dwie przecinają się to jest tam skrzyżowanie. Tak więc droga z jednego szpitala do drugiego może być bezpośrednia (prosta droga z jednego punktu na mapie do drugiego) lub pośrednia, czyli taka która zawiera zmianę drogi przy przejeździe przez skrzyżowanie lub przy przejeździe przez jakiś szpital.
 
 Gdy tylko pojawia się jakiś pacjent na terenie państwa natychmiast znajduje sie przy nim karetka i wyrusza do najbliższego szpitala w linii prostej obierając kierunek prosto na szpital, gdyż chwilowo nie musi się poruszać po drogach. Jeżeli szpital, do którego dotarła nie ma wolnych łóżek to karetka musi podróżować do kolejnego szpitala po drogach. Zawsze gdy szpital jest pełny karetka wybiera ten szpital do którego droga bezpośrednia lub pośrednia jest najkrótsza aż znajdzie szpital, który może przyjąć pacjenta. Karetka nie sprawdza dwa razy tego samego szpitala. Gdy karetka odwiedza ostatni szpital i również ten nie ma wolnych łóżek to wtedy ustawia się w kolejce do tego szpitala czekając aż się zwolni łóżko.
 
@@ -31,7 +31,7 @@ Plikiem wejściowym z mapą jest plik w formacie .txt, który składa się z trz
 
 Każda z sekcji ma swój unikalny porządek danych. W przypadku szpitali każdy wiersz składa się z:
 \begin{itemize}
-\item id szpitala, które musi być unikalną, nieujemną liczbą całkowitą
+\item identyfikatora szpitala, które musi być unikalną, nieujemną liczbą całkowitą
 \item nazwy szpitala, która jest dowolnym ciągiem znaków za wyjątkiem znaku "$\mid$"
 \item współrzędenj w osi \textit{x}, która oznacza położenie w tej osi danego szpitala, która musi być całkowita
 \item współrzędenj w osi \textit{y}, która oznacza położenie w tej osi danego szpitala, która musi być całkowita
@@ -40,16 +40,16 @@ Każda z sekcji ma swój unikalny porządek danych. W przypadku szpitali każdy 
 \end{itemize}
 W przypadku obiektów każdy wiersz składa się z:
 \begin{itemize}
-\item id obiketu, które musi być unikalną, nieujemną liczbą całkowitą
+\item identyfikatora obiketu, które musi być unikalną, nieujemną liczbą całkowitą
 \item nazwy obiektu, która jest dowolnym ciągiem znaków za wyjątkiem znaku "$\mid$"
 \item współrzędenj w osi \textit{x}, która oznacza położenie w tej osi danego obiektu, która musi być całkowita
 \item współrzędenj w osi \textit{y}, która oznacza położenie w tej osi danego obiektu, która musi być całkowita
 \end{itemize}
 W przypadku połączeń dróg każdy wiersz składa się z:
 \begin{itemize}
-\item id drogi, które musi być unikalną, nieujemną liczbą całkowitą
-\item id szpitala, które musi istenieć w sekcji szpitali
-\item id szpitala, który musi istenieć w sekcji szpitali
+\item identyfikatora drogi, które musi być unikalną, nieujemną liczbą całkowitą
+\item identyfikatora szpitala, który musi być poprzednio zdefiniowany
+\item identyfikatora szpitala, który musi być poprzednio zdefiniowany
 \item odległości między szpitalami z poprzednich dwóch punktów, która musi być liczbą całkowitą, dodatnią
 \end{itemize}
 
@@ -81,7 +81,7 @@ Przykładowy plik wejściowy z mapą umieszczono poniżej:
 
 Plik wejściowy z pacjentami musi być w formacie .txt i składać się z jedego nagłówka i jednej sekcji. Nagłówek ma strukturę jak w pliku obowiązokowym. Sekcja natomiast na składa się z uporzątkowanych wierszy według następującej kolejności:
 \begin{itemize}
-\item id pacjenta, które musi być unikalną, nieujemną liczbą całkowitą
+\item identyfikator pacjenta, które musi być unikalną, nieujemną liczbą całkowitą
 \item współrzędenj w osi \textit{x}, która oznacza położenie w tej osi danego pacjenta, która musi być całkowita
 \item współrzędenj w osi \textit{y}, która oznacza położenie w tej osi danego pacjenta, która musi być całkowita
 \end{itemize}
@@ -95,7 +95,7 @@ Przykładowy plik wygląda następująco:
 
 \section{Uruchomienie programu}
 
-Program można uruchomić z terminala. Aby to zrobić trzeba zainstalować na komputerze oprogramowanie języka Java najlepiej w aktualnej wersji. Gdy ten wymóg jest już spełniony należy w lokalizacji pliku ProjektZespolowy.jar otworzyć temrminal i wpisać komendę: \\
+Program można uruchomić z terminala. Aby to zrobić trzeba zainstalować na komputerze środowisko uruchomieniowe JRE języka Java. Gdy ten wymóg jest już spełniony należy w lokalizacji pliku ProjektZespolowy.jar otworzyć temrminal i wpisać komendę: \\
 \\
 \textsl{java -jar ProjektZespolowy.jar}
 
@@ -109,7 +109,7 @@ Po porawnym uruchomieniu programu pokazuje się okno intersejsku graficznego. Wy
   \label{fig:GUIstart}
 \end{figure}
 
-W prawym dolnym rogu znajduje się okno komunikatów. W górnej części znajduje sie przycisk "wybierz plik do wgrania mapy", kótry należy wciskąć aby wybrać z komputera plik wejściowy z mapą. Dodatkowo widoczne są 4 krótkie odcinki. Dwa pionowe będą oznaczyły skrajne wartości punktów zaznaczonych na mapie w osi x a obok nich pojawią się odpowiadające im wartości. Analogicznie odcinki poziome oznaczają skrajne wartości punktów zaznaczonych na mapie w osi y a obok nich odpowiadające im wartości. Po wgraniu poprawnego pliku pojawia się mapa państwa i dodatkowe przuciski jak na Rysnuku 2.
+W prawym dolnym rogu znajduje się okno komunikatów. W górnej części znajduje sie przycisk "wybierz plik do wgrania mapy", który należy wciskąć aby wybrać z komputera plik wejściowy z mapą. Dodatkowo widoczne są 4 krótkie odcinki. Dwa pionowe będą oznaczyły skrajne wartości punktów zaznaczonych na mapie w osi x a obok nich pojawią się odpowiadające im wartości. Analogicznie odcinki poziome oznaczają skrajne wartości punktów zaznaczonych na mapie w osi y a obok nich odpowiadające im wartości. Po wgraniu poprawnego pliku pojawia się mapa państwa i dodatkowe przuciski jak na Rysnuku 2.
 
 \begin{figure}[h]
   \includegraphics[width=\linewidth]{./images/widok_z_mapa.png}
@@ -121,13 +121,13 @@ Terytorium państwa ma niebieskie tło. Obikety oznaczono kształtem trójkąta 
 
 Po prawej stronie od mapy na samej górze znajduje się tabela, która zawiera rekordy szpitali: ich id, nazwę, liczbę łóżek, liczbę wolnych łóżek i kolejkę pacjentów oczekujących na przyjęcie do danego szpitala. Kolejka składa się z ciągu id pacjentów w kolejce oddzielonych przecinkami. Jeżeli dany szpital nie ma wolnych łóżek wiersz jest w kolorze czerwonym. W przeciwnym przypadku jest koloru zielonego.
 
-Poniżej tabeli z informacjami o szpitalach znajdują się 3 sekcje operacji na pacjentach. Pierwszy z obiekt z lewej to przycisk o nazwie "Wybierz plik do wgrania pacjentów", który służy do wgrywania pliku wejściowego z pacjentami. Druga sekcja składa się z trzech pól do wpisywania liczb oraz przycisku dodaj pacjenta.Aby dodać pacjenta użytkownik musi podać jego współrzędne x, y oraz jego id, a następnie wcisnąć przycisk "dodaj pacjenta". Trzecia sekcja służy do usuwania pacjentów, których jednak nie będziemy chcieli poddawać symulacji. Dla wybranego pacjenta należy wpisać jego id w pole do wpisywania liczb oraz wcisnąć przycisk "usuń pacjenta". Lista id pacjentów, którzy będą podani symulacji po jej uruchomieniu znajduje się nad oknem komunikatów. Kojene id są oddzielane przecinkami a kolejność jest zgodna z kolejnością wprowadzania koljenych pacjentów.
+Poniżej tabeli z informacjami o szpitalach znajdują się 3 sekcje operacji na pacjentach. Pierwszy obiekt z lewej to przycisk o nazwie "Wybierz plik do wgrania pacjentów", który służy do wgrywania pliku wejściowego z pacjentami. Druga sekcja składa się z trzech pól do wpisywania liczb oraz przycisku dodaj pacjenta. Aby dodać pacjenta użytkownik musi podać jego współrzędne x, y oraz jego id, a następnie wcisnąć przycisk "dodaj pacjenta". Trzecia sekcja służy do usuwania pacjentów, których jednak nie będziemy chcieli poddawać symulacji. Dla wybranego pacjenta należy wpisać jego id w pole do wpisywania liczb oraz wcisnąć przycisk "usuń pacjenta". Lista id pacjentów, którzy będą podani symulacji po jej uruchomieniu znajduje się nad oknem komunikatów. Kojene id są oddzielane przecinkami a kolejność jest zgodna z kolejnością wprowadzania koljenych pacjentów.
 
 Na prawo od okna kounikatów znajudje się przycisk "Rozpocznij Symylację", który blokuje wprowadznie nowych pacjentów oraz zmianę mapy i dokonuje animacji transportowania pacjentów do szpitala w kolejności jak zostali wprowadzani do programu. Nad przyciskiem "Rozpocznij Symulację" znajduje się suwak regulujący szybkość animacji.
 
 \section{Przebieg animacji}
 
-Po wciśnięciu przycisku "Rozpocznij Symulację" na mapie pokazują wszyscy pacjenci jako pomarańczowe kropki. Następnie każdy kropka oznaczająca pacjenta, według kolejności na liście pacjentów poddawanych symulacji, zaczyna przemieszczać. Dodatkowo zostawia za sobą łamaną w postaci przebytej trasy w kolorze pomarańczowym. Widok takiego przemieszczania się pacjenta oraz pozostałych pacjentów czekających na swoją kolej został pokazany na Rysnuku 3.
+Po wciśnięciu przycisku "Rozpocznij Symulację" na mapie pokazują wszyscy pacjenci jako pomarańczowe kropki. Następnie każda kropka oznaczająca pacjenta, według kolejności na liście pacjentów poddawanych symulacji, zaczyna się przemieszczać. Dodatkowo zostawia za sobą łamaną w postaci przebytej trasy w kolorze pomarańczowym. Widok takiego przemieszczania się pacjenta oraz pozostałych pacjentów czekających na swoją kolej został pokazany na Rysnuku 3.
 
 \begin{figure}[h]
   \includegraphics[width=\linewidth]{./images/widok_symulacji.png}
@@ -135,26 +135,35 @@ Po wciśnięciu przycisku "Rozpocznij Symulację" na mapie pokazują wszyscy pac
   \label{fig:GUIsym}
 \end{figure}
 
-Gdy dany punkt dotrze do szpitala gdzie jest wolne miejsce pojawia się stosowny komunikat informujący o przyjęciu pacjenta o danym id do szpitala o danym id. Następuje aktualizacja liczby wolnych miejsc w danym szpitalu i ewentualnie zmiana jego koloru na mapie i w tabeli na kolor czerwony. Następnie znika punkt symbolizujący dopiero co przyjętego pacjęta z mapy jak róznież znika jego trasa. Dalej jest inicjalizowane rozpoczęcie animacji trasy kolejnych pajentów. Jeżeli dla danego pacjenta nie starczy miejscaa w żadnym szpitalu to pojawia się o tym komunikat w oknie komunikatów. Napstępnie id tego pacjenta jest dodawane w tabeli szpiatali do listy id pacjentów w kolejce. Następnie znika punkt i jego trasa i rozpoczyna sie symulacja kolejnego pacjenta. Jeżeli jakiś pacjent jest poza granicami państwa to pojawia się o tym komunikat. Następnie znika on z mapy i następuje animacja kolejnego pacjenta. Gdy już wszysycy pacjenci dostali poddani symulacji w oknie komunikatów pojawia sie komunikat o zakończeniu symulacji. Dalej program ma zapisane w pamięci mapę i pacjetnów i można dowolnie wiele razy wykonywać symulację. Aby zakończyć działanie programu należy wycisnąć przycisk ESC.
+Gdy dany punkt dotrze do szpitala gdzie jest wolne miejsce pojawia się stosowny komunikat informujący o przyjęciu pacjenta o danym id do szpitala o danym id. Następuje aktualizacja liczby wolnych miejsc w danym szpitalu i ewentualnie zmiana jego koloru na mapie i w tabeli na kolor czerwony. Następnie znika punkt symbolizujący dopiero co przyjętego pacjęta z mapy jak róznież znika jego trasa. Dalej jest inicjalizowane rozpoczęcie animacji trasy kolejnych pajentów. Jeżeli dla danego pacjenta nie starczy miejsca w żadnym szpitalu to pojawia się o tym komunikat w oknie komunikatów. Napstępnie id tego pacjenta jest dodawane w tabeli szpiatali do listy id pacjentów w kolejce. Następnie znika punkt i jego trasa i rozpoczyna sie symulacja kolejnego pacjenta. Jeżeli jakiś pacjent jest poza granicami państwa to pojawia się o tym komunikat. Następnie znika on z mapy i następuje animacja kolejnego pacjenta. Gdy już wszysycy pacjenci dostali poddani symulacji w oknie komunikatów pojawia sie komunikat o zakończeniu symulacji. Dalej program ma zapisane w pamięci mapę i pacjetnów i można dowolnie wiele razy wykonywać symulację. Aby zakończyć działanie programu należy wycisnąć przycisk ESC.
 
 \section{Możliwe komunikaty w oknie komunikatów}
 Gdy plik wejściowy jest niezgodny z opisem z rozdziału 2. lub zostanie podana błędna ścieżka do tego pliku lub on nie istnieje, to program nie wykona swojego zadania a w terminalu pojawi się błąd. Rodzaj komunikatu będzie zależał od tego co zostało źle zrobione. Poniżej wypunktowano możliwe błędy i ich komunikaty:
 \begin{itemize}
-\item brak parametru w komendzie uruchamiającej program w postaci ścieżki do pliku wejściowego:\\ \textbf{Error: not given input file name}
-\item brak pilku wejściowego lub niepoprawna ścieżka dostępu do niego:\\ 			\textbf{Error: input file not found}
-\item błędny znak w pliku tekstowym: \\ \textbf{Error in line \textless numer linii\textgreater: incorrect char in input file}
-\item brak nagłówka rozpoczynającego się znakiem \# :\\ \textbf{Error in line \textless numer linii\textgreater: no section header}
-\item brak danych (jakiejkolwiek linii) w którejś sekcji: \\ \textbf{Error in line \textless numer linii\textgreater: no data in this section}
-\item brak jednej z pozycji w danych: \\ \textbf{Error in line \textless numer linii\textgreater: missing data}
-\item znak "$\mid$" po ostatniej spodziewanej pozycji danych: \\ \textbf{Error in line \textless numer linii\textgreater: to many $\mid$ chars}
-\item niezgodny typ danych: \\ \textbf{Error in line \textless numer linii\textgreater: unexpected type of data}
+\item brak pliku wejściowego lub niepoprawna ścieżka dostępu do niego: \\ \textbf{Error: input file not found}
+\item początek pliku nie rozpoczyna się od znaku \#: \\ \textbf{Error in first line: missing \# character}
+\item pusty plik: \\ \textbf{Error: file is empty}
+\item brak nawet jednego rekordu w sekcji szpitali: \\ \textbf{Error in line \textless numer linii\textgreater: no data in hospitals section}
+\item zbyt dużo znaków "$\mid$" w linii: \\ \textbf{Error in line \textless numer linii\textgreater: too many $\mid$ chars}
+\item zbyt mało znaków "$\mid$" w linii: \\ \textbf{Error in line \textless numer linii\textgreater: too little $\mid$ chars}
+\item niezgodny typ danych: \\ \textbf{Error in line \textless numer linii\textgreater: unexpected data type}
 \item liczba jest ujemna gdy wymagana jest nieujemna: \\ \textbf{Error in line \textless numer linii\textgreater: the given value should not be negative}
 \item liczba jest niedodatnia, gdy wymagana jest dodatnia: \\ \textbf{Error in line \textless numer linii\textgreater: the given value should be positive}
-\item id nie jest unikalne: \\ \textbf{Error in line \textless numer linii\textgreater : the id is not unique }
-\item w połączeniach jest użyte id, które nie istnieje: \\ \textbf{Error in line \textless numer linii\textgreater: the id does not fit any object}
-\item w połączeniach użyto dwukrotnie (lub więcej) tej samej kombinacji id apteki i producenta: \\ \textbf{Error in line \textless numer linii\textgreater : connection between this pharmacy and manufacturer has been already set}
-\item koszt jednej szczepionki jest podany z trzema lub więcej cyframi po przecinku: \\ \textbf{Error in line \textless numer linii\textgreater: the cost of one vaccine is incorrect}
-\item liczba połączeń nie równa się iloczynowi liczby aptek i producentów: \\ \textbf{Error: missing connections between pharmacy and manufacturer}
+\item identyfikator szpitali, obiektów lub dróg nie jest unikalny: \\ \textbf{Error in line \textless numer linii\textgreater : Hospital/Object/Route identifier is not unique }
+\item w połączeniach jest użyty identyfikator szpitala, który nie istnieje: \\ \textbf{Error in line \textless numer linii\textgreater: Route identifier does not fit any hospital}
+\item redefinicja drogi: \\ \textbf{Error in line \textless numer linii\textgreater : connection between hospitals has already been defined}
+\end{itemize}
+
+Gdy plik wejściowy jest prawidłowy i program zaczyna działać prawidłowo, możliwe są następujące komunikaty:
+\begin{itemize}
+\item poprawnie wczytano mapę:\\ \textbf{Info: Map loaded.}
+\item poprawnie wczytano listę pacjentów:\\ \textbf{Info: List of patients loaded.}
+\item pojawił się nowy pacjent wymagający pomocy:\\ \textbf{Info: New patient appeared to need help. Starting the rescue.}
+\item pacjent został przyjęty do szpitala:\\ \textbf{Info: Patient added to hospital}
+\item pacjent nie znalazł miejsca w tym szpitalu i przemieszcza się do następnego:\\ \textbf{Info: No places in hospital available. Continue searching for help in another hospital.}
+\item pacjent nie znalazł miejsca w żadnym szpitalu, więc ustawia się w kolejkę w ostatnim szpitalu do którego dotarł\\ 			\textbf{Info: Patient visited all hospitals. Waiting for free place in Hospital <name of hospital>}
+\item pacjent poza granicami państwa: \\ \textbf{Info: Patient outside of country (can't be served). Skipping.}
+\item koniec symulacji \\ \textbf{Info: All patients served. Simulation ended.}
 \end{itemize}
 
 \section{Źródła}
