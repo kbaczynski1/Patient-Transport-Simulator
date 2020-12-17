@@ -1,3 +1,5 @@
 createPDFs:
-	pdflatex specyfikacja_implementacyjna/SI.tex
-	pdflatex specyfikacja\ funkcjonalna/SF.tex
+	cd specyfikacja_implementacyjna/; \
+		pdflatex SI.tex
+	cd specyfikacja\ funkcjonalna/; \
+		pdflatex SF.tex
