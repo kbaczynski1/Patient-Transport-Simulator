@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.11.5)  17 DEC 2020 20:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.11.5)  17 DEC 2020 23:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -293,66 +293,56 @@ LaTeX Font Info:    Trying to load font information for U+lasy on input line 27
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <10> on input line 63.
+(Font)              <10> on input line 90.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <7> on input line 63.
+(Font)              <7> on input line 90.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <5> on input line 63.
+(Font)              <5> on input line 90.
 
-Overfull \hbox (0.25171pt too wide) in paragraph at lines 65--68
+Overfull \hbox (0.25171pt too wide) in paragraph at lines 92--95
 []\OT4/cmr/m/n/10 Istnieje tak-»e bar-dziej prze-my-±la-ny al-go-rytm, któ-ry p
 o-przez "omie-ce-nie wi¡z-
  []
 
-
-Overfull \hbox (3.99585pt too wide) in paragraph at lines 86--86
-[]\OT4/cmr/bx/n/12 Przeszukiwanie gra-fu w ce-lu zna-le-zie-nia miej-sca w szpi
--
+[3]
+Overfull \hbox (7.91734pt too wide) in paragraph at lines 121--122
+[]\OT4/cmr/m/n/10 Udaj si¦ do wy-bra-ne-go szpi-ta-la i po do-je¹-dzie (gdy po-
+zy-cja pa-cjen-ta=pozycji
  []
 
 
-Package lastpage Warning: Rerun to get the references right on input line 95.
-
-
 AED: lastpage setting LastPage
-
-LaTeX Warning: Reference `LastPage' on page 2 undefined on input line 95.
-
-[2]
-
-LaTeX Warning: Reference `LastPage' on page 3 undefined on input line 95.
-
-[3] (./SI.aux)
-
-LaTeX Warning: There were undefined references.
-
+[4] (./SI.aux)
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 3074 strings out of 483148
- 41162 string characters out of 5965416
- 272698 words of memory out of 5000000
- 18040 multiletter control sequences out of 15000+600000
- 545928 words of font info for 68 fonts, out of 8000000 for 9000
+ 3075 strings out of 483148
+ 41215 string characters out of 5965416
+ 274744 words of memory out of 5000000
+ 18042 multiletter control sequences out of 15000+600000
+ 545422 words of font info for 67 fonts, out of 8000000 for 9000
  34 hyphenation exceptions out of 8191
- 30i,10n,45p,275b,261s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plrm.enc} </home/rvbc-/.tex
-live2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk>{/usr/share/texli
-ve/texmf-dist/fonts/enc/dvips/pl/plmi.enc}</usr/share/texlive/texmf-dist/fonts/
-type1/public/pl/plbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl
-/plbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plmi10.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/pl/plr12.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/pl/plr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/p
-l/plr7.pfb>
-Output written on SI.pdf (3 pages, 53210 bytes).
+ 30i,11n,45p,655b,328s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plme.enc}{/usr/share/texliv
+e/texmf-dist/fonts/enc/dvips/pl/plms.enc}{/usr/share/texlive/texmf-dist/fonts/e
+nc/dvips/pl/plmi.enc} </home/rvbc-/.texlive2019/texmf-var/fonts/pk/ljfour/jknap
+pen/ec/tcrm1000.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plrm.en
+c}</usr/share/texlive/texmf-dist/fonts/type1/public/pl/plbx12.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/pl/plex10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/pl/plmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/pl/plmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr10.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/plr12.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/pl/plr17.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/pl/plr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/pl/plsy10.pfb>
+Output written on SI.pdf (4 pages, 66422 bytes).
 PDF statistics:
- 49 PDF objects out of 1000 (max. 8388607)
- 35 compressed objects within 1 object stream
+ 62 PDF objects out of 1000 (max. 8388607)
+ 45 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
