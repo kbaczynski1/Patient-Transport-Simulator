@@ -5,7 +5,7 @@
 \usepackage{amssymb}
 \usepackage{polski}
 \usepackage{latexsym}
-\usepackage{enumitem}
+\usepackage[shortlabels]{enumitem}
 \usepackage{graphicx}
 
 \usepackage{lastpage}
@@ -48,11 +48,36 @@ minimalujazując kolzje spowodowaną pracą dwóch osób na jednym elemtem proje
 
 \section{Problemy Algorytmiczne}
 
-\subsection{Znalezienie obrysu państwa}
+\subsection{Znalezienie mapy państwa}
 
-//Problem Convex hull
+\begin{enumerate}
+    \item Szukaj wierzchołka o najmniejszej współrzędnej x.
+    \item Dodaj go do nowo utworzonej listy wierchołków.
+    \item Stwórz początkowo pustą listę współczynników kierunkowych, która będzie gromadzić nachylenie prostej przechodzącej przez wybrane dwa wierchołki grafu.
+    \item Szukaj kolejnego wierzchołka o najmniejszej możliwej współrzędnej x (może to być również wierchołek, który ma taką samą współrzędną w osi x o ile ma większą wartość w osi y).
+    \item Po znalezieniu wierzhołka wyznacz współczynnik kierunkowy prostej łączącej go i poprzedni punkt. Jeśli jest on mniejszy od ostatniego elemtnu na liście współczynników to dodaj ten wierzchołek do listy wierzchołków, a współczynnik do listy współczynników. Jeśli lista współczynników jest pusta to warunek jest zawsze spełniony. Jeżeli warunek nie jest sepłniony to usuń z obu list ostatni element i sprawdź analogiczny warunek dla nowych ostatnich elementów obu list. Jeśli warunek jest spełniony to dodaj elementy do listy, jeśli nie to ponownie usuwaj tak długo aż warunek będzie spełniony.
+    \item Kroki od 3 do 5 powtarzaj tak długo aż zostaną sprawdzone wszystkie wierzchołki - czy nie ma nowego wierzchołka o współrzędnej y większej niż ostatni z listy.
+    \item Wykonaj kroki 1-6 z tym, że:
+    \begin{enumerate}[a)]
+        \item zacznij od ostatniego punktu z listy wierzchołków z punktów 1-6,
+        \item szukaj kolejnych wierzchołków malejąco wzdłuż osi y takich, żeby ich współrzędne x były coraz większe,
+        \item postępuj analogicznie jak w punkcie 5.
+    \end{enumerate}
+    \item Wykonaj kroki 1-6 z tym, że:
+    \begin{enumerate}[a)]
+        \item zacznij od ostatniego punktu z listy wierchołków z punktu 7,
+        \item szukaj kolejnych wierzchołków malejąco wzdłuż osi x takich, żeby ich współrzędne y były coraz mniejsze,
+        \item postępuj jak w punkcie 5.
+    \end{enumerate}
+    \item Wykonaj kroki 1-6 z tym, że:
+    \begin{enumerate}[a)]
+        \item zacznij od ostatniego punktu z listy wierzchołków z punktu 8,
+        \item szukaj kolejnych wierzchołków rosnąco wzdłuż osi y takich, żeby ich współrzędne x były coraz mniejsze,
+        \item postępuj analogicznie jak w punkcie 5.
+    \end{enumerate}
+\end{enumerate}
 
-\subsection{Wykrycie skrzyżowań}
+\subsection{Znalezienie skrzyżowań}
 
 //Naive or Bentley–Ottmann algorithm
 
@@ -79,15 +104,32 @@ Dzięki temu nie potrzeba sprawdzać każdej pary odcinków ze sobą, co skutkuj
 Rozwijając ten algorytm, punkty przecięć zostaną skrzyżowaniami z punktu widzenia działania programu, a drogi na przecięciach zostaną zmodyfikowane w zależności od tego w jakiej proporcji punkt podzielił odcinki.
 
 
-\subsection{Określenie czy pacjent znajduje się w obszarze Państwa}
+\subsection{Określenie czy pacjent znajduje się na terytorium państwa}
 
-//Even-odd rule Algorithm
+\begin{enumerate}
+    \item Dla pacjenta o współrzędnych $(x_p,y_p)$ i każdego boku mapy państwa (wielokąta wypukłego) $M=\{W_1=(x_1,y_1), ..., W_n=(x_n,y_n)\}$, oblicz i sprawdź znak:
+    $$e=(y_{i+1}-y_i)*(x_p-x_i)-(x_{i+1}-x_i)*(y_p-y_i)$$
+    \item Jeśli $e$ dla wszystkich boków mapy ma taki sam znak, to pacjent znajduje się na terytorium państwa. Jeśli nie, to pacjent znajduje się poza granicami państwa.
+\end{enumerate}
 
-\subsection{Znalezienie najbliższego szpitala}
+\subsection{Transport pacjenta do najbliższego szpitala}
 
-\subsection{Przeszukiwanie grafu w celu znalezienia miejsca w szpitalu}
-
-//Zmodyfikowany DFS/BFS
+\begin{enumerate}
+    \item Oblicz odległość pacjenta do wszystkich szpitali wg wzoru:
+    $$d_i=\sqrt{({x_s}_i-x_p)^2+({y_s}_i-y_p)^2}$$
+    \item Wybierz szpital, do którego odległość $d$ jest najmniejsza
+    \item Udaj się do wybranego szpitala i po dojeździe (gdy pozycja pacjenta=pozycji szpitala) sprawdź czy w wybranym szpitalu jest wolne łóżko. Jeśli TAK – KONIEC transportu pacjenta, zostaw pacjenta w szpitalu. Jeśli NIE - oznacz szpital jako odwiedzony i przejdź do punktu 4.
+    \item Dla szpitala, w którym obecnie znajduje się pacjent wyznacz inny szpital, do którego droga jest najkrótsza:
+    \begin{enumerate}[4.1.]
+        \item Dla każdego szpitala i wierzchołka bezpośrednio połączonego z obecnym szpitalem (skrzyżowania) wyznacz długości połączeń i zapamiętaj je.
+        \item Zawsze jeśli sprawdziłeś już jakiś wierzchołek zapamiętaj ten fakt (zapamiętaj, że udało się do niego wyznaczyć jakąkolwiek drogę).
+        \item Jeśli w danym szpitalu nie było jeszcze karetki, to zakończ przeszukiwanie ścieżek przechodzących przez ten szpital.
+        \item Jeśli w danym miejscu była już karetka, to przeszukuj dalej graf, zapamiętując sumaryczną drogę i trasę do każdego wierzchołka.
+        \item Kończ przeszukiwanie danej ścieżki, gdy dotrzesz do wierzchołka, który był już sprawdzony.
+        \item Po przeszukaniu całego grafu z obecnego szpitala, wybierz nieodwiedzony szpital, do ktorego sumaryczna droga jest najkrótsza. Z tak wybranym szpitalem przejdź do punktu 3. 
+        
+    \end{enumerate}
+\end{enumerate}
 
 \section{Testy oprogramowania}
 
