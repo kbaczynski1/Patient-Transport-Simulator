@@ -50,6 +50,29 @@
 
 //Naive or Bentley–Ottmann algorithm
 
+
+W postawionym zadaniu istnieje założenie, że jeżeli drogi przecinają się to w miejscu przecięcia powstaje skrzyżowanie.
+Powoduje to, że od pewnego szpitala do innego szpitala można dojechać okrężną, lecz szybszą drogą, mimo że nie istnieje ona w pliku wejściowym.
+Biorąc pod uwagę, że wszystkie obiekty mapy posiadają współrzędne kartezjańskie, punkty przecięć można wyznaczyć w sposób czysto matematyczny.
+Przedstawiając drogę od szpitala do szpitala jako odcinek, można przedstawić wszystkie drogi jako odcinki i znaleźć ich punkty przecięcia.
+Jest to metoda naiwna, ponieważ wymaga ona przeanalizowania każdej drogi z każdą inną drogą.
+O ile dla jednej pary złożoność obliczeniowa to O(1), tak dla n dróg jest to już O($n^2$).
+
+Istnieje także bardziej przemyślany algorytm, który poprzez "omiecenie wiązką" przez wszystkie odcinki jest w stanie wykryć ich punkty przecięć.
+Implementacja algorytmu Bentley–Ottmann wymaga przedstawienia dróg jako posortowanych punktów względem osi X oraz odcinków. Algorytm można przedstawić następująco:
+\begin{itemize}
+    \item Pionowa linia "przemiata" wszystkie punkty od lewej do prawej.
+    \item Po natknięciu się na lewy(początkowy) punkt odcinka, odcinek oznaczany jest jako aktywny.
+    \item Następnie sprawdzane są przecięcia z najbliższymi, aktywnymi odcinkami powyżej i poniżej aktualnego odcinka.
+    \item Jeżeli odcinki aktywne się przecinają wtedy jest znajdowany i zapamiętywany punkt przecięcia między tymi odcinkami.
+    \item W momencie gdy pionowa linia napotka końcowy punkt odcinka, wtedy dezaktywuje ona odcinek. Sprawia to, że odcinek nie jest brany dalej do analizy przecięć z innymi odcinkami.
+\end{itemize}
+Taki sposób pozwala na ograniczenie zbioru sprawdzanych odcinków do sąsiedztwa potencjalnie przecinających się odcinków.
+Dzięki temu nie potrzeba sprawdzać każdej pary odcinków ze sobą, co skutkuje złożonością obliczeniową rzędu O((n+k)log n), gdzie n to liczba odcinków, a k liczba przecięć.
+
+Rozwijając ten algorytm, punkty przecięć zostaną skrzyżowaniami z punktu widzenia działania programu, a drogi na przecięciach zostaną zmodyfikowane w zależności od tego w jakiej proporcji punkt podzielił odcinki.
+
+
 \subsection{Określenie czy pacjent znajduje się w obszarze Państwa}
 
 //Even-odd rule Algorithm
