@@ -29,25 +29,27 @@
 
 \section{Wstęp}
 
-Niniejszy dokument jest ściśle powiązany z dokumentem dotyczącym dokumentacji funkcjonalnej projektu zespołowego z przedmiotu Algorytmy i Struktury Danych w roku akademickim 2020/2021 na Wydziale Elektrycznym Politechniki Warszawskiej, 
-gdyż zawiera opis implementacyjny algorytmu wykorzystanego do rozwiązania problemu przedstawionego jako założenia projektowe. 
-Aby nie powielać informacji ogólnyuch dotyczących projektu zalecane jest zapoznanie, ze wspomnianym dokumentem, gdyż znajduje sie w nim dokładny opis i założenia projektu.
+Niniejszy dokument jest ściśle powiązany z dokumentem dotyczącym dokumentacji funkcjonalnej projektu zespołowego z przedmiotu Algorytmy i Struktury Danych w roku akademickim 2020/2021 na Wydziale Elektrycznym Politechniki Warszawskiej.
+Zawiera opis implementacyjny algorytmu wykorzystanego do rozwiązania problemu postawionego w projekcie.
+Aby nie powielać informacji ogólnych dotyczących projektu zalecane jest zapoznanie, ze wspomnianym dokumentem, gdyż znajduje sie w nim dokładny opis i założenia projektu.
 
 \section{Opis struktury projektu}
 
 \subsection{Założenia wstępne}
 
 
-W celu relizacji problemu przedstawionego w celu projektu, rozwiązać należało kwestie sprawdzenia poprawności danych, stworzenie grafu połaczeń pomiędzy szpitalami a następnie kwestie odpowiedniego przydziału pacjenta do najbliższego 
-szpitala oraz ewentualne jego przemieszczenia w przypadku braku wolnego łóżka. Dodatkowo w programie należało rozwiązać kwestie graficznej prezentacji danych wejściowych oraz wyników działania algorytmu w formie czytelnej dla użytkownika.
+W celu relizacji problemu należało rozwiązać kwestie sprawdzenia poprawności danych, stworzenia grafu połaczeń pomiędzy szpitalami, uwzględniając możliwe skrzyżowania, a następnie kwestie odpowiedniego przydziału pacjenta do najbliższego
+szpitala oraz ewentualne jego przemieszczenia w przypadku braku wolnego łóżka.
+Dodatkowo w programie należało rozwiązać kwestie graficznej prezentacji danych wejściowych oraz wyników działania algorytmu w formie czytelnej dla użytkownika.
 
 \subsection{Wykorzystane technologie}
 
-W celu zrealizowania założeń projektu postanowiono wykorzystać jezyk porogramowania Java. Jego dużą zaletą jest fakt możliwości uruchamiania na większości dostępnych obecnie systemów opracyjnych. Kolejną zaletą jest bardzo dobre wsparcie 
-programowania współbieżnego oraz spora ilość elementów (np. dkonterów danych) zaimplementowanych przez autorów języka, co znacząco przyśpiesza wykonanie projektu oraz zmniejsza podatność na błędy implemntacyjne. 
-Dodatkowo do projektu postanowiono zastosować interfejs graficzny (ang. Graphical user interface - GUI) wykorzystując do tego celu środowisko JavaFX. Zaletą tego środkowiska jest możliwość sporej seperacji kodu żródłowego napisanego w języku Java 
-realizaującego mechanikę działania GUI oraz cel projektu od warstwy wizualnej interfejsu graficznego. Pozwala to na lepszą możliwość współpracy w projekcie zespołowym, gdzie dane osoby mogą realizować swoje cześci projektu 
-minimalizując kolzje spowodowane pracą dwóch osób nad jednym elemtem projektu. 
+W celu zrealizowania założeń projektu postanowiono wykorzystać jezyk porogramowania Java (OpenJDK w wersji 11 lub adekwatnej wersji OracleJDK).
+Jego dużą zaletą jest fakt możliwości uruchamiania na większości dostępnych obecnie systemów opracyjnych.
+Kolejną zaletą jest bardzo dobre wsparcie programowania współbieżnego oraz spora ilość elementów (np. konterów danych) zaimplementowanych przez autorów języka, co znacząco przyśpiesza wykonanie projektu oraz zmniejsza podatność na błędy implemntacyjne.
+Dodatkowo do projektu postanowiono zastosować interfejs graficzny (ang. Graphical user interface - GUI) wykorzystując do tego celu środowisko JavaFX (w wersji conajmniej 11).
+Zaletą tego środkowiska jest możliwość sporej seperacji kodu żródłowego napisanego w języku Java realizaującego mechanikę działania GUI oraz cel projektu od warstwy wizualnej interfejsu graficznego.
+Pozwala to na lepszą współpracę w projekcie zespołowym, gdzie dane osoby mogą realizować różne cześci projektu minimalizując kolzje spowodowane pracą dwóch osób nad jednym elemtem projektu.
 
 \subsection{Diagram klas}
 
@@ -59,11 +61,23 @@ minimalizując kolzje spowodowane pracą dwóch osób nad jednym elemtem projekt
 
 \section{Problemy Algorytmiczne}
 
-\subsection{Znalezienie mapy państwa}
+Całe zadanie symulacji transportu pacjenta do szpitali można rozbić na pomniejsze problemy.
+Rozwiązując je sekwencyjnie uzyskać można rzeczywiste rozwiązanie problemu przewozu pacjentów przy pomocy karetek do szpitali.
+Poniżej znajdują się opisy wydzielonych problemów programistycznych, których rozwiązanie pozwoli na otrzymanie końcowego wyniku.
+
+\subsection{Przedstawienie mapy państwa}
+
+Pierwszym krokiem programu jest wczytanie środowiska, w którym należy rozwiązać symulację.
+Granice państwa muszą być figurą wypukłą opartą na najbardziej zewnętrznych punktach.
+Mimo tego nie wszystkie zewnętrzne punkty wyznaczają granice pańśtwa, ponieważ połączenie niektórych z nich powoduje powstanie bryły niewypukłej.
+
+W tym celu zastosowany zostanie poniższy algorytm bazujący na problemie "Convex Hull" w implementacji opracowanej przez jednego z członków zespołu.
+Wierzchołkami przedstawionego poniżej grafu są szpitale oraz pomniki, których jedyna funkcja to poszerzenie granic państwa.
+Poniżej znajduje się opis algorytmu:
 
 \begin{enumerate}
     \item Szukaj wierzchołka o najmniejszej współrzędnej x.
-    \item Dodaj go do nowo utworzonej listy wierchołków.
+    \item Dodaj go do nowo utworzonej listy wierzchołków.
     \item Stwórz początkowo pustą listę współczynników kierunkowych, która będzie gromadzić nachylenie prostej przechodzącej przez wybrane dwa wierchołki grafu.
     \item Szukaj kolejnego wierzchołka o najmniejszej możliwej współrzędnej x (może to być również wierchołek, który ma taką samą współrzędną w osi x o ile ma większą wartość w osi y).
     \item Po znalezieniu wierzhołka wyznacz współczynnik kierunkowy prostej łączącej go i poprzedni punkt. Jeśli jest on mniejszy od ostatniego elemtnu na liście współczynników to dodaj ten wierzchołek do listy wierzchołków, a współczynnik do listy współczynników. Jeśli lista współczynników jest pusta to warunek jest zawsze spełniony. Jeżeli warunek nie jest sepłniony to usuń z obu list ostatni element i sprawdź analogiczny warunek dla nowych ostatnich elementów obu list. Jeśli warunek jest spełniony to dodaj elementy do listy, jeśli nie to ponownie usuwaj tak długo aż warunek będzie spełniony.
@@ -90,14 +104,11 @@ minimalizując kolzje spowodowane pracą dwóch osób nad jednym elemtem projekt
 
 \subsection{Znalezienie skrzyżowań}
 
-//Naive or Bentley–Ottmann algorithm
-
-
 W postawionym zadaniu istnieje założenie, że jeżeli drogi przecinają się to w miejscu przecięcia powstaje skrzyżowanie.
 Powoduje to, że od pewnego szpitala do innego szpitala można dojechać okrężną, lecz szybszą drogą, mimo że nie istnieje ona w pliku wejściowym.
 Biorąc pod uwagę, że wszystkie obiekty mapy posiadają współrzędne kartezjańskie, punkty przecięć można wyznaczyć w sposób czysto matematyczny.
 Przedstawiając drogę od szpitala do szpitala jako odcinek, można przedstawić wszystkie drogi jako odcinki i znaleźć ich punkty przecięcia.
-Jest to metoda naiwna, ponieważ wymaga ona przeanalizowania każdej drogi z każdą inną drogą.
+Jest to metoda naiwna, ponieważ wymaga ona przeanalizowania każdej drogi z każdą inną drogą ze zbioru dróg.
 O ile dla jednej pary złożoność obliczeniowa to O(1), tak dla n dróg jest to już O($n^2$).
 
 Istnieje także bardziej przemyślany algorytm, który poprzez "omiecenie wiązką" przez wszystkie odcinki jest w stanie wykryć ich punkty przecięć.
@@ -110,12 +121,16 @@ Implementacja algorytmu Bentley–Ottmann wymaga przedstawienia dróg jako posor
     \item W momencie gdy pionowa linia napotka końcowy punkt odcinka, wtedy dezaktywuje ona odcinek. Sprawia to, że odcinek nie jest brany dalej do analizy przecięć z innymi odcinkami.
 \end{itemize}
 Taki sposób pozwala na ograniczenie zbioru sprawdzanych odcinków do sąsiedztwa potencjalnie przecinających się odcinków.
-Dzięki temu nie potrzeba sprawdzać każdej pary odcinków ze sobą, co skutkuje złożonością obliczeniową rzędu O((n+k)log n), gdzie n to liczba odcinków, a k liczba przecięć.
+Dzięki temu nie trzeba sprawdzać każdej pary odcinków ze sobą, co skutkuje złożonością obliczeniową rzędu O((n+k)log n), gdzie n to liczba odcinków, a k liczba przecięć.
 
 Rozwijając ten algorytm, punkty przecięć zostaną skrzyżowaniami z punktu widzenia działania programu, a drogi na przecięciach zostaną zmodyfikowane w zależności od tego w jakiej proporcji punkt podzielił odcinki.
 
 
 \subsection{Określenie czy pacjent znajduje się na terytorium państwa}
+
+Założeniem projektu jest obsługa pacjentów znajdujących się w obszarze państwa.
+Jeżeli pacjent znajdujący się poza granicami państwa wymaga pomocy, wtedy karetka nie jest w stanie jej udzielić.
+Algorytm wygląda następująco:
 
 \begin{enumerate}
     \item Dla pacjenta o współrzędnych $(x_p,y_p)$ i każdego boku mapy państwa (wielokąta wypukłego) $M=\{W_1=(x_1,y_1), ..., W_n=(x_n,y_n)\}$, oblicz i sprawdź znak:
@@ -124,6 +139,11 @@ Rozwijając ten algorytm, punkty przecięć zostaną skrzyżowaniami z punktu wi
 \end{enumerate}
 
 \subsection{Transport pacjenta do najbliższego szpitala}
+
+Transport pacjenta jest to szereg operacji mających na celu doprowadzić pacjenta do szpitala, w którym może zostać mu udzielona pomoc.
+Składa się on z operacji przewiezienia pacjenta do najbliższego szpitala, a jeżeli nie będzie w nim miejsca, znalezienie takiego szpitala , który jest w stanie tą pomoc zaoferować.
+Poszukiwanie szpitali odbywa się poprzez przewożenia pacjenta do szpitala i dopiero sprawdzania czy są w nim miejsca.
+Algorytm dostarczenia pacjenta do placówki prezentuje się następująco:
 
 \begin{enumerate}
     \item Oblicz odległość pacjenta do wszystkich szpitali wg wzoru:
@@ -138,7 +158,6 @@ Rozwijając ten algorytm, punkty przecięć zostaną skrzyżowaniami z punktu wi
         \item Jeśli w danym miejscu była już karetka, to przeszukuj dalej graf, zapamiętując sumaryczną drogę i trasę do każdego wierzchołka.
         \item Kończ przeszukiwanie danej ścieżki, gdy dotrzesz do wierzchołka, który był już sprawdzony.
         \item Po przeszukaniu całego grafu z obecnego szpitala, wybierz nieodwiedzony szpital, do ktorego sumaryczna droga jest najkrótsza. Z tak wybranym szpitalem przejdź do punktu 3. 
-        
     \end{enumerate}
 \end{enumerate}
 
@@ -156,6 +175,7 @@ Dla plików wejściowych - pliku z mapą oraz pliku z pacjentami przeprowadzone 
     \item Nieprawidłowy typ danych.
     \item Niepoprawne watości danych - niedopuszczalna wartość zerowa, ujemnna lub wartość spoza zakresu danego typu danych.
     \item Powtarzające się id lub para id (sekcja "Drogi").
+    \item Wykorzystanie nieistniejącego id w sekcji "Drogi".
     \item Nieistniejący szpital użyty w sekcji "Drogi".
 \end{enumerate}
 
