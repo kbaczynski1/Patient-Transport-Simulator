@@ -225,7 +225,10 @@ Dla plików wejściowych - pliku z mapą oraz pliku z pacjentami przeprowadzone 
 
 Inne (niedotyczące plików wejściowych) testy programu:
 \begin{enumerate}
-    \item
+    \item Próby wywołania funkcji z niepoprawnym parametrem (np dodanie do klasy DataBase obiektu null)
+    \item Próby odwoływania się do poprawnych typów i zakresów danych ale niesteniejących (np odwoływanie się do pacienta o nieisteniejącym id)
+    \item Testy algortmu dla kilku testowych danych i porównanie ich z poprawnym wyjściem określonym wcześniej (np testy na klasie PathSearcher)
+    \item Testy GUI pod kątem przypadków szczególnych (np brak granic państwa czy pusta lista szpitali)
 \end{enumerate}
 
 
