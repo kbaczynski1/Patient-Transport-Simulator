@@ -119,8 +119,8 @@ Rozwijając ten algorytm, punkty przecięć zostaną skrzyżowaniami z punktu wi
 
 \begin{enumerate}
     \item Dla pacjenta o współrzędnych $(x_p,y_p)$ i każdego boku mapy państwa (wielokąta wypukłego) $M=\{W_1=(x_1,y_1), ..., W_n=(x_n,y_n)\}$, oblicz i sprawdź znak:
-    $$e=(y_{i+1}-y_i)*(x_p-x_i)-(x_{i+1}-x_i)*(y_p-y_i)$$
-    \item Jeśli $e$ dla wszystkich boków mapy ma taki sam znak, to pacjent znajduje się na terytorium państwa. Jeśli nie, to pacjent znajduje się poza granicami państwa.
+    $$h=(y_{i+1}-y_i)*(x_p-x_i)-(x_{i+1}-x_i)*(y_p-y_i)$$
+    \item Jeśli $h$ dla wszystkich boków mapy ma taki sam znak, to pacjent znajduje się na terytorium państwa. Jeśli nie, to pacjent znajduje się poza granicami państwa.
 \end{enumerate}
 
 \subsection{Transport pacjenta do najbliższego szpitala}
@@ -143,6 +143,28 @@ Rozwijając ten algorytm, punkty przecięć zostaną skrzyżowaniami z punktu wi
 \end{enumerate}
 
 \section{Testy oprogramowania}
+
+Do testowania oprogramowania użyte będzie narzędzie JUnit.
+
+Dla plików wejściowych - pliku z mapą oraz pliku z pacjentami przeprowadzone zostaną następujące testy:
+ 
+\begin{enumerate}
+    \item Pusty plik.
+    \item Pusta sekcja.
+    \item Brak tytułu sekcji (znaku "\#").
+    \item Nieprawidłowa liczba znaków strumienia "\textbar".
+    \item Nieprawidłowy typ danych.
+    \item Niepoprawne watości danych - niedopuszczalna wartość zerowa, ujemnna lub wartość spoza zakresu danego typu danych.
+    \item Powtarzające się id lub para id (sekcja "Drogi").
+    \item Wykorzystanie nieistniejącego id w sekcji "Drogi".
+    \item Nieistniejący szpital użyty w sekcji "Drogi".
+\end{enumerate}
+
+Inne (niedotyczące plików wejściowych) testy programu:
+\begin{enumerate}
+    \item
+\end{enumerate}
+
 
 \section{Źródła}
 
