@@ -20,7 +20,7 @@
 \cfoot{Strona \thepage\ z \pageref{LastPage}}
 
 
-\title{\huge AiSD - laboratorium \\ \Large Projekt zespołowy - specyfikacja implementacyjna}
+\title{\huge AiSD - laboratorium \\ \Large Symulator Transportu Pacjentów - specyfikacja implementacyjna}
 \author{Kacper Baczyński, Michał Kiełczykowski, Marek Knosala, \\ Edward Sucharda}
 
 \begin{document}
@@ -58,6 +58,42 @@ Pozwala to na lepszą współpracę w projekcie zespołowym, gdzie dane osoby mo
   \caption{Diagram klas.}
   \label{fig:diagram_klas}
 \end{figure}
+
+Powyższy diagram prezentuje pomysł na zrealizowanie żądanej funkcjonalności.
+W diagramie widoczne jest wyraźne rozdzielenie na klasy dotyczące reprezentacji graficznej oraz kodu, który wykonuje algorytmy.
+
+Na samej górze, kolorem jasnoniebieskim zostały zaznaczone klasy kontrolerów okien JavyFX. Struktura opiera się na głównym oknie MainWindow, do którego następnie ładowane są kolejne okna.
+Każde okno reprezentuje funkconalność okna przedstawioną w specyfikacji funkcjonalnej.
+
+\begin{itemize}
+    \item PatientWindowController - odpowiedzialny za dodawanie pacjentów do symulacji (ręcznie i z pliku)
+    \item MapWindowController - odpowiedzialny za wyświetlenie mapy oraz operacje wizualizacyjne w symulacji. Wykorzystuje do swoich celów algorytm znajdujący kolejny szpital, do którego musi zostać przesłany pacjent.
+    \item TerminalWindowController - odpowiedzialny za przetrzymywanie i pokazywanie komunikatów programu.
+    \item HospitalsWindowController - odpowiedzialny za reprezentację stanu każdego szpitala i pokazywanie ich zmian.
+    \item SimulationSettingsWindowController - odpowiedzialny za wskazanie parametrów symulacji np. prędkość jej postępowania.
+    \item MainWindowController - główne okno programu. Zarządza wszystkimi pozostałymi oknami oraz przekazuje referencje i zmiany stanów pomiędzy oknami.
+\end{itemize}
+W dolnej części diagramu przedstawione zostały wyszczególnione klasy związane z wykonywaniem algorytmów.
+Głównym ich zadaniem jest realizacja funkcjonalności projektu.
+Można je podzielić na klasy reprezentujące dane oraz funkcjonalności programu.
+Klasy reprezentujące dane:
+
+\begin{itemize}
+    \item Patient - klasa reprezentująca pacjenta. Posiada współrzędne kartezjańske, identyfikator oraz nazwę.
+    \item Hospital - klasa reprezentująca szpital. Wyposażona we współrzędne kartezjańskie, identyfikator, nazwę oraz liczbę dostępnych w ogóle i wolnych łóżek.
+    \item Road - klasa reprezentująca połączenia między szpitalami. Wyposażona w referencje do szpitali, do których jest w stanie doprowadzić, identyfikator oraz czas, potrzebny na jej pokonanie.
+\end{itemize}
+
+
+Poniżej zostały przedstawione klasy odpowiedzialne za operacje algorytmiczne:
+
+\begin{itemize}
+    \item DataLoader - klasa odpowiedzialna za wczytywanie danych z pliku. Będzie odpowiedzialna za zaczerpnięcie danych dotyczących mapy oraz listy pacjentów.
+    \item DataBase - klasa przetrzymująca dane. Jest to klasa singleton, która będzie dostarczała dane do wszystkich klas. Taka realizacja pozwoli na spójny dostęp do danych.
+    \item PathSearcher - klasa znajdująca szpitale, do których będziemy chcieli przewozić pacjentów. Jej wynik będzie dostarczany do kontrolerów okien w celu aktualizacji postępu symulacji.
+\end{itemize}
+
+Takie zaprojektowanie systemu pozwoli na oddzielenie warstwy kontroli okien od warstwy obliczeniowej.
 
 \section{Problemy Algorytmiczne}
 
