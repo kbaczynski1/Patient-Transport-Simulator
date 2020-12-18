@@ -80,20 +80,28 @@ Klasy reprezentujące dane:
 
 \begin{itemize}
     \item Patient - klasa reprezentująca pacjenta. Posiada współrzędne kartezjańske, identyfikator oraz nazwę.
-    \item Hospital - klasa reprezentująca szpital. Wyposażona we współrzędne kartezjańskie, identyfikator, nazwę oraz liczbę dostępnych w ogóle i wolnych łóżek.
     \item Road - klasa reprezentująca połączenia między szpitalami. Wyposażona w referencje do szpitali, do których jest w stanie doprowadzić, identyfikator oraz czas, potrzebny na jej pokonanie.
+    \item Boundary - klasa reprezentująca obiekty wchodzące w skład granicy pańśtwa. Zawiera współrzędne kartezjańskie, identyfikator oraz nazwę.
+    \item Hospital - klasa reprezentująca szpital, pochodna Boundary, ponieważ może wyznaczać granicę państwa. Posiada dodatkowo informację o ilości wszystkich i wolnych łóżek w szpitalu.
+    \item Monument - klasa reprezentująca pomnik. Stworzona w celu odróżnienia szpitala od pomnika.
+    \item Country - klasa reprezentująca państwo. Zawiera listę obiektów, które wyznaczają granice państwa.
+
 \end{itemize}
 
 
 Poniżej zostały przedstawione klasy odpowiedzialne za operacje algorytmiczne:
 
 \begin{itemize}
-    \item DataLoader - klasa odpowiedzialna za wczytywanie danych z pliku. Będzie odpowiedzialna za zaczerpnięcie danych dotyczących mapy oraz listy pacjentów.
     \item DataBase - klasa przetrzymująca dane. Jest to klasa singleton, która będzie dostarczała dane do wszystkich klas. Taka realizacja pozwoli na spójny dostęp do danych.
     \item PathSearcher - klasa znajdująca szpitale, do których będziemy chcieli przewozić pacjentów. Jej wynik będzie dostarczany do kontrolerów okien w celu aktualizacji postępu symulacji.
+    \item Interfejs Loader - interfejs ujednolicający sposób tworzenia pacjentów oraz mapy z listy. Pozwoli na generyczne pobieranie danych z plików i zapewni zdolności uogólniające kodu.
+    \item MapLoader - klasa implementująca interfejs Loader. Głównym zadaniem jest wczytanie mapy z pliku.
+    \item MapLoader - klasa implementująca interfejs Loader. Głównym zadaniem jest wczytanie pacjentów z pliku.
 \end{itemize}
 
 Takie zaprojektowanie systemu pozwoli na oddzielenie warstwy kontroli okien od warstwy obliczeniowej.
+Dodatkowo powstały interfejs pozwoli na zwiększenie uogólnienia zastosowania kodu i ograniczenie powielania kodu.
+Dziedzieczenie obiektów, pozwoli na łatwiejsze sprawdzenie granic państwa, bez rozróżnienia, czy obiekt jest szpitalem czy pomnikiem.
 
 \section{Problemy Algorytmiczne}
 
