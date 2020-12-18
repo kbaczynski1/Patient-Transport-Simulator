@@ -4,6 +4,7 @@ specyfikacja\ funkcjonalna/*
 !specyfikacja\ funkcjonalna/images/*
 
 specyfikacja_implementacyjna/*
+!specyfikacja_implementacyjna/images
 !specyfikacja_implementacyjna/*.tex
 !specyfikacja_implementacyjna/*.pdf
 !specyfikacja_implementacyjna/images/*
