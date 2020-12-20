@@ -5,7 +5,12 @@ import java.util.stream.Collectors;
 
 public class DataBase {
     private static ArrayList<Hospital> hospitalsList = new ArrayList<Hospital>();
+    private static ArrayList<Boundary> boundaryList = new ArrayList<Boundary>();
+    private static ArrayList<Road> roadsList = new ArrayList<Road>();
     private static ArrayList<Patient> patientsLists = new ArrayList<Patient>();
+
+
+    //HOSPITAL
 
     public static void addHospital(Hospital hospital){
         hospitalsList.add(hospital);
@@ -13,7 +18,7 @@ public class DataBase {
 
     public static Hospital getHospital(int id){
         return hospitalsList.stream()
-                .filter(patient -> id == patient.getId())
+                .filter(hospital -> id == hospital.getId())
                 .findAny()
                 .orElse(null);
     }
@@ -21,6 +26,42 @@ public class DataBase {
     public static ArrayList<Hospital> getHospitalsList(){
         return hospitalsList;
     }
+
+    //BOUNDARY
+
+    public static void addBoundary(Boundary boundary){
+        boundaryList.add(boundary);
+    }
+
+    public static Boundary getBoundary(int id){
+        return boundaryList.stream()
+                .filter(boundary -> id == boundary.getId())
+                .findAny()
+                .orElse(null);
+    }
+
+    public static ArrayList<Boundary> getBoundaryList(){
+        return boundaryList;
+    }
+
+    //ROAD
+
+    public static void addRoad(Road road){
+        roadsList.add(road);
+    }
+
+    public static Road getRoad(int id){
+        return roadsList.stream()
+                .filter(road -> id == road.getId())
+                .findAny()
+                .orElse(null);
+    }
+
+    public static ArrayList<Road> getRoadsList(){
+        return roadsList;
+    }
+
+    //PATIENT
 
     public static void addPatient(Patient patient){
         patientsLists.add(patient);
@@ -37,9 +78,25 @@ public class DataBase {
         return patientsLists;
     }
 
+    //PRINTERS
+
     public static void printHospitals(){
         System.out.println("Lista Szpitali");
         System.out.println(hospitalsList.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining("\n")));
+    }
+
+    public static void printBoundary(){
+        System.out.println("Lista Obiektów");
+        System.out.println(boundaryList.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining("\n")));
+    }
+
+    public static void printRoads(){
+        System.out.println("Lista Dróg");
+        System.out.println(roadsList.stream()
                 .map(Object::toString)
                 .collect(Collectors.joining("\n")));
     }

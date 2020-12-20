@@ -14,6 +14,9 @@ public class MapWindowController {
 
         MapLoader mapLoader = new MapLoader();
         mapLoader.loadDataFromFile(selectedFile.getAbsolutePath());
+
         DataBase.printHospitals();
+        DataBase.printBoundary();
+        DataBase.printRoads();
     }
 }

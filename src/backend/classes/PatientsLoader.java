@@ -55,7 +55,7 @@ public class PatientsLoader extends DataLoader implements Loader {
             case NONE:
                 break;
             case PATIENT:
-                if (loadPatient() == false) {
+                if (!loadPatient()) {
                     return false;
                 }
                 break;
