@@ -14,6 +14,7 @@ public class PatientsLoader extends DataLoader implements Loader {
 
     private LoadingDataType loadingMode = LoadingDataType.NONE;
 
+    private static final int PATIENT_DATA_SIZE = 3;
     private static final int PATIENT_ID_INDEX = 0;
     private static final int PATIENT_X_INDEX = 1;
     private static final int PATIENT_Y_INDEX = 2;

@@ -11,7 +11,6 @@ public class DataLoader {
     protected static String loadedLine = "";
 
     protected static final String DATA_SPITER = " \\| ";
-    protected static final int PATIENT_DATA_SIZE = 3;
 
     protected void checkComment() {
 

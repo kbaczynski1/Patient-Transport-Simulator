@@ -7,7 +7,7 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 
-public class PatientController {
+public class PatientWindowController {
 
 
     public void loadPatientsFromFile(ActionEvent actionEvent) {
