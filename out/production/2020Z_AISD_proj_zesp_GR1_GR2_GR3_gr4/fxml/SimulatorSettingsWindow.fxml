@@ -7,6 +7,6 @@
    <children>
       <Slider layoutX="50.0" layoutY="92.0" prefHeight="16.0" prefWidth="200.0" />
       <Button layoutX="108.0" layoutY="140.0" mnemonicParsing="false" text="Start/Stop" />
-      <Label layoutX="90.0" layoutY="40.0" text="Szybkosc animacji" />
+      <Label layoutX="90.0" layoutY="40.0" text="Szybkość animacji" />
    </children>
 </AnchorPane>

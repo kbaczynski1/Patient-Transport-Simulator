@@ -12,7 +12,7 @@
           <TableColumn prefWidth="120.0" text="nazwa szpitala" />
             <TableColumn prefWidth="120.0" text="liczba łóżek" />
             <TableColumn prefWidth="120.0" text="liczba wolnych łóżek" />
-            <TableColumn prefWidth="120.0" text="id pacientów w kolejce" />
+            <TableColumn prefWidth="120.0" text="id pacjentów w kolejce" />
         </columns>
       </TableView>
    </children>

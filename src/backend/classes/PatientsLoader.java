@@ -3,11 +3,9 @@ package classes;
 import interfaces.Loader;
 
 import java.awt.geom.Point2D;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PatientsLoader extends DataLoader implements Loader {
     private enum LoadingDataType {
@@ -24,7 +22,7 @@ public class PatientsLoader extends DataLoader implements Loader {
 
     @Override
     public void loadDataFromFile(String filePath) {
-        if(loadData(filePath)){
+        if(loadData(filePath) && vaildateData()){
             for(Patient patient : loadedPatiensList){
                 DataBase.addPatient(patient);
             }
@@ -32,11 +30,14 @@ public class PatientsLoader extends DataLoader implements Loader {
     }
 
     @Override
-    public void vaildateData(String filePath) {
-
+    public boolean vaildateData() {
+       Set<Patient> set = new HashSet<Patient>(loadedPatiensList);
+        if(set.size() < loadedPatiensList.size()){
+            System.out.println("Dwukrotne wystąpienie pacjenta o takim samym id");
+            return false;
+        }
+        return true;
     }
-
-
 
     @Override
     protected void checkComment() {
@@ -75,7 +76,7 @@ public class PatientsLoader extends DataLoader implements Loader {
             }
 
         } else {
-            System.out.println("Niewłaściwa liczba danych dla pacienta w linii " + lineNumber +":\n" + loadedLine);
+            System.out.println("Niewłaściwa liczba danych dla pacjenta w linii " + lineNumber +":\n" + loadedLine);
         }
         return false;
     }

@@ -2,7 +2,7 @@ package classes;
 
 import java.awt.geom.Point2D;
 
-public class Patient {
+public class Patient implements Comparable<Patient>{
     private int id;
     private String name;
     private Point2D.Double cords;
@@ -48,5 +48,19 @@ public class Patient {
         return "[" + id + "] " + name + "\tCords: " + cords.getX() + "\t" + cords.getY();
     }
 
+    @Override
+    public int compareTo(Patient p) {
+        return Integer.compare(this.getId(), p.getId());
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if(((Patient)o).getId() == this.id) return true;
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }
