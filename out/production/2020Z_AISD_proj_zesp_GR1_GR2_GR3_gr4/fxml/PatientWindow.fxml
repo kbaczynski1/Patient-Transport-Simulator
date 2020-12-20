@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Separator orientation="VERTICAL" prefHeight="200.0" />
+      <VBox prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <AnchorPane prefHeight="405.0" prefWidth="100.0">
+               <children>
+                  <Button layoutX="36.0" layoutY="87.0" mnemonicParsing="false" text="Wgraj pacientów" />
+               </children>
+            </AnchorPane>
+         </children></VBox>
+      <Separator orientation="VERTICAL" prefHeight="200.0" />
+      <VBox prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="16.0" prefWidth="218.0" text="Wgraj Pacientow recznie">
+               <padding>
+                  <Insets bottom="20.0" top="10.0" />
+               </padding></Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="500.0" prefWidth="100.0">
+                     <children>
+                        <HBox prefHeight="50.0" prefWidth="100.0">
+                           <children>
+                              <Label prefHeight="16.0" prefWidth="39.0" text="X" />
+                              <Spinner />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="50.0" prefWidth="100.0">
+                           <children>
+                              <Label prefHeight="16.0" prefWidth="39.0" text="Y" />
+                              <Spinner />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <HBox prefHeight="100.0" prefWidth="100.0">
+                  <children>
+                     <Label prefHeight="16.0" prefWidth="39.0" text="id" />
+                     <Spinner />
+                  </children>
+               </HBox>
+            </HBox>
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="197.0" text="Dodaj pacienta" />
+         </children></VBox>
+      <Separator orientation="VERTICAL" prefHeight="200.0" />
+      <VBox prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label alignment="TOP_CENTER" prefHeight="16.0" prefWidth="224.0" text="Usun pacienta">
+               <padding>
+                  <Insets bottom="20.0" top="10.0" />
+               </padding></Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="16.0" prefWidth="39.0" text="id" />
+                  <Spinner />
+               </children>
+            </HBox>
+         </children></VBox>
+   </children>
+</HBox>
