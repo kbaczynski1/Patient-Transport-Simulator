@@ -17,6 +17,10 @@ public class Hospital {
         this.freeBedsAmount = freeBedsAmount;
     }
 
+    public void setFreeBedsAmount(int freeBedsAmount){
+        this.freeBedsAmount = freeBedsAmount;
+    }
+
     public int getId() {
         return id;
     }

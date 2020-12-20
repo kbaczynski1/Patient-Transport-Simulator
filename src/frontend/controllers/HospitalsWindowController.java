@@ -29,6 +29,23 @@ public class HospitalsWindowController {
         hospitalsTableNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         hospitalsTableAllBedsColumn.setCellValueFactory(new PropertyValueFactory<>("bedsAmount"));
         hospitalsTableFreeBedsColumn.setCellValueFactory(new PropertyValueFactory<>("freeBedsAmount"));
+
+        Thread refreshTableThread = new Thread() {
+            public void run() {
+                while(true) {
+                    hospitalsTable.refresh();
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        refreshTableThread.setDaemon(true);
+        refreshTableThread.start();
+
+
     }
 
     public void updateHospitalTable(){
