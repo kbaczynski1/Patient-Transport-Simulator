@@ -13,9 +13,10 @@ public class PatientWindowController {
     public void loadPatientsFromFile(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
-
-        PatientsLoader patientsLoader = new PatientsLoader();
-        patientsLoader.loadDataFromFile(selectedFile.getAbsolutePath());
-        DataBase.printPatiens();
+        if(selectedFile != null){
+            PatientsLoader patientsLoader = new PatientsLoader();
+            patientsLoader.loadDataFromFile(selectedFile.getAbsolutePath());
+            DataBase.printPatiens();
+        }
     }
 }

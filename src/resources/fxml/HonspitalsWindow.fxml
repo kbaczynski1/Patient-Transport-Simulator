@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HospitalsWindowController">
    <children>
-      <TableView prefHeight="400.0" prefWidth="600.0">
+      <TableView fx:id="hospitalsTable" prefHeight="400.0" prefWidth="600.0">
         <columns>
-          <TableColumn prefWidth="120.0" text="id szpitala" />
-          <TableColumn prefWidth="120.0" text="nazwa szpitala" />
-            <TableColumn prefWidth="120.0" text="liczba łóżek" />
-            <TableColumn prefWidth="120.0" text="liczba wolnych łóżek" />
-            <TableColumn prefWidth="120.0" text="id pacjentów w kolejce" />
-        </columns>
-      </TableView>
-   </children>
-</AnchorPane>
+          <TableColumn fx:id="hospitalsTableIdColumn" prefWidth="120.0" text="id szpitala" />
+            <TableColumn fx:id="hospitalsTableNameColumn" prefWidth="120.0" text="nazwa szpitala" />
+              <TableColumn fx:id="hospitalsTableAllBedsColumn" prefWidth="120.0" text="liczba łóżek" />
+              <TableColumn fx:id="hospitalsTableFreeBedsColumn" prefWidth="120.0" text="liczba wolnych łóżek" />
+              <TableColumn fx:id="hospitalsTableIdPatientsColumn" prefWidth="120.0" text="id pacjentów w kolejce" />
+          </columns>
+        </TableView>
+     </children>
+  </AnchorPane>

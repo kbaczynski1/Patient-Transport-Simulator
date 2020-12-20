@@ -9,7 +9,7 @@ public class Hospital {
     private int bedsAmount;
     private int freeBedsAmount;
 
-    Hospital(int id, String name, Point2D.Double cords, int bedsAmount, int freeBedsAmount){
+    public Hospital(int id, String name, Point2D.Double cords, int bedsAmount, int freeBedsAmount){
         this.id = id;
         this.name = name;
         this.cords = cords;
