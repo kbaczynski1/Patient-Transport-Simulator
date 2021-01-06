@@ -3,9 +3,6 @@ package classes;
 import java.awt.geom.Point2D;
 
 public class Hospital extends Boundary{
-//    private int id;
-//    private String name;
-//    private Point2D.Double cords;
     private int bedsAmount;
     private int freeBedsAmount;
 

@@ -42,14 +42,12 @@ public class MapLoader extends DataLoader implements Loader {
         if(loadData(filePath) && vaildateData()){
             for(Hospital hospital : loadedHospitalsList){
                 DataBase.addHospital(hospital);
-                Boundary tempboundary = new Boundary(DataBase.getBoundariesList().size(), hospital.getName(), hospital.getCords());
-                DataBase.addBoundary(tempboundary);
+                DataBase.addBoundary((Boundary) hospital);
             }
 
             for(Monument monument : loadedMonumentList){
                 DataBase.addMonument(monument);
-                Boundary tempboundary = new Boundary(DataBase.getBoundariesList().size(), monument.getName(), monument.getCords());
-                DataBase.addBoundary(tempboundary);
+                DataBase.addBoundary((Boundary) monument);
             }
 
             for(Road road : loadedRoadsList){

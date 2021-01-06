@@ -35,6 +35,7 @@ public class MapWindowController {
             DataBase.printMonuments();
             DataBase.printRoads();
 
+            Country.calculateBoundaries(DataBase.getBoundariesList());
             printMap();
             mainWindowController.doActionsAfterLoadMap();
         }
@@ -46,6 +47,19 @@ public class MapWindowController {
 
     private void printMap(){
         double scale = 3.0;
+
+        double[] arrayOfBoundaries = new double[2 * Country.getBoundariesNodes().size()];
+        int count = 0;
+        for(Boundary boundary : Country.getBoundariesNodes()) {
+            arrayOfBoundaries[count] = boundary.getCords().getX()*scale;
+            count++;
+            arrayOfBoundaries[count] = boundary.getCords().getY()*scale;
+            count++;
+        }
+        Polygon polygon = new Polygon(arrayOfBoundaries);
+        polygon.setFill(Color.LIGHTBLUE);
+        anchorPaneMapWindow.getChildren().add(polygon);
+
         for(Monument monument : DataBase.getMonumentsList()){
             Circle circle = new Circle(monument.getCords().getX() * scale, monument.getCords().getY() * scale, 5.f, Color.BLUE);
             anchorPaneMapWindow.getChildren().add(circle);
@@ -74,17 +88,7 @@ public class MapWindowController {
             monumentsList.add(tempMonument);
         }
 
-        double[] arrayOfBoundaries = new double[2 * DataBase.getBoundariesList().size()];
-        int count = 0;
-        for(Boundary boundary : DataBase.getBoundariesList()) {
-            arrayOfBoundaries[count] = boundary.getCords().getX();
-            count++;
-            arrayOfBoundaries[count] = boundary.getCords().getY();
-            count++;
-        }
-        Polygon polygon = new Polygon(arrayOfBoundaries);
-        polygon.setFill(Color.LIGHTBLUE);
-        anchorPaneMapWindow.getChildren().add(polygon);
+
 
         // create a Group
   //      Group group = new Group(circle);
