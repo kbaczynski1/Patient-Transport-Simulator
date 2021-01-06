@@ -31,9 +31,12 @@ public class Boundary {
         return "[" + id + "] " + name + "\tCords: " + cords.getX() + "\t" + cords.getY();
     }
 
-    public static Comparator<Boundary> SortByXAsc = new Comparator<Boundary>(){
+    public static Comparator<Boundary> SortByXAscThenYDesc = new Comparator<Boundary>(){
         public int compare(Boundary one, Boundary two) {
-            return Double.compare(one.getCords().getX(), two.getCords().getX());
+            if (Double.compare(one.getCords().getX(), two.getCords().getX()) == 0)
+                return Double.compare(two.getCords().getY(), one.getCords().getY());
+            else
+                return Double.compare(one.getCords().getX(), two.getCords().getX());
         }
     };
 

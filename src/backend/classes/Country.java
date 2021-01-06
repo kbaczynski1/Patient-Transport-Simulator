@@ -12,109 +12,110 @@ public class Country {
     }
 
     static public void calculateBoundaries(ArrayList<Boundary> allBoundaries){
-        ArrayList<Double> slopes = new ArrayList<Double>();
+        ArrayList<Double> angles = new ArrayList<Double>();
         ArrayList<Boundary> goodBoundaries = new ArrayList<>();
-        Collections.sort(allBoundaries, Boundary.SortByXAsc);
+        Collections.sort(allBoundaries, Boundary.SortByXAscThenYDesc);
         for (Boundary boundary: allBoundaries){
-            if (goodBoundaries.size() == 0)
+            if (goodBoundaries.size() == 0) {
                 goodBoundaries.add(boundary);
-            else if (boundary.getCords().getY() <= goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY()){
+            }
+            else if (boundary.getCords().getY() >= goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY()){
                 if (goodBoundaries.size() == 1){
-                    slopes.add((goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX()) );
+                    angles.add(Math.atan2((goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX()), goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY()) );
                     goodBoundaries.add(boundary);
                 }
                 else{
-                    Double tempSlope = (goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX());
-                    while (slopes.get(slopes.size() - 1) > tempSlope){
+                    Double tempAngle = (goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX());
+                    while (angles.get(angles.size() - 1) > tempAngle){
                         goodBoundaries.remove(goodBoundaries.size() - 1);
-                        slopes.remove(slopes.size() - 1);
-                        tempSlope = (goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX());
-                        if (slopes.size() == 0)
+                        angles.remove(angles.size() - 1);
+                        tempAngle = Math.atan2((goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX()), goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY()) ;
+                        if (angles.size() == 0)
                                 break;
                     }
                     goodBoundaries.add(boundary);
-                    slopes.add(tempSlope);
+                    angles.add(tempAngle);
                 }
             }
         }
         boundariesNodes.addAll(goodBoundaries);
         goodBoundaries = new ArrayList<>();
-        slopes = new ArrayList<Double>();
+        angles = new ArrayList<Double>();
         Collections.sort(allBoundaries, Boundary.SortByYDesc);
+        goodBoundaries.add(boundariesNodes.get(boundariesNodes.size() - 1));
         for (Boundary boundary: allBoundaries){
-            if (goodBoundaries.size() == 0)
-                goodBoundaries.add(boundary);
-            else if (boundary.getCords().getX() >= goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX()){
+            if (boundary.getCords().getX() >= goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX()){
                 if (goodBoundaries.size() == 1){
-                    slopes.add((goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX()) );
+                    angles.add(Math.atan2((goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX()), goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY()) );
                     goodBoundaries.add(boundary);
                 }
                 else{
-                    Double tempSlope = (goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX());
-                    while (slopes.get(slopes.size() - 1) > tempSlope){
+                    Double tempAngle = (goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX());
+                    while (angles.get(angles.size() - 1) < tempAngle){
                         goodBoundaries.remove(goodBoundaries.size() - 1);
-                        slopes.remove(slopes.size() - 1);
-                        tempSlope = (goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX());
-                        if (slopes.size() == 0)
+                        angles.remove(angles.size() - 1);
+                        tempAngle = Math.atan2((goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX()), goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY()) ;
+                        if (angles.size() == 0)
                             break;
                     }
                     goodBoundaries.add(boundary);
-                    slopes.add(tempSlope);
+                    angles.add(tempAngle);
                 }
             }
         }
+        goodBoundaries.remove(0);
         boundariesNodes.addAll(goodBoundaries);
         goodBoundaries = new ArrayList<>();
-        slopes = new ArrayList<Double>();
+        angles = new ArrayList<Double>();
         Collections.sort(allBoundaries, Boundary.SortByXDesc);
+        goodBoundaries.add(boundariesNodes.get(boundariesNodes.size() - 1));
         for (Boundary boundary: allBoundaries){
-            if (goodBoundaries.size() == 0)
-                goodBoundaries.add(boundary);
-            else if (boundary.getCords().getY() >= goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY()){
+            if (boundary.getCords().getY() <= goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY()){
                 if (goodBoundaries.size() == 1){
-                    slopes.add((goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX()) );
+                    angles.add(Math.atan2((goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX()), goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY()) );
                     goodBoundaries.add(boundary);
                 }
                 else{
-                    Double tempSlope = (goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX());
-                    while (slopes.get(slopes.size() - 1) > tempSlope){
+                    Double tempAngle = (goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX());
+                    while (angles.get(angles.size() - 1) < tempAngle){
                         goodBoundaries.remove(goodBoundaries.size() - 1);
-                        slopes.remove(slopes.size() - 1);
-                        tempSlope = (goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX());
-                        if (slopes.size() == 0)
+                        angles.remove(angles.size() - 1);
+                        tempAngle = Math.atan2((goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX()), goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY()) ;
+                        if (angles.size() == 0)
                             break;
                     }
                     goodBoundaries.add(boundary);
-                    slopes.add(tempSlope);
+                    angles.add(tempAngle);
                 }
             }
         }
+        goodBoundaries.remove(0);
         boundariesNodes.addAll(goodBoundaries);
         goodBoundaries = new ArrayList<>();
-        slopes = new ArrayList<Double>();
-        Collections.sort(allBoundaries, Boundary.SortByYDesc);
+        angles = new ArrayList<Double>();
+        Collections.sort(allBoundaries, Boundary.SortByYAsc);
+        goodBoundaries.add(boundariesNodes.get(boundariesNodes.size() - 1));
         for (Boundary boundary: allBoundaries){
-            if (goodBoundaries.size() == 0)
-                goodBoundaries.add(boundary);
-            else if (boundary.getCords().getX() <= goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX()){
+            if (boundary.getCords().getX() <= goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX()){
                 if (goodBoundaries.size() == 1){
-                    slopes.add((goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX()) );
+                    angles.add(Math.atan2((goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX()), goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY()) );
                     goodBoundaries.add(boundary);
                 }
                 else{
-                    Double tempSlope = (goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX());
-                    while (slopes.get(slopes.size() - 1) > tempSlope){
+                    Double tempAngle = (goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX());
+                    while (angles.get(angles.size() - 1) < tempAngle){
                         goodBoundaries.remove(goodBoundaries.size() - 1);
-                        slopes.remove(slopes.size() - 1);
-                        tempSlope = (goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY())/(goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX());
-                        if (slopes.size() == 0)
+                        angles.remove(angles.size() - 1);
+                        tempAngle = Math.atan2((goodBoundaries.get(goodBoundaries.size() - 1).getCords().getX() - boundary.getCords().getX()), goodBoundaries.get(goodBoundaries.size() - 1).getCords().getY() - boundary.getCords().getY()) ;
+                        if (angles.size() == 0)
                             break;
                     }
                     goodBoundaries.add(boundary);
-                    slopes.add(tempSlope);
+                    angles.add(tempAngle);
                 }
             }
         }
+        goodBoundaries.remove(0);
         boundariesNodes.addAll(goodBoundaries);
     }
 }
