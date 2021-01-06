@@ -5,9 +5,10 @@ import java.util.stream.Collectors;
 
 public class DataBase {
     private static ArrayList<Hospital> hospitalsList = new ArrayList<Hospital>();
-    private static ArrayList<Boundary> boundaryList = new ArrayList<Boundary>();
+    private static ArrayList<Monument> monumentsList = new ArrayList<Monument>();
     private static ArrayList<Road> roadsList = new ArrayList<Road>();
     private static ArrayList<Patient> patientsLists = new ArrayList<Patient>();
+    private static ArrayList<Boundary> boundariesList = new ArrayList<>();
 
 
     //HOSPITAL
@@ -27,21 +28,21 @@ public class DataBase {
         return hospitalsList;
     }
 
-    //BOUNDARY
+    //MONUMENT
 
-    public static void addBoundary(Boundary boundary){
-        boundaryList.add(boundary);
+    public static void addMonument(Monument monument){
+        monumentsList.add(monument);
     }
 
-    public static Boundary getBoundary(int id){
-        return boundaryList.stream()
-                .filter(boundary -> id == boundary.getId())
+    public static Monument getMonument(int id){
+        return monumentsList.stream()
+                .filter(monument -> id == monument.getId())
                 .findAny()
                 .orElse(null);
     }
 
-    public static ArrayList<Boundary> getBoundaryList(){
-        return boundaryList;
+    public static ArrayList<Monument> getMonumentsList(){
+        return monumentsList;
     }
 
     //ROAD
@@ -78,6 +79,23 @@ public class DataBase {
         return patientsLists;
     }
 
+    //BOUNDARIES
+
+    public static void addBoundary(Boundary boundary){
+        boundariesList.add(boundary);
+    }
+
+    public static Boundary getBoundary(int id){
+        return boundariesList.stream()
+                .filter(boundary -> id == boundary.getId())
+                .findAny()
+                .orElse(null);
+    }
+
+    public static ArrayList<Boundary> getBoundariesList(){
+        return boundariesList;
+    }
+
     //PRINTERS
 
     public static void printHospitals(){
@@ -87,9 +105,9 @@ public class DataBase {
                 .collect(Collectors.joining("\n")));
     }
 
-    public static void printBoundary(){
+    public static void printMonuments(){
         System.out.println("Lista Obiektów");
-        System.out.println(boundaryList.stream()
+        System.out.println(monumentsList.stream()
                 .map(Object::toString)
                 .collect(Collectors.joining("\n")));
     }

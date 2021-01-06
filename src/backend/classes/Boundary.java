@@ -3,9 +3,9 @@ package classes;
 import java.awt.geom.Point2D;
 
 public class Boundary {
-    private int id;
-    private String name;
-    private Point2D.Double cords;
+    protected int id;
+    protected String name;
+    protected Point2D.Double cords;
 
     Boundary(int id, String name, Point2D.Double cords){
         this.id = id;

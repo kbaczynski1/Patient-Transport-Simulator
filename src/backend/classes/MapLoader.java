@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class MapLoader extends DataLoader implements Loader {
 
     private enum LoadingDataType {
-        NONE, HOSPITAL, BOUNDARY, ROAD;
+        NONE, HOSPITAL, MONUMENT, ROAD;
     }
 
     private LoadingDataType loadingMode = LoadingDataType.NONE;
@@ -21,11 +21,11 @@ public class MapLoader extends DataLoader implements Loader {
     private static final int HOSPITAL_BEDS_AMOUNT_INDEX = 4;
     private static final int HOSPITAL_FREE_BEDS_AMOUNT_INDEX = 5;
 
-    private static final int BOUNDARY_DATA_SIZE = 4;
-    private static final int BOUNDARY_ID_INDEX = 0;
-    private static final int BOUNDARY_NAME_INDEX = 1;
-    private static final int BOUNDARY_X_INDEX = 2;
-    private static final int BOUNDARY_Y_INDEX = 3;
+    private static final int MONUMENT_DATA_SIZE = 4;
+    private static final int MONUMENT_ID_INDEX = 0;
+    private static final int MONUMENT_NAME_INDEX = 1;
+    private static final int MONUMENT_X_INDEX = 2;
+    private static final int MONUMENT_Y_INDEX = 3;
 
     private static final int ROAD_DATA_SIZE = 4;
     private static final int ROAD_ID_INDEX = 0;
@@ -34,7 +34,7 @@ public class MapLoader extends DataLoader implements Loader {
     private static final int ROAD_DISTANCE_INDEX = 3;
 
     private ArrayList<Hospital> loadedHospitalsList = new ArrayList<Hospital>();
-    private ArrayList<Boundary> loadedBoundaryList = new ArrayList<Boundary>();
+    private ArrayList<Monument> loadedMonumentList = new ArrayList<Monument>();
     private ArrayList<Road> loadedRoadsList = new ArrayList<Road>();
 
     @Override
@@ -42,10 +42,14 @@ public class MapLoader extends DataLoader implements Loader {
         if(loadData(filePath) && vaildateData()){
             for(Hospital hospital : loadedHospitalsList){
                 DataBase.addHospital(hospital);
+                Boundary tempboundary = new Boundary(DataBase.getBoundariesList().size(), hospital.getName(), hospital.getCords());
+                DataBase.addBoundary(tempboundary);
             }
 
-            for(Boundary boundary : loadedBoundaryList){
-                DataBase.addBoundary(boundary);
+            for(Monument monument : loadedMonumentList){
+                DataBase.addMonument(monument);
+                Boundary tempboundary = new Boundary(DataBase.getBoundariesList().size(), monument.getName(), monument.getCords());
+                DataBase.addBoundary(tempboundary);
             }
 
             for(Road road : loadedRoadsList){
@@ -64,7 +68,7 @@ public class MapLoader extends DataLoader implements Loader {
         if (loadedLine.startsWith("# Szpitale")) {
             loadingMode = LoadingDataType.HOSPITAL;
         } else if (loadedLine.startsWith("# Obiekty")){
-            loadingMode = LoadingDataType.BOUNDARY;
+            loadingMode = LoadingDataType.MONUMENT;
         } else if (loadedLine.startsWith("# Drogi")){
             loadingMode = LoadingDataType.ROAD;
         } else {
@@ -82,8 +86,8 @@ public class MapLoader extends DataLoader implements Loader {
                     return false;
                 }
                 break;
-            case BOUNDARY:
-                if (!loadBoundary()) {
+            case MONUMENT:
+                if (!loadMonument()) {
                     return false;
                 }
                 break;
@@ -118,15 +122,15 @@ public class MapLoader extends DataLoader implements Loader {
         return false;
     }
 
-    private boolean loadBoundary() {
-        String[] boundaryData = loadedLine.split(DATA_SPITER);
-        if (boundaryData.length == BOUNDARY_DATA_SIZE) {
+    private boolean loadMonument() {
+        String[] monumentData = loadedLine.split(DATA_SPITER);
+        if (monumentData.length == MONUMENT_DATA_SIZE) {
             try {
-                int boundaryId = parseInt(boundaryData, BOUNDARY_ID_INDEX);
-                String boundaryName = boundaryData[BOUNDARY_NAME_INDEX];
-                double boundaryX = parseInt(boundaryData, BOUNDARY_X_INDEX);
-                double boundaryY = parseInt(boundaryData, BOUNDARY_Y_INDEX);
-                loadedBoundaryList.add(new Boundary(boundaryId, boundaryName, new Point2D.Double(boundaryX, boundaryY)));
+                int boundaryId = parseInt(monumentData, MONUMENT_ID_INDEX);
+                String boundaryName = monumentData[MONUMENT_NAME_INDEX];
+                double boundaryX = parseInt(monumentData, MONUMENT_X_INDEX);
+                double boundaryY = parseInt(monumentData, MONUMENT_Y_INDEX);
+                loadedMonumentList.add(new Monument(boundaryId, boundaryName, new Point2D.Double(boundaryX, boundaryY)));
                 return true;
             } catch (NumberFormatException e) {
                 return false;
