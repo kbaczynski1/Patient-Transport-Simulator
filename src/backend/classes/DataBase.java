@@ -8,6 +8,7 @@ public class DataBase {
     private static ArrayList<Boundary> boundaryList = new ArrayList<Boundary>();
     private static ArrayList<Road> roadsList = new ArrayList<Road>();
     private static ArrayList<Patient> patientsLists = new ArrayList<Patient>();
+    private static ArrayList<Intersection> intersectionsList = new ArrayList<Intersection>();
 
 
     //HOSPITAL
@@ -76,6 +77,23 @@ public class DataBase {
 
     public static ArrayList<Patient> getPatientsList(){
         return patientsLists;
+    }
+
+    //INTERSECTION
+
+    public static void addIntesection(Intersection intersection){
+        intersectionsList.add(intersection);
+    }
+
+    public static Patient getIntersection(int id){
+        return patientsLists.stream()
+                .filter(intersection -> id == intersection.getId())
+                .findAny()
+                .orElse(null);
+    }
+
+    public static ArrayList<Intersection> getIntersectionsList(){
+        return intersectionsList;
     }
 
     //PRINTERS

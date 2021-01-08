@@ -29,6 +29,9 @@ public class MapWindowController {
             MapLoader mapLoader = new MapLoader();
             mapLoader.loadDataFromFile(selectedFile.getAbsolutePath());
 
+            IntersectionDetector intersectionDetector = new IntersectionDetector();
+            intersectionDetector.detect();
+
             DataBase.printHospitals();
             DataBase.printBoundary();
             DataBase.printRoads();
@@ -58,6 +61,11 @@ public class MapWindowController {
             Line line = new Line(road.getFirstHospital().getCords().getX() * scale, road.getFirstHospital().getCords().getY() * scale,
                     road.getSecondHospital().getCords().getX() * scale, road.getSecondHospital().getCords().getY() * scale);
             anchorPaneMapWindow.getChildren().add(line);
+        }
+
+        for(Intersection intersection : DataBase.getIntersectionsList()){
+            Circle circle = new Circle(intersection.getCords().getX() * scale, intersection.getCords().getY() * scale, 5.f, Color.DARKGREEN);
+            anchorPaneMapWindow.getChildren().add(circle);
         }
 
         // create a Group
