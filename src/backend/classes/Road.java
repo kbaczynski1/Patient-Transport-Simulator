@@ -8,6 +8,7 @@ public class Road  implements Comparable<Road>{
     private int id;
     private int firstHospitalId;
     private int secondHospitalId;
+    private double value;
     private double distance;
 
     Road(int id, int firstHospitalId, int secondHospitalId, double distance){
@@ -15,6 +16,11 @@ public class Road  implements Comparable<Road>{
         this.firstHospitalId = firstHospitalId;
         this.secondHospitalId = secondHospitalId;
         this.distance = distance;
+//        this.calculateValue(this.getStartPoint().getX());
+    }
+
+    public void initValue() {
+        this.calculateValue(this.getStartPoint().getX());
     }
 
     public int getId() {
@@ -39,6 +45,39 @@ public class Road  implements Comparable<Road>{
 
     public double getDistance() {
         return distance;
+    }
+
+    public Point2D getStartPoint() {
+        if (this.getFirstHospital().getCords().getX() <= this.getSecondHospital().getCords().getX()) {
+            return this.getFirstHospital().getCords();
+        } else {
+            return getSecondHospital().getCords();
+        }
+    }
+
+    public Point2D getEndPoint() {
+        if (getFirstHospital().getCords().getX() <= getSecondHospital().getCords().getX()) {
+            return getSecondHospital().getCords();
+        } else {
+            return getFirstHospital().getCords();
+        }
+    }
+
+    //TODO understand what "value" means
+    public void calculateValue(double value) {
+        double x1 = this.getStartPoint().getX();
+        double x2 = this.getEndPoint().getX();
+        double y1 = this.getStartPoint().getY();
+        double y2 = this.getEndPoint().getY();
+        this.value = y1 + (((y2 - y1) / (x2 - x1)) * (value - x1));
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public double getValue() {
+        return this.value;
     }
 
     @Override
