@@ -8,7 +8,11 @@ public class DataBase {
     private static ArrayList<Monument> monumentsList = new ArrayList<Monument>();
     private static ArrayList<Road> roadsList = new ArrayList<Road>();
     private static ArrayList<Patient> patientsLists = new ArrayList<Patient>();
+<<<<<<< HEAD
     private static ArrayList<Boundary> boundariesList = new ArrayList<>();
+=======
+    private static ArrayList<Intersection> intersectionsList = new ArrayList<Intersection>();
+>>>>>>> 5bc89e2bbb616d3e8507d80fffa375d996e8108f
 
 
     //HOSPITAL
@@ -79,6 +83,7 @@ public class DataBase {
         return patientsLists;
     }
 
+<<<<<<< HEAD
     //BOUNDARIES
 
     public static void addBoundary(Boundary boundary){
@@ -88,12 +93,28 @@ public class DataBase {
     public static Boundary getBoundary(int id){
         return boundariesList.stream()
                 .filter(boundary -> id == boundary.getId())
+=======
+    //INTERSECTION
+
+    public static void addIntesection(Intersection intersection){
+        intersectionsList.add(intersection);
+    }
+
+    public static Patient getIntersection(int id){
+        return patientsLists.stream()
+                .filter(intersection -> id == intersection.getId())
+>>>>>>> 5bc89e2bbb616d3e8507d80fffa375d996e8108f
                 .findAny()
                 .orElse(null);
     }
 
+<<<<<<< HEAD
     public static ArrayList<Boundary> getBoundariesList(){
         return boundariesList;
+=======
+    public static ArrayList<Intersection> getIntersectionsList(){
+        return intersectionsList;
+>>>>>>> 5bc89e2bbb616d3e8507d80fffa375d996e8108f
     }
 
     //PRINTERS
