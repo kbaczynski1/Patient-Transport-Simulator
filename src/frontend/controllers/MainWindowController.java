@@ -36,4 +36,6 @@ public class MainWindowController {
 //        readingThread.setDaemon(true);
 //        readingThread.start();
     }
+
+
 }
