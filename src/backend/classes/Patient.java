@@ -7,7 +7,7 @@ public class Patient implements Comparable<Patient>{
     private String name;
     private Point2D.Double cords;
 
-    Patient(int id, String name, Point2D.Double cords){
+    public Patient(int id, String name, Point2D.Double cords){
         this.id = id;
         this.name = name;
         this.cords = cords;

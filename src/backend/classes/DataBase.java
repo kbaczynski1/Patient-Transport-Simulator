@@ -18,7 +18,7 @@ public class DataBase {
 
     public static void addHospital(Hospital hospital){
         hospitalsList.add(hospital);
-        nodesList.add(new Node(hospital.getId(), hospital.getCords()));
+        nodesList.add(new Node(hospital.getId(), hospital.getCords(), false));
     }
 
     public static Hospital getHospital(int id){
@@ -33,6 +33,10 @@ public class DataBase {
                 .filter(node -> id == node.getId())
                 .findAny()
                 .orElse(null);
+    }
+
+    public static ArrayList<Node> getNodesList() {
+        return nodesList;
     }
 
     public static ArrayList<Hospital> getHospitalsList(){
@@ -138,7 +142,7 @@ public class DataBase {
 
     private static void addIntersectionToNodes(){
         for (Intersection inter : intersectionsList){
-            nodesList.add(new Node(inter.getId(), inter.getCords()));
+            nodesList.add(new Node(inter.getId(), inter.getCords(), true));
         }
     }
 
@@ -153,6 +157,7 @@ public class DataBase {
     public static ArrayList<Boundary> getBoundariesList() {
         return boundariesList;
     }
+
     public static ArrayList<Intersection> getIntersectionsList(){
         return intersectionsList;
     }

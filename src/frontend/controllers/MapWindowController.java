@@ -105,5 +105,14 @@ public class MapWindowController {
             monumentsList.add(tempMonument);
         }
 
+        /* test działania najbliżeszego szpitala
+        DataBase.addPatient(new Patient(0, "Edek", new Point2D.Double(11.0,31.0)));
+        PathSearcher pathSearcher = new PathSearcher(DataBase.getPatient(0));
+        pathSearcher.searchFirstHospital();
+        Hospital hos = pathSearcher.getCurrentHospital();
+        Circle circle = new Circle(hos.getCords().getX() * scale, hos.getCords().getY() * scale, 5.f, Color.ORANGE);
+        anchorPaneMapWindow.getChildren().add(circle);
+        */
+
     }
 }
