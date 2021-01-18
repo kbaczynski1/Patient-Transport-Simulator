@@ -10,12 +10,12 @@ public class IntersectionDetector {
 
     private Queue<IntersectionEvent> queue;
     private NavigableSet<Road> tree;
-    private ArrayList<Point2D> points;
+    private ArrayList<Intersection> intersections;
 
     public IntersectionDetector(ArrayList<Road> roads) {
         this.queue = new PriorityQueue<>(new IntersectionEventComparator());
         this.tree = new TreeSet<>(new RoadComparator());
-        this.points = new ArrayList<>();
+        this.intersections = new ArrayList<>();
         for (Road road: roads) {
             this.queue.add(new IntersectionEvent(road.getStartPoint(), road, 0));
             this.queue.add(new IntersectionEvent(road.getEndPoint(), road, 1));
@@ -79,7 +79,7 @@ public class IntersectionDetector {
                         this.removeFuture(r, road2);
                     }
                 }
-                this.points.add(event.getPoint());
+                this.intersections.add(new Intersection(DataBase.getIntersectionsList().size() + DataBase.getHospitalsList().size(), road1.getId(), road2.getId(), event.getPoint()));
             }
         }
     }
@@ -114,9 +114,11 @@ public class IntersectionDetector {
             if(t >= 0 && t <= 1 && u >= 0 && u <= 1) {
                 double x_c = x1 + t * (x2 - x1);
                 double y_c = y1 + t * (y2 - y1);
-                if(x_c > L) {
-                    this.queue.add(new IntersectionEvent(new Point2D.Double(x_c, y_c), new ArrayList<>(Arrays.asList(road1, road2)), 2));
-                    return true;
+                if ((x_c != x1 || y_c != y1) && (x_c != x2 || y_c != y2) && (x_c != x3 || y_c != y3) && (x_c != x4 || y_c != y4)) {
+                    if (x_c > L) {
+                        this.queue.add(new IntersectionEvent(new Point2D.Double(x_c, y_c), new ArrayList<>(Arrays.asList(road1, road2)), 2));
+                        return true;
+                    }
                 }
             }
         }
@@ -134,49 +136,6 @@ public class IntersectionDetector {
         this.tree.add(road2);
     }
 
-    public void detect() {
-        ArrayList<Road> roads = DataBase.getRoadsList();
-        boolean[][] checkedRoads = new boolean[roads.size()][roads.size()];
-        // set diagonal as true, since we don't want to check road with itself
-        for (int i = 0; i < checkedRoads.length; i++) {
-            checkedRoads[i][i] = true;
-        }
-        // check
-//        for (int i = 0; i < checkedRoads.length; i++) {
-//            for (int j = 0; j< checkedRoads[i].length; j++){
-//                System.out.print(checkedRoads[i][j]);
-//            }
-//            System.out.println();
-//        }
-
-        ArrayList<Intersection> intersections = new ArrayList<>();
-
-        for(int i = 0; i < roads.size(); i++) {
-            for (int j = 0; j < roads.size(); j++) {
-                // check intersection
-                if(checkedRoads[i][j]) {
-                    continue;
-                }
-
-                Intersection intersection = roads.get(i).doesIntersect(roads.get(j));
-
-                if ( intersection != null) {
-                    DataBase.addIntesection(intersection);
-                }
-                checkedRoads[i][j] = true;
-                checkedRoads[j][i] = true;
-            }
-        }
-
-//        System.out.println("Znalezione przecięcia");
-//        for (Intersection intersection: DataBase.getIntersectionsList()) {
-//            System.out.println(intersection);
-//        }
-
-        // TODO Implement sweep Line algorithm instead
-        Collections.sort(roads);
-    }
-
     private void recalculate(double L) {
         Iterator<Road> iter = this.tree.iterator();
         while(iter.hasNext()) {
@@ -186,12 +145,12 @@ public class IntersectionDetector {
 
     public void printIntersections() {
         System.out.println("Found intersections");
-        for(Point2D point: this.points) {
-            System.out.println("x= " + point.getX() + ", y= " + point.getY());
+        for(Intersection inter: this.intersections) {
+            System.out.println("x= " + inter.getCords().getX() + ", y= " + inter.getCords().getY());
         }
     }
-    public ArrayList<Point2D> getIntersections() {
-        return this.points;
+    public ArrayList<Intersection> getIntersections() {
+        return this.intersections;
     }
 
     private class IntersectionEventComparator implements Comparator<IntersectionEvent> {

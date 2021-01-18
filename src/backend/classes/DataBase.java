@@ -1,5 +1,6 @@
 package classes;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -8,22 +9,28 @@ public class DataBase {
     private static ArrayList<Monument> monumentsList = new ArrayList<Monument>();
     private static ArrayList<Road> roadsList = new ArrayList<Road>();
     private static ArrayList<Patient> patientsLists = new ArrayList<Patient>();
-<<<<<<< HEAD
     private static ArrayList<Boundary> boundariesList = new ArrayList<>();
-=======
-    private static ArrayList<Intersection> intersectionsList = new ArrayList<Intersection>();
->>>>>>> 5bc89e2bbb616d3e8507d80fffa375d996e8108f
+    private static ArrayList<Intersection> intersectionsList = new ArrayList<>();
+    private  static  ArrayList<Node> nodesList = new ArrayList<>();
 
 
     //HOSPITAL
 
     public static void addHospital(Hospital hospital){
         hospitalsList.add(hospital);
+        nodesList.add(new Node(hospital.getId(), hospital.getCords()));
     }
 
     public static Hospital getHospital(int id){
         return hospitalsList.stream()
                 .filter(hospital -> id == hospital.getId())
+                .findAny()
+                .orElse(null);
+    }
+
+    public static Node getNode(int id){
+        return nodesList.stream()
+                .filter(node -> id == node.getId())
                 .findAny()
                 .orElse(null);
     }
@@ -83,7 +90,6 @@ public class DataBase {
         return patientsLists;
     }
 
-<<<<<<< HEAD
     //BOUNDARIES
 
     public static void addBoundary(Boundary boundary){
@@ -93,28 +99,62 @@ public class DataBase {
     public static Boundary getBoundary(int id){
         return boundariesList.stream()
                 .filter(boundary -> id == boundary.getId())
-=======
+                .findAny()
+                .orElse(null);
+    }
     //INTERSECTION
 
-    public static void addIntesection(Intersection intersection){
-        intersectionsList.add(intersection);
+    public static void addIntesection(ArrayList<Intersection> intersection){
+        intersectionsList.addAll(intersection);
     }
+
+    public static void divideRoads(){
+        for (Intersection inter : intersectionsList) {
+            Road road = roadsList.get(inter.getRoad1Id());
+            if (road.getFirstNode().getCords().getX() - road.getSecondNode().getCords().getX() != 0){
+                roadsList.add(new Road(roadsList.size() + 1, road.getFirstNodeId(), inter.getId(), road.getDistance() * (road.getFirstNode().getCords().getX() - inter.getCords().getX()) / (double) (road.getFirstNode().getCords().getX() - road.getSecondNode().getCords().getX())));
+                roadsList.add(new Road(roadsList.size() + 1, road.getSecondNodeId(), inter.getId(), road.getDistance() * (road.getSecondNode().getCords().getX() - inter.getCords().getX()) / (double) road.getSecondNode().getCords().getX() - road.getFirstNode().getCords().getX()));
+            }
+            else {
+                roadsList.add(new Road(roadsList.size() + 1, road.getFirstNodeId(), inter.getId(), road.getDistance() * (road.getFirstNode().getCords().getY() - inter.getCords().getY()) / (double) (road.getFirstNode().getCords().getY() - road.getSecondNode().getCords().getY())));
+                roadsList.add(new Road(roadsList.size() + 1, road.getSecondNodeId(), inter.getId(), road.getDistance() * (road.getSecondNode().getCords().getY() - inter.getCords().getY()) / (double) road.getSecondNode().getCords().getY() - road.getFirstNode().getCords().getY()));
+            }
+            road = roadsList.get(inter.getRoad2Id());
+            if (road.getFirstNode().getCords().getX() - road.getSecondNode().getCords().getX() != 0){
+                roadsList.add(new Road(roadsList.size() + 1, road.getFirstNodeId(), inter.getId(), road.getDistance() * (road.getFirstNode().getCords().getX() - inter.getCords().getX()) / (double) (road.getFirstNode().getCords().getX() - road.getSecondNode().getCords().getX())));
+                roadsList.add(new Road(roadsList.size() + 1, road.getSecondNodeId(), inter.getId(), road.getDistance() * (road.getSecondNode().getCords().getX() - inter.getCords().getX()) / (double) road.getSecondNode().getCords().getX() - road.getFirstNode().getCords().getX()));
+            }
+            else {
+                roadsList.add(new Road(roadsList.size() + 1, road.getFirstNodeId(), inter.getId(), road.getDistance() * (road.getFirstNode().getCords().getY() - inter.getCords().getY()) / (double) (road.getFirstNode().getCords().getY() - road.getSecondNode().getCords().getY())));
+                roadsList.add(new Road(roadsList.size() + 1, road.getSecondNodeId(), inter.getId(), road.getDistance() * (road.getSecondNode().getCords().getY() - inter.getCords().getY()) / (double) road.getSecondNode().getCords().getY() - road.getFirstNode().getCords().getY()));
+            }
+        }
+        for (Intersection inter : intersectionsList){
+            roadsList.remove(inter.getRoad1Id());
+            roadsList.remove(inter.getRoad2Id());
+        }
+        addIntersectionToNodes();
+    }
+
+    private static void addIntersectionToNodes(){
+        for (Intersection inter : intersectionsList){
+            nodesList.add(new Node(inter.getId(), inter.getCords()));
+        }
+    }
+
 
     public static Patient getIntersection(int id){
         return patientsLists.stream()
                 .filter(intersection -> id == intersection.getId())
->>>>>>> 5bc89e2bbb616d3e8507d80fffa375d996e8108f
                 .findAny()
                 .orElse(null);
     }
 
-<<<<<<< HEAD
-    public static ArrayList<Boundary> getBoundariesList(){
+    public static ArrayList<Boundary> getBoundariesList() {
         return boundariesList;
-=======
+    }
     public static ArrayList<Intersection> getIntersectionsList(){
         return intersectionsList;
->>>>>>> 5bc89e2bbb616d3e8507d80fffa375d996e8108f
     }
 
     //PRINTERS

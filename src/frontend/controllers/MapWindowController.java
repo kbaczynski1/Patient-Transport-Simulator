@@ -12,7 +12,9 @@ import javafx.stage.FileChooser;
 
 import java.awt.geom.Point2D;
 import java.io.File;
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MapWindowController {
 
@@ -36,13 +38,10 @@ public class MapWindowController {
             for (Road road : DataBase.getRoadsList()) {
                 road.initValue();
             }
-//            intersectionDetector.detect();
             intersectionDetector.scanIntersections();
             intersectionDetector.printIntersections();
-            for (Point2D point : intersectionDetector.getIntersections()) {
-                Circle circle = new Circle(point.getX() * 3.0, point.getY() * 3.0, 5.f, Color.BLACK);
-                anchorPaneMapWindow.getChildren().add(circle);
-            }
+            DataBase.addIntesection(intersectionDetector.getIntersections());
+            DataBase.divideRoads();
 
             DataBase.printHospitals();
             DataBase.printMonuments();
@@ -73,12 +72,16 @@ public class MapWindowController {
         polygon.setFill(Color.LIGHTBLUE);
         anchorPaneMapWindow.getChildren().add(polygon);
 
+        for (Intersection inter : DataBase.getIntersectionsList()) {
+            Circle circle = new Circle(inter.getCords().getX() * 3.0, inter.getCords().getY() * 3.0, 5.f, Color.BLACK);
+            anchorPaneMapWindow.getChildren().add(circle);
+        }
+
         for(Monument monument : DataBase.getMonumentsList()){
             Circle circle = new Circle(monument.getCords().getX() * scale, monument.getCords().getY() * scale, 5.f, Color.BLUE);
             anchorPaneMapWindow.getChildren().add(circle);
         }
 
-<<<<<<< HEAD
         for(Hospital hospital : DataBase.getHospitalsList()){
             Circle circle;
             if(hospital.getFreeBedsAmount() == 0)
@@ -88,20 +91,13 @@ public class MapWindowController {
 
             anchorPaneMapWindow.getChildren().add(circle);
         }
-=======
-//        for(Hospital hospital : DataBase.getHospitalsList()){
-//            Circle circle = new Circle(hospital.getCords().getX() * scale, hospital.getCords().getY() * scale, 5.f, Color.RED);
-//            anchorPaneMapWindow.getChildren().add(circle);
-//        }
->>>>>>> 5bc89e2bbb616d3e8507d80fffa375d996e8108f
 
         for(Road road : DataBase.getRoadsList()){
-            Line line = new Line(road.getFirstHospital().getCords().getX() * scale, road.getFirstHospital().getCords().getY() * scale,
-                    road.getSecondHospital().getCords().getX() * scale, road.getSecondHospital().getCords().getY() * scale);
+            Line line = new Line(road.getFirstNode().getCords().getX() * scale, road.getFirstNode().getCords().getY() * scale,
+                    road.getSecondNode().getCords().getX() * scale, road.getSecondNode().getCords().getY() * scale);
             anchorPaneMapWindow.getChildren().add(line);
         }
 
-<<<<<<< HEAD
         ArrayList<Hospital> hospitalsList = DataBase.getHospitalsList();
         ArrayList<Monument> monumentsList = new ArrayList<>();
         for(Monument monument : DataBase.getMonumentsList()) {
@@ -109,16 +105,5 @@ public class MapWindowController {
             monumentsList.add(tempMonument);
         }
 
-
-=======
-
-//        for(Intersection intersection : DataBase.getIntersectionsList()){
-//            Circle circle = new Circle(intersection.getCords().getX() * scale, intersection.getCords().getY() * scale, 5.f, Color.BLACK);
-//            anchorPaneMapWindow.getChildren().add(circle);
-//        }
->>>>>>> 5bc89e2bbb616d3e8507d80fffa375d996e8108f
-
-        // create a Group
-  //      Group group = new Group(circle);
     }
 }

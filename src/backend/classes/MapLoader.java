@@ -145,10 +145,10 @@ public class MapLoader extends DataLoader implements Loader {
         if (roadData.length == ROAD_DATA_SIZE) {
             try {
                 int roadId = parseInt(roadData, ROAD_ID_INDEX);
-                int roadFirstHospitalId = parseInt(roadData, ROAD_FIRST_HOSPITAL_ID_INDEX);
-                int roadSecondHospitalId = parseInt(roadData, ROAD_SECOND_HOSPITAL_ID_INDEX);
+                int roadFirstNodeId = parseInt(roadData, ROAD_FIRST_HOSPITAL_ID_INDEX);
+                int roadSecondNodeId = parseInt(roadData, ROAD_SECOND_HOSPITAL_ID_INDEX);
                 double roadDistance = parseInt(roadData, ROAD_DISTANCE_INDEX);
-                loadedRoadsList.add(new Road(roadId, roadFirstHospitalId, roadSecondHospitalId, roadDistance));
+                loadedRoadsList.add(new Road(roadId, roadFirstNodeId, roadSecondNodeId, roadDistance));
                 return true;
             } catch (NumberFormatException e) {
                 return false;

@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class IntersectionEvent {
-    private Point2D point;
+    private Point2D.Double point;
     private ArrayList<Road> roads;
     private double value;
     private int type;
 
-    public Point2D getPoint() {
+    public Point2D.Double getPoint() {
         return point;
     }
 
-    public void setPoint(Point2D point) {
+    public void setPoint(Point2D.Double point) {
         this.point = point;
     }
 
@@ -42,14 +42,14 @@ public class IntersectionEvent {
         this.type = type;
     }
 
-    IntersectionEvent(Point2D point, Road road, int type) {
+    IntersectionEvent(Point2D.Double point, Road road, int type) {
         this.point = point;
         this.roads = new ArrayList<Road>(Arrays.asList(road));
         this.value = point.getX();
         this.type = type;
     }
 
-    IntersectionEvent(Point2D point, ArrayList<Road> roads, int type) {
+    IntersectionEvent(Point2D.Double point, ArrayList<Road> roads, int type) {
         this.point = point;
         this.roads = roads;
         this.value = point.getX();
