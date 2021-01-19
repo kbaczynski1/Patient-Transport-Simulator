@@ -6,11 +6,13 @@ public class Node {
     private int id;
     private Point2D.Double cords;
     private boolean visited;
+    private boolean canStop;
 
-    Node(int ID, Point2D.Double cor, boolean vis){
+    Node(int ID, Point2D.Double cor, boolean vis, boolean canstop){
         id = ID;
         cords = cor;
         visited = vis;
+        canStop = canstop;
     }
 
     public int getId(){ return id;}

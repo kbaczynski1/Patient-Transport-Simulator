@@ -2,6 +2,7 @@ package classes;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class DataBase {
@@ -12,13 +13,27 @@ public class DataBase {
     private static ArrayList<Boundary> boundariesList = new ArrayList<>();
     private static ArrayList<Intersection> intersectionsList = new ArrayList<>();
     private  static  ArrayList<Node> nodesList = new ArrayList<>();
+    private static double[][] graph;
 
 
     //HOSPITAL
+    public static void setGraph(){
+        graph = new double[nodesList.size()][nodesList.size()];
+        for (double[] row: graph)
+            Arrays.fill(row, 0.0);
+        for (Road road : roadsList){
+            graph[road.getSecondNodeId() - 1 ][road.getFirstNodeId() - 1] = road.getDistance();
+            graph[road.getFirstNodeId() - 1 ][road.getSecondNodeId() - 1] = road.getDistance();
+        }
+    }
+
+    public static double[][] getGraph(){
+        return graph;
+    }
 
     public static void addHospital(Hospital hospital){
         hospitalsList.add(hospital);
-        nodesList.add(new Node(hospital.getId(), hospital.getCords(), false));
+        nodesList.add(new Node(hospital.getId(), hospital.getCords(), false, (hospital.getFreeBedsAmount() != 0)));
     }
 
     public static Hospital getHospital(int id){
@@ -142,7 +157,7 @@ public class DataBase {
 
     private static void addIntersectionToNodes(){
         for (Intersection inter : intersectionsList){
-            nodesList.add(new Node(inter.getId(), inter.getCords(), true));
+            nodesList.add(new Node(inter.getId(), inter.getCords(), false, false));
         }
     }
 

@@ -1,14 +1,17 @@
 package classes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PathSearcher {
     private Patient patient;
     private Hospital hospital;
+    private double[][] graph;
 
     public PathSearcher(Patient patient) {
         this.patient = patient;
+        this.graph = DataBase.getGraph();
     }
 
     // check that the patient is on the territory of the country
@@ -63,56 +66,112 @@ public class PathSearcher {
                 id = i;
             }
         }
+        DataBase.getNode(id).setVisited(true);
         hospital = hospitals.get(id); // assign the first nearest hospital
+
+    }
+
+    public Path[] checkNextNode(int id, double pathValue, Path[] bestPaths, ArrayList<Integer> path){
+        for (int i = 0; i < graph[0].length; i++){
+            if (graph[id-1][i] != 0){
+                if(! DataBase.getNode(i+1).isVisited()) {
+                    pathValue += graph[id-1][i];
+                    if (bestPaths[i].getValue() > pathValue) {
+                        bestPaths[i].setValue(pathValue);
+                        bestPaths[i].setNodesList(new ArrayList<>(path));
+                    }
+                }else{
+                    DataBase.getNode(i+1).setVisited(true);
+                    path.add(i);
+                    bestPaths = checkNextNode(i+1, pathValue + graph[id-1][i+1], bestPaths, path);
+                    path.remove(path.size() - 1);
+                    DataBase.getNode(i+1).setVisited(false);
+                }
+            }
+        }
+        return bestPaths;
     }
 
     // search the next nearest hospital
-    public void searchNextHospital() {
-        List<Hospital> hospitals = DataBase.getHospitalsList();
-        List<Intersection> intersections = DataBase.getIntersectionsList();
-        List<Node> nodes = DataBase.getNodesList();
-
-        // check that the hospital has direct connections to unvisited hospitals
-        // check that the hospital has direct connections to intersections or hospitals visited
-        List<Road> roads = DataBase.getRoadsList();
-        boolean connectionWithUnvisitedHospitals = false;
-        boolean connectionWithVisitedNodes = false;
-        double minDirectDistance = Double.MAX_VALUE;
-        int idOfMinDirectDistance = 0;
-        for (int i = 0; i < nodes.size(); i++) {
-            if (nodes.get(i).getId() != hospital.getId()) {
-                for (Road road : roads) {
-                    if ((road.getFirstNodeId() == hospital.getId() &&
-                            road.getSecondNodeId() == nodes.get(i).getId()) ||
-                            (road.getFirstNodeId() == nodes.get(i).getId() &&
-                                    road.getSecondNodeId() == hospital.getId())) {
-                        if (!nodes.get(i).isVisited()) {
-                            connectionWithUnvisitedHospitals = true;
-                            double distance = road.getDistance();
-                            if (distance < minDirectDistance) {
-                                minDirectDistance = distance;
-                                idOfMinDirectDistance = i;
-                            }
-                        } else {
-                            connectionWithVisitedNodes = true;
-                        }
-                    }
-                }
-
+    public ArrayList<Integer> searchNextHospital() {
+        Path[] bestPaths = new Path[graph.length];
+        ArrayList<Integer> path = new ArrayList<>();
+        bestPaths = checkNextNode(hospital.getId(), 0.0, bestPaths, path);
+        double minVal = Double.POSITIVE_INFINITY;
+        int index;
+        for (int i = 0; i < bestPaths.length; i++) {
+            if (bestPaths[i].getValue() <= minVal) {
+                minVal = bestPaths[i].getValue();
+                index = i;
             }
         }
-        if (!connectionWithUnvisitedHospitals && !connectionWithVisitedNodes) {
-            // the end of patient transport, leave him in the queue at the current hospital
-            return;
-        } else if (connectionWithUnvisitedHospitals && !connectionWithVisitedNodes) {
-            // go to the nearest directly connected hospital
-            hospital = hospitals.get(idOfMinDirectDistance);
-
+        if (minVal < Double.POSITIVE_INFINITY) {
+            return bestPaths[index].getNodesList();
         } else {
-            // find the shortest path in a graph consisting of intersections, hospitals visited
-            // and hospitals not visited that have no direct connection to the current hospital
-
+            return null;
         }
-
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        List<Hospital> hospitals = DataBase.getHospitalsList();
+//        List<Node> nodes = DataBase.getNodesList();
+//
+//        // check that the hospital has direct connections to unvisited hospitals
+//        // check that the hospital has direct connections to intersections or hospitals visited
+//        List<Road> roads = DataBase.getRoadsList();
+//        boolean connectionWithUnvisitedHospitals = false;
+//        boolean connectionWithVisitedNodes = false;
+//        double minDirectDistance = Double.MAX_VALUE;
+//        int idOfMinDirectDistance = 0;
+//        for (int i = 0; i < nodes.size(); i++) {
+//            if (nodes.get(i).getId() != hospital.getId()) {
+//                for (Road road : roads) {
+//                    if ((road.getFirstNodeId() == hospital.getId() &&
+//                            road.getSecondNodeId() == nodes.get(i).getId()) ||
+//                            (road.getFirstNodeId() == nodes.get(i).getId() &&
+//                                    road.getSecondNodeId() == hospital.getId())) {
+//                        if (!nodes.get(i).isVisited()) {
+//                            connectionWithUnvisitedHospitals = true;
+//                            double distance = road.getDistance();
+//                            if (distance < minDirectDistance) {
+//                                minDirectDistance = distance;
+//                                idOfMinDirectDistance = i;
+//                            }
+//                        } else {
+//                            connectionWithVisitedNodes = true;
+//                        }
+//                    }
+//                }
+//
+//            }
+//        }
+//        if (!connectionWithUnvisitedHospitals && !connectionWithVisitedNodes) {
+//            // the end of patient transport, leave him in the queue at the current hospital
+//            return;
+//        } else if (connectionWithUnvisitedHospitals && !connectionWithVisitedNodes) {
+//            // go to the nearest directly connected hospital
+//            hospital = hospitals.get(idOfMinDirectDistance);
+//
+//        } else {
+//            // find the shortest path in a graph consisting of intersections, hospitals visited
+//            // and hospitals not visited that have no direct connection to the current hospital
+//
+//        }
+
+
 }
