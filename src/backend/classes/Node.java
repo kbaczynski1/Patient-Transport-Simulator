@@ -30,4 +30,8 @@ public class Node {
         this.visited = visited;
     }
 
+    public void setCanStop(boolean canStop){this.canStop = canStop;}
+
+    public boolean getCanStop(){return canStop;}
+
 }

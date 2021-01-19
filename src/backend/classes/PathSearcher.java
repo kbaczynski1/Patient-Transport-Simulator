@@ -74,18 +74,24 @@ public class PathSearcher {
     public Path[] checkNextNode(int id, double pathValue, Path[] bestPaths, ArrayList<Integer> path){
         for (int i = 0; i < graph[0].length; i++){
             if (graph[id-1][i] != 0){
-                if(! DataBase.getNode(i+1).isVisited()) {
-                    pathValue += graph[id-1][i];
-                    if (bestPaths[i].getValue() > pathValue) {
-                        bestPaths[i].setValue(pathValue);
-                        bestPaths[i].setNodesList(new ArrayList<>(path));
+                Node node = DataBase.getNode(i+1);
+                if (! node.isVisited()) {
+                    if (node.getCanStop()) {
+                        pathValue += graph[id - 1][i];
+                        path.add(i);
+                        if (bestPaths[i].getValue() > pathValue) {
+                            bestPaths[i].setValue(pathValue);
+                            bestPaths[i].setNodesList(new ArrayList<>(path));
+                        }
+                        path.remove(path.size() - 1);
+                        pathValue -= graph[id - 1][i];
+                    } else {
+                        node.setVisited(true);
+                        path.add(i);
+                        bestPaths = checkNextNode(i + 1, pathValue + graph[id - 1][i + 1], bestPaths, path);
+                        path.remove(path.size() - 1);
+                        node.setVisited(false);
                     }
-                }else{
-                    DataBase.getNode(i+1).setVisited(true);
-                    path.add(i);
-                    bestPaths = checkNextNode(i+1, pathValue + graph[id-1][i+1], bestPaths, path);
-                    path.remove(path.size() - 1);
-                    DataBase.getNode(i+1).setVisited(false);
                 }
             }
         }
