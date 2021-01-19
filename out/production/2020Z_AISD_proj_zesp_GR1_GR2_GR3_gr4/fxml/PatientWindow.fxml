@@ -68,6 +68,7 @@
                   <Spinner />
                </children>
             </HBox>
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="197.0" text="Usuń pacjenta" />
          </children></VBox>
    </children>
 </HBox>

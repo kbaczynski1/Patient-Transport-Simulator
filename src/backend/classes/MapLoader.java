@@ -53,6 +53,9 @@ public class MapLoader extends DataLoader implements Loader {
             for(Road road : loadedRoadsList){
                 DataBase.addRoad(road);
             }
+            DataBase.addTerminalMessage("Map loaded");
+        } else {
+            DataBase.addTerminalMessage("Map loaded failed");
         }
     }
 
