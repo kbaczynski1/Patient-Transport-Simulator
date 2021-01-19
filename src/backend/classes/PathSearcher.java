@@ -98,7 +98,7 @@ public class PathSearcher {
         ArrayList<Integer> path = new ArrayList<>();
         bestPaths = checkNextNode(hospital.getId(), 0.0, bestPaths, path);
         double minVal = Double.POSITIVE_INFINITY;
-        int index;
+        int index = -1;
         for (int i = 0; i < bestPaths.length; i++) {
             if (bestPaths[i].getValue() <= minVal) {
                 minVal = bestPaths[i].getValue();
