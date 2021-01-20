@@ -1,22 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainWindowController">
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.CheckMenuItem?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1220.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainWindowController">
    <children>
-       <fx:include fx:id="mapWindow" source="MapWindow.fxml" />
-      <VBox prefHeight="200.0" prefWidth="100.0">
+       <MenuBar fx:id="mainMenuBar">
+           <menus>
+               <Menu mnemonicParsing="false" text="Mapa">
+                   <items>
+                       <MenuItem mnemonicParsing="false" onAction="#loadMapFromFile" text="Wgraj" />
+                   </items>
+               </Menu>
+               <Menu mnemonicParsing="false" text="Pacjenci">
+                   <items>
+                       <MenuItem mnemonicParsing="false" onAction="#loadPatientsFromFile" text="Wgraj" />
+                   </items>
+               </Menu>
+           </menus>
+       </MenuBar>
+      <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-             <fx:include fx:id="hospitalsWindow" source="HonspitalsWindow.fxml" />
-             <fx:include fx:id="patientWindow" source="PatientWindow.fxml" />
-            <HBox prefHeight="100.0" prefWidth="200.0">
+             <fx:include fx:id="mapWindow" source="MapWindow.fxml" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                   <fx:include fx:id="terminalindow" source="TerminalWindow.fxml" />
-                   <fx:include fx:id="simulationSettingsWindow" source="SimulatorSettingsWindow.fxml" />
+                   <fx:include fx:id="hospitalsWindow" source="HonspitalsWindow.fxml" />
+                   <fx:include fx:id="patientWindow" source="PatientWindow.fxml" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                         <fx:include fx:id="terminalindow" source="TerminalWindow.fxml" />
+                         <fx:include fx:id="simulationSettingsWindow" source="SimulatorSettingsWindow.fxml" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
          </children>
-      </VBox>
+      </HBox>
    </children>
-</HBox>
+</VBox>

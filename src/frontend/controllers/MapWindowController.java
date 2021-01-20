@@ -26,38 +26,11 @@ public class MapWindowController {
 
     }
 
-    public void loadHospitalsFromFile(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
-        File selectedFile = fileChooser.showOpenDialog(null);
-
-        if(selectedFile != null){
-            MapLoader mapLoader = new MapLoader();
-            mapLoader.loadDataFromFile(selectedFile.getAbsolutePath());
-
-            IntersectionDetector intersectionDetector = new IntersectionDetector(DataBase.getRoadsList());
-            for (Road road : DataBase.getRoadsList()) {
-                road.initValue();
-            }
-            intersectionDetector.scanIntersections();
-            intersectionDetector.printIntersections();
-            DataBase.addIntesection(intersectionDetector.getIntersections());
-            DataBase.divideRoads();
-
-            DataBase.printHospitals();
-            DataBase.printMonuments();
-            DataBase.printRoads();
-
-            Country.calculateBoundaries(DataBase.getBoundariesList());
-            printMap();
-            mainWindowController.doActionsAfterLoadMap();
-        }
-    }
-
     public void setMainWindowController(MainWindowController mainWindowController) {
         this.mainWindowController = mainWindowController;
     }
 
-    private void printMap(){
+    public void printMap(){
         double scale = 3.0;
 
         double[] arrayOfBoundaries = new double[2 * Country.getBoundariesNodes().size()];

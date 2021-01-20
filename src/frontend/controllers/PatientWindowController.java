@@ -37,16 +37,6 @@ public class PatientWindowController {
 
     }
 
-    public void loadPatientsFromFile(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if(selectedFile != null){
-            PatientsLoader patientsLoader = new PatientsLoader();
-            patientsLoader.loadDataFromFile(selectedFile.getAbsolutePath());
-            DataBase.printPatiens();
-        }
-    }
-
     public void addPatientAction(ActionEvent actionEvent) {
         DataBase.addTerminalMessage("add patient [X:" + addPatientValueX.getValue() + " Y:" + addPatientValueY.getValue() + " Id:" + addPatientValueId.getValue() +"]");
     }
