@@ -34,13 +34,13 @@
                         <HBox prefHeight="50.0" prefWidth="100.0">
                            <children>
                               <Label prefHeight="16.0" prefWidth="39.0" text="X" />
-                              <Spinner />
+                              <Spinner fx:id="addPatientValueX"/>
                            </children>
                         </HBox>
                         <HBox prefHeight="50.0" prefWidth="100.0">
                            <children>
                               <Label prefHeight="16.0" prefWidth="39.0" text="Y" />
-                              <Spinner />
+                              <Spinner fx:id="addPatientValueY"/>
                            </children>
                         </HBox>
                      </children>
@@ -49,11 +49,11 @@
                <HBox prefHeight="100.0" prefWidth="100.0">
                   <children>
                      <Label prefHeight="16.0" prefWidth="39.0" text="id" />
-                     <Spinner />
+                     <Spinner fx:id="addPatientValueId"/>
                   </children>
                </HBox>
             </HBox>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="197.0" text="Dodaj pacjenta" />
+            <Button mnemonicParsing="false" onAction="#addPatientAction" prefHeight="26.0" prefWidth="197.0" text="Dodaj pacjenta" />
          </children></VBox>
       <Separator orientation="VERTICAL" prefHeight="200.0" />
       <VBox prefHeight="200.0" prefWidth="200.0">
@@ -65,10 +65,10 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="16.0" prefWidth="39.0" text="id" />
-                  <Spinner />
+                  <Spinner fx:id="removePatientValueId"/>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="197.0" text="Usuń pacjenta" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#removeatientAction" prefHeight="26.0" prefWidth="197.0" text="Usuń pacjenta" />
          </children></VBox>
    </children>
 </HBox>
