@@ -27,6 +27,9 @@ public class PatientsLoader extends DataLoader implements Loader {
             for(Patient patient : loadedPatiensList){
                 DataBase.addPatient(patient);
             }
+            DataBase.addTerminalMessage("Patients loaded");
+        } else {
+            DataBase.addTerminalMessage("Patients loaded failed");
         }
     }
 

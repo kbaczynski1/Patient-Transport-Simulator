@@ -1,6 +1,5 @@
 package classes;
 
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -14,6 +13,8 @@ public class DataBase {
     private static ArrayList<Intersection> intersectionsList = new ArrayList<>();
     private  static  ArrayList<Node> nodesList = new ArrayList<>();
     private static double[][] graph;
+
+    private static ArrayList<String> terminalMessagesList = new ArrayList<>();
 
 
     //HOSPITAL
@@ -175,6 +176,16 @@ public class DataBase {
 
     public static ArrayList<Intersection> getIntersectionsList(){
         return intersectionsList;
+    }
+
+    //TERMINAL
+
+    public static void addTerminalMessage(String message){
+        terminalMessagesList.add(message);
+    }
+
+    public static ArrayList<String> getTerminalMessagesList(){
+        return terminalMessagesList;
     }
 
     //PRINTERS

@@ -12,62 +12,54 @@
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PatientWindowController">
    <children>
       <Separator orientation="VERTICAL" prefHeight="200.0" />
-      <VBox prefHeight="200.0" prefWidth="200.0">
+      <VBox prefHeight="200.0" prefWidth="300.0">
          <children>
-            <AnchorPane prefHeight="405.0" prefWidth="100.0">
-               <children>
-                  <Button layoutX="36.0" layoutY="87.0" mnemonicParsing="false" onAction="#loadPatientsFromFile" text="Wgraj pacjentów" />
-               </children>
-            </AnchorPane>
-         </children></VBox>
-      <Separator orientation="VERTICAL" prefHeight="200.0" />
-      <VBox prefHeight="200.0" prefWidth="200.0">
-         <children>
-            <Label alignment="CENTER" prefHeight="16.0" prefWidth="218.0" text="Wgraj Pacjentów ręcznie">
+            <Label alignment="CENTER" prefHeight="16.0" prefWidth="318.0" text="Dodaj pacjenta">
                <padding>
                   <Insets bottom="20.0" top="10.0" />
                </padding></Label>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <VBox prefHeight="500.0" prefWidth="100.0">
+                  <VBox prefHeight="500.0" prefWidth="150.0">
                      <children>
-                        <HBox prefHeight="50.0" prefWidth="100.0">
+                        <HBox prefHeight="50.0" prefWidth="150.0">
                            <children>
-                              <Label prefHeight="16.0" prefWidth="39.0" text="X" />
-                              <Spinner />
+                              <Label prefHeight="16.0" prefWidth="70.0" text="X" />
+                              <Spinner fx:id="addPatientValueX"/>
                            </children>
                         </HBox>
-                        <HBox prefHeight="50.0" prefWidth="100.0">
+                        <HBox prefHeight="50.0" prefWidth="150.0">
                            <children>
-                              <Label prefHeight="16.0" prefWidth="39.0" text="Y" />
-                              <Spinner />
+                              <Label prefHeight="16.0" prefWidth="70.0" text="Y" />
+                              <Spinner fx:id="addPatientValueY"/>
                            </children>
                         </HBox>
                      </children>
                   </VBox>
                </children>
-               <HBox prefHeight="100.0" prefWidth="100.0">
+               <HBox prefHeight="100.0" prefWidth="150.0">
                   <children>
-                     <Label prefHeight="16.0" prefWidth="39.0" text="id" />
-                     <Spinner />
+                     <Label prefHeight="16.0" prefWidth="90.0" text="  id" />
+                     <Spinner fx:id="addPatientValueId"/>
                   </children>
                </HBox>
             </HBox>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="197.0" text="Dodaj pacjenta" />
+            <Button mnemonicParsing="false" onAction="#addPatientAction" prefHeight="26.0" prefWidth="297.0" text="Dodaj pacjenta" />
          </children></VBox>
       <Separator orientation="VERTICAL" prefHeight="200.0" />
-      <VBox prefHeight="200.0" prefWidth="200.0">
+      <VBox prefHeight="200.0" prefWidth="300.0">
          <children>
-            <Label alignment="TOP_CENTER" prefHeight="16.0" prefWidth="224.0" text="Usuń pacjenta">
+            <Label alignment="TOP_CENTER" prefHeight="16.0" prefWidth="324.0" text="Usuń pacjenta">
                <padding>
                   <Insets bottom="20.0" top="10.0" />
                </padding></Label>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="300.0">
                <children>
                   <Label prefHeight="16.0" prefWidth="39.0" text="id" />
-                  <Spinner />
+                  <Spinner fx:id="removePatientValueId"/>
                </children>
             </HBox>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#removeatientAction" prefHeight="26.0" prefWidth="297.0" text="Usuń pacjenta" />
          </children></VBox>
    </children>
 </HBox>
