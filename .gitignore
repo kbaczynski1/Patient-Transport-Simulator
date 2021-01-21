@@ -8,3 +8,5 @@ specyfikacja_implementacyjna/*
 !specyfikacja_implementacyjna/*.tex
 !specyfikacja_implementacyjna/*.pdf
 !specyfikacja_implementacyjna/images/*
+
+*.class

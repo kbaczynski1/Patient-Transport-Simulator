@@ -104,5 +104,21 @@ public class MapWindowController {
         pathTransition.setNode(circle);
         pathTransition.setCycleCount(PathTransition.INDEFINITE);
         pathTransition.play();
+
+
+        Thread refreshTableThread = new Thread(() -> {
+            int i = 0;
+            while(true) {
+                pathTransition.setDuration(Duration.millis(1000*i));
+                i++;
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        refreshTableThread.setDaemon(true);
+        refreshTableThread.start();
     }
 }
