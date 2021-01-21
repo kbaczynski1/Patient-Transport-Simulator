@@ -7,10 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.control.TextFormatter.Change;
 import java.util.ArrayList;
+import javafx.util.StringConverter;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.util.function.UnaryOperator;
 
 public class PatientWindowController {
 
@@ -23,19 +27,87 @@ public class PatientWindowController {
     @FXML
     private Spinner<Integer> addPatientValueId;
 
-//    .setValueFactory(
-//                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 255));
-
     @FXML
     void initialize() {
-        addPatientValueX.setValueFactory(
-                new SpinnerValueFactory.DoubleSpinnerValueFactory(0, 1000));
-        addPatientValueY.setValueFactory(
-                new SpinnerValueFactory.DoubleSpinnerValueFactory(0, 1000));
-        addPatientValueId.setValueFactory(
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000));
-        removePatientValueId.setValueFactory(
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000));
+        UnaryOperator<Change> doubleFilter = new UnaryOperator<Change>() {
+            @Override
+            public Change apply(Change t) {
+
+                String newText = t.getControlNewText() ;
+                if (newText.matches("-?[0-9]*\\.?[0-9]*")) {
+                    return t ;
+                }
+                return null ;
+            }
+        };
+
+        UnaryOperator<Change> intFilter = new UnaryOperator<Change>() {
+            @Override
+            public Change apply(Change t) {
+
+                String newText = t.getControlNewText() ;
+                if (newText.matches("[0-9]{0,7}")) {
+                    return t ;
+                }
+                return null ;
+            }
+        };
+
+        StringConverter<Double> doubleConverter = new StringConverter<Double>() {
+            @Override
+            public String toString(Double object) {
+                return object.toString() ;
+            }
+
+            @Override
+            public Double fromString(String string){
+                if (string.isEmpty() || ".".equals(string) || "-".equals(string) || "-.".equals(string)) {
+                    return 0.0;
+                } else {
+                    return new Double(string);
+                }
+            }
+        };
+
+        StringConverter<Integer> intConverter = new StringConverter<Integer>() {
+            @Override
+            public String toString(Integer object) {
+                return object.toString() ;
+            }
+
+            @Override
+            public Integer fromString(String string){
+                if (string.isEmpty() || ".".equals(string) || "-".equals(string) || "-.".equals(string)) {
+                    return 0;
+                } else {
+                    return new Integer(string);
+                }
+            }
+        };
+        SpinnerValueFactory<Double> xValueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory( -1000000, 1000000,0);
+        SpinnerValueFactory<Double> yValueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory( -1000000, 1000000,0);
+        SpinnerValueFactory<Integer> addIntValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory( 0, 1000000);
+        SpinnerValueFactory<Integer> removeIntValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory( 0, 1000000);
+
+        xValueFactory.setConverter(doubleConverter);
+        yValueFactory.setConverter(doubleConverter);
+        addIntValueFactory.setConverter(intConverter);
+        removeIntValueFactory.setConverter(intConverter);
+
+        addPatientValueX.setValueFactory(xValueFactory);
+        addPatientValueY.setValueFactory(yValueFactory);
+        addPatientValueId.setValueFactory(addIntValueFactory);
+        removePatientValueId.setValueFactory(removeIntValueFactory);
+
+        addPatientValueX.getEditor().setTextFormatter(new TextFormatter<>(doubleConverter, 0.0, doubleFilter));
+        addPatientValueY.getEditor().setTextFormatter(new TextFormatter<>(doubleConverter, 0.0, doubleFilter));
+        addPatientValueId.getEditor().setTextFormatter(new TextFormatter<>(intConverter, 0, intFilter));
+        removePatientValueId.getEditor().setTextFormatter(new TextFormatter<>(intConverter, 0, intFilter));
+
+        addPatientValueY.setEditable(true);
+        addPatientValueX.setEditable(true);
+        addPatientValueId.setEditable(true);
+        removePatientValueId.setEditable(true);
 
     }
 
@@ -76,7 +148,6 @@ public class PatientWindowController {
             if (patientsList.get(i).getId() == patientId) {
                 DataBase.addTerminalMessage("Patient [Id:" + removePatientValueId.getValue() + "] removed");
                 patientsList.remove(i);
-                // jeżeli zakładamy, że istnieje tylko jeden pacjent z danym id
                 return;
             }
         }

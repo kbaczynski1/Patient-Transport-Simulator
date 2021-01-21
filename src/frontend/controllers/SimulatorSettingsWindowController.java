@@ -27,6 +27,11 @@ public class SimulatorSettingsWindowController {
 
     @FXML
     void initialize() {
+        symulationButton.setDisable(true);
+    }
+
+    public void setDisableSimulationButton(boolean value) {
+            symulationButton.setDisable(value);
     }
 
     public void startSimulation(ActionEvent actionEvent){
