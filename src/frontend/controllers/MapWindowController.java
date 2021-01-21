@@ -1,25 +1,29 @@
 package controllers;
 
 import classes.*;
-import javafx.event.ActionEvent;
+import javafx.animation.PathTransition;
+
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Polygon;
-import javafx.stage.FileChooser;
+import javafx.scene.shape.*;
+import javafx.scene.shape.Path;
+
+import javafx.scene.text.Text;
+
+import javafx.util.Duration;
 
 import java.awt.geom.Point2D;
-import java.io.File;
-import java.io.PrintStream;
+
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
+
 
 public class MapWindowController {
 
     public AnchorPane anchorPaneMapWindow;
     private MainWindowController mainWindowController;
+    double scale = 3.0;
 
     @FXML
     void initialize() {
@@ -30,9 +34,8 @@ public class MapWindowController {
         this.mainWindowController = mainWindowController;
     }
 
-    public void printMap(){
-        double scale = 3.0;
 
+    public void printMap(){
         double[] arrayOfBoundaries = new double[2 * Country.getBoundariesNodes().size()];
         int count = 0;
         for(Boundary boundary : Country.getBoundariesNodes()) {
@@ -69,6 +72,11 @@ public class MapWindowController {
             Line line = new Line(road.getFirstNode().getCords().getX() * scale, road.getFirstNode().getCords().getY() * scale,
                     road.getSecondNode().getCords().getX() * scale, road.getSecondNode().getCords().getY() * scale);
             anchorPaneMapWindow.getChildren().add(line);
+            Text text = new Text();
+            text.setText(Double.toString(Math.round(road.getDistance() * 100)/100));
+            text.setX(((road.getFirstNode().getCords().getX() + road.getSecondNode().getCords().getX())/2)*scale);
+            text.setY(((road.getFirstNode().getCords().getY() + road.getSecondNode().getCords().getY())/2)*scale);
+            anchorPaneMapWindow.getChildren().add(text);
         }
 
         ArrayList<Hospital> hospitalsList = DataBase.getHospitalsList();
@@ -77,15 +85,21 @@ public class MapWindowController {
             Monument tempMonument = new Monument(monument.getId() + hospitalsList.size(), monument.getName(), monument.getCords());
             monumentsList.add(tempMonument);
         }
+        drawPatient(new Patient(1, "edek", new Point2D.Double(50, 50)), new ArrayList<Integer>(Arrays.asList(new Integer[]{1, 2, 3})), 1);
 
-        /* test działania najbliżeszego szpitala
-        DataBase.addPatient(new Patient(0, "Edek", new Point2D.Double(11.0,31.0)));
-        PathSearcher pathSearcher = new PathSearcher(DataBase.getPatient(0));
-        pathSearcher.searchFirstHospital();
-        Hospital hos = pathSearcher.getCurrentHospital();
-        Circle circle = new Circle(hos.getCords().getX() * scale, hos.getCords().getY() * scale, 5.f, Color.ORANGE);
+    }
+
+    public void drawPatient(Patient patient, ArrayList<Integer> nodesPath, double speed){
+        Circle circle = new Circle(patient.getX() * scale, patient.getY() * scale, 5.f, Color.ORANGE);
         anchorPaneMapWindow.getChildren().add(circle);
-        */
-
+        javafx.scene.shape.Path path = new Path();
+        for (Integer nodeId : nodesPath){
+            path.getElements().add(new MoveTo(DataBase.getNode(nodeId).getCords().getX(), DataBase.getNode(nodeId).getCords().getY()));
+        }
+        PathTransition pathTransition = new PathTransition();
+        pathTransition.setDuration(Duration.millis(4000/speed));
+        pathTransition.setPath(path);
+        pathTransition.setNode(circle);
+        pathTransition.play();
     }
 }

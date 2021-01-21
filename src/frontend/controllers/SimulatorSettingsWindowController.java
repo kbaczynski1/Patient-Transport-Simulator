@@ -31,22 +31,26 @@ public class SimulatorSettingsWindowController {
 
     public void startSimulation(ActionEvent actionEvent){
         for (Patient patient : DataBase.getPatientsList()){
-            System.out.println("Kolejny pacjent");
             pathSearcher = new PathSearcher(patient);
-            pathSearcher.searchFirstHospital();
-            System.out.println(pathSearcher.getCurrentHospital());
-            while (pathSearcher.getCurrentHospital() != null && pathSearcher.getCurrentHospital().getFreeBedsAmount() == 0){
-                ArrayList<Integer> temp = pathSearcher.searchNextHospital();
-                System.out.println(temp);
+            if (pathSearcher.checkIfPatientIsInCountry()) {
+                ArrayList<Integer> path = new ArrayList<>();
+                pathSearcher.searchFirstHospital();
+                path.add(pathSearcher.getCurrentHospital().getId());
                 System.out.println(pathSearcher.getCurrentHospital());
+                while (pathSearcher.getCurrentHospital() != null && pathSearcher.getCurrentHospital().getFreeBedsAmount() == 0) {
+                    path.addAll(pathSearcher.searchNextHospital());
+                }
+
+                //tu powinna się wywołać funkcja drawPatient z MapWindowController
+
+                pathSearcher.getCurrentHospital().setFreeBedsAmount(pathSearcher.getCurrentHospital().getFreeBedsAmount() - 1);
+                if (pathSearcher.getCurrentHospital().getFreeBedsAmount() - 1 == 0)
+                    DataBase.getNode(pathSearcher.getCurrentHospital().getId()).setCanStop(false);
+                DataBase.setAllNodesNotVisited();
             }
-            pathSearcher.getCurrentHospital().setFreeBedsAmount(pathSearcher.getCurrentHospital().getFreeBedsAmount() - 1);
-            if (pathSearcher.getCurrentHospital().getFreeBedsAmount() - 1 == 0)
-                DataBase.getNode(pathSearcher.getCurrentHospital().getId()).setCanStop(false);
-            DataBase.setAllNodesNotVisited();
         }
-        simulationSpeed = speedSlider.getValue();
-        System.out.println(simulationSpeed);
+//        simulationSpeed = speedSlider.getValue();
+//        System.out.println(simulationSpeed);
     }
 
     public double getSimulationSpeed(){return simulationSpeed;}

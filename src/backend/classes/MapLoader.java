@@ -38,7 +38,7 @@ public class MapLoader extends DataLoader implements Loader {
     private ArrayList<Road> loadedRoadsList = new ArrayList<Road>();
 
     @Override
-    public void loadDataFromFile(String filePath) {
+    public boolean loadDataFromFile(String filePath) {
         if(loadData(filePath) && vaildateData()){
             for(Hospital hospital : loadedHospitalsList){
                 DataBase.addHospital(hospital);
@@ -54,8 +54,10 @@ public class MapLoader extends DataLoader implements Loader {
                 DataBase.addRoad(road);
             }
             DataBase.addTerminalMessage("Map loaded");
+            return true;
         } else {
             DataBase.addTerminalMessage("Map loaded failed");
+            return false;
         }
     }
 

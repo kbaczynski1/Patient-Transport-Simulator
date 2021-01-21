@@ -28,10 +28,10 @@ public class Patient implements Comparable<Patient>{
         cords.setLocation(cords.getX(), cords.getX());
     }
 
-    double getX (){
+    public double getX (){
         return cords.getX();
     }
-    double getY (){
+    public double getY (){
         return cords.getY();
     }
 

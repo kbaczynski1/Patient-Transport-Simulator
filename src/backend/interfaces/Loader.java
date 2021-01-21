@@ -1,6 +1,6 @@
 package interfaces;
 
 public interface Loader {
-    void loadDataFromFile(String filePath);
+    boolean loadDataFromFile(String filePath);
     boolean vaildateData();
 }

@@ -156,8 +156,9 @@ public class DataBase {
             }
         }
         for (Intersection inter : intersectionsList){
-            roadsList.remove(inter.getRoad1Id());
-            roadsList.remove(inter.getRoad2Id());
+            System.out.println("kolejne pzecięcire");
+            roadsList.remove(getRoad(inter.getRoad1Id()));
+            roadsList.remove(getRoad(inter.getRoad2Id()));
         }
         addIntersectionToNodes();
     }

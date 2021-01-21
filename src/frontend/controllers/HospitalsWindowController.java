@@ -42,8 +42,6 @@ public class HospitalsWindowController {
         });
         refreshTableThread.setDaemon(true);
         refreshTableThread.start();
-
-
     }
 
     public void updateHospitalTable(){

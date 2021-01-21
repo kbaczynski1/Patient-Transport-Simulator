@@ -22,14 +22,16 @@ public class PatientsLoader extends DataLoader implements Loader {
     private ArrayList<Patient> loadedPatiensList = new ArrayList<Patient>();
 
     @Override
-    public void loadDataFromFile(String filePath) {
+    public boolean loadDataFromFile(String filePath) {
         if(loadData(filePath) && vaildateData()){
             for(Patient patient : loadedPatiensList){
                 DataBase.addPatient(patient);
             }
             DataBase.addTerminalMessage("Patients loaded");
+            return true;
         } else {
             DataBase.addTerminalMessage("Patients loaded failed");
+            return false;
         }
     }
 

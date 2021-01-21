@@ -17,28 +17,15 @@ public class MainWindowController {
     private HospitalsWindowController hospitalsWindowController;
 
     @FXML
+    private SimulatorSettingsWindowController simulatorSettingsWindowController;
+
+    @FXML
     void initialize() {
         mapWindowController.setMainWindowController(this);
     }
 
     public void doActionsAfterLoadMap(){
         hospitalsWindowController.updateHospitalTable();
-//        Thread readingThread = new Thread() {
-//            public void run() {
-//                int free = 0;
-//                while(true) {
-//                    DataBase.getHospital(1).setFreeBedsAmount(free);
-//                    free++;
-//                    try {
-//                        Thread.sleep(100);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        };
-//        readingThread.setDaemon(true);
-//        readingThread.start();
     }
 
     public void loadMapFromFile(ActionEvent actionEvent) {
@@ -47,7 +34,8 @@ public class MainWindowController {
 
         if(selectedFile != null){
             MapLoader mapLoader = new MapLoader();
-            mapLoader.loadDataFromFile(selectedFile.getAbsolutePath());
+            if (!mapLoader.loadDataFromFile(selectedFile.getAbsolutePath()))
+                return;
 
             IntersectionDetector intersectionDetector = new IntersectionDetector(DataBase.getRoadsList());
             for (Road road : DataBase.getRoadsList()) {
