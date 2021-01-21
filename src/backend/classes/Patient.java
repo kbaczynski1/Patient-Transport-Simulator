@@ -7,13 +7,19 @@ public class Patient implements Comparable<Patient>{
     private String name;
     private Point2D.Double cords;
 
+    public Patient(int id, String name, double x, double y ){
+        this.id = id;
+        this.name = name;
+        this.cords = new Point2D.Double(x, y);
+    }
+
     public Patient(int id, String name, Point2D.Double cords){
         this.id = id;
         this.name = name;
         this.cords = cords;
     }
 
-    int getId(){
+    public int getId(){
         return id;
     }
 

@@ -223,4 +223,32 @@ public class DataBase {
                 .map(Object::toString)
                 .collect(Collectors.joining("\n")));
     }
+
+    public static void clearHospitals() {
+        hospitalsList.clear();
+    }
+
+    public static void clearMonuments() {
+        monumentsList.clear();
+    }
+
+    public static void clearRoads() {
+        roadsList.clear();
+    }
+
+    public static void clearIntersections() {
+        intersectionsList.clear();
+    }
+
+    public static void clearPatients() {
+        patientsLists.clear();
+    }
+
+    public static void clearBoundaries() {
+        boundariesList.clear();
+    }
+
+    public static void clearNodes() {
+        nodesList.clear();
+    }
 }

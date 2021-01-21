@@ -45,6 +45,7 @@ public class HospitalsWindowController {
     }
 
     public void updateHospitalTable(){
+        hospitalsTable.getItems().clear();
         for(Hospital hospital : DataBase.getHospitalsList()){
             hospitalsTable.getItems().addAll(hospital);
         }

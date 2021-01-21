@@ -7,7 +7,7 @@
          <children>
       <AnchorPane prefHeight="360.0" prefWidth="600.0">
          <children>
-               <AnchorPane fx:id="anchorPaneMapWindow" layoutX="20.0" layoutY="15.0" prefHeight="330.0" prefWidth="560.0" />
+               <AnchorPane fx:id="anchorPaneMapWindow" layoutX="20.0" layoutY="15.0" prefHeight="700.0" prefWidth="560.0" />
          </children>
       </AnchorPane>
          </children>

@@ -32,6 +32,11 @@ public class SimulatorSettingsWindowController {
 
     @FXML
     void initialize() {
+        symulationButton.setDisable(true);
+    }
+
+    public void setDisableSimulationButton(boolean value) {
+            symulationButton.setDisable(value);
     }
 
     public void setMapWindowController(MapWindowController mapWindowController){
@@ -42,12 +47,10 @@ public class SimulatorSettingsWindowController {
         ArrayList<PathTransition> pathList = new ArrayList<>();
         for (Patient patient : DataBase.getPatientsList()){
             pathSearcher = new PathSearcher(patient);
-            System.out.println("NIC");
             if (pathSearcher.checkIfPatientIsInCountry()) {
                 ArrayList<Integer> path = new ArrayList<>();
                 pathSearcher.searchFirstHospital();
                 path.add(pathSearcher.getCurrentHospital().getId());
-                System.out.println(pathSearcher.getCurrentHospital());
                 while (pathSearcher.getCurrentHospital() != null && pathSearcher.getCurrentHospital().getFreeBedsAmount() == 0) {
                     path.addAll(pathSearcher.searchNextHospital());
                 }
