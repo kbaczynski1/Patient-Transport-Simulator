@@ -37,6 +37,7 @@ public class MainWindowController {
         DataBase.clearIntersections();
         DataBase.clearNodes();
         Country.clearBoundaries();
+        simulationSettingsWindowController.setDisableSimulationButton(true);
 
 
         if(selectedFile != null){
