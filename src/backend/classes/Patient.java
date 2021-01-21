@@ -13,7 +13,7 @@ public class Patient implements Comparable<Patient>{
         this.cords = cords;
     }
 
-    int getId(){
+    public int getId(){
         return id;
     }
 
@@ -28,10 +28,10 @@ public class Patient implements Comparable<Patient>{
         cords.setLocation(cords.getX(), cords.getX());
     }
 
-    double getX (){
+    public double getX (){
         return cords.getX();
     }
-    double getY (){
+    public double getY (){
         return cords.getY();
     }
 
