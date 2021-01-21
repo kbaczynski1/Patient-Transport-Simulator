@@ -12,11 +12,7 @@ import javafx.scene.shape.Path;
 import javafx.scene.text.Text;
 
 import javafx.util.Duration;
-
-import java.awt.geom.Point2D;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class MapWindowController {
@@ -85,7 +81,6 @@ public class MapWindowController {
             Monument tempMonument = new Monument(monument.getId() + hospitalsList.size(), monument.getName(), monument.getCords());
             monumentsList.add(tempMonument);
         }
-        drawPatient(new Patient(1, "edek", new Point2D.Double(50, 50)), new ArrayList<Integer>(Arrays.asList(new Integer[]{1, 2, 3})), 1);
 
     }
 
