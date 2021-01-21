@@ -51,6 +51,12 @@ public class DataBase {
                 .orElse(null);
     }
 
+    public static void setAllNodesNotVisited(){
+        for (Node node : nodesList){
+            node.setVisited(false);
+        }
+    }
+
     public static ArrayList<Node> getNodesList() {
         return nodesList;
     }

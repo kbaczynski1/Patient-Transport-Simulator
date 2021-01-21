@@ -35,12 +35,15 @@ public class SimulatorSettingsWindowController {
             pathSearcher = new PathSearcher(patient);
             pathSearcher.searchFirstHospital();
             System.out.println(pathSearcher.getCurrentHospital());
-            while (pathSearcher.getCurrentHospital() != null){
+            while (pathSearcher.getCurrentHospital() != null && pathSearcher.getCurrentHospital().getFreeBedsAmount() == 0){
                 ArrayList<Integer> temp = pathSearcher.searchNextHospital();
                 System.out.println(temp);
                 System.out.println(pathSearcher.getCurrentHospital());
             }
-
+            pathSearcher.getCurrentHospital().setFreeBedsAmount(pathSearcher.getCurrentHospital().getFreeBedsAmount() - 1);
+            if (pathSearcher.getCurrentHospital().getFreeBedsAmount() - 1 == 0)
+                DataBase.getNode(pathSearcher.getCurrentHospital().getId()).setCanStop(false);
+            DataBase.setAllNodesNotVisited();
         }
         simulationSpeed = speedSlider.getValue();
         System.out.println(simulationSpeed);

@@ -1,16 +1,13 @@
 # Szpitale (id | nazwa | wsp. x | wsp. y | Liczba łóżek | Liczba wolnych łóżek)
-1 | Szpital Wojewódzki nr 997 | 10 | 30 | 1000 | 100
+1 | Szpital Wojewódzki nr 997 | 10 | 10 | 1000 | 100
 2 | Krakowski Szpital Kliniczny | 100 | 120 | 999 | 99
 3 | Pierwszy Szpital im. Prezesa RP | 120 | 130 | 99 | 0
-4 | Drugi Szpital im. Naczelnika RP | 10 | 100 | 70 | 1
-5 | Trzeci Szpital im. Króla RP | 140 | 50 | 996 | 0
+4 | Drugi Szpital im. Naczelnika RP | 10 | 140 | 70 | 1
+5 | Trzeci Szpital im. Króla RP | 140 | 10 | 996 | 0
 # Obiekty (id | nazwa | wsp. x | wsp. y)
-1 | Pomnik Wikipedii | 10 | 50
-2 | Pomnik Fryderyka Chopina | 110 | 140
-3 | Pomnik Anonimowego Przechodnia | 40 | 140
-4 | Pomnik Anonimowego Przechodnia | 40 | 10
-5 | Pomnik Anonimowego Przechodnia | 80 | 10
-6 | Pomnik Anonimowego Przechodnia | 40 | 70
+1 | Pomnik Wikipedii | -1 | 50
+2 | Pomnik Fryderyka Chopina | 110 | 55
+3 | Pomnik Anonimowego Przechodnia | 40 | 70
 # Drogi (id | id_szpitala | id_szpitala | odległość)
 1 | 1 | 2 | 700
 2 | 1 | 4 | 550

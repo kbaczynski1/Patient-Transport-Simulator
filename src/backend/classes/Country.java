@@ -39,6 +39,7 @@ public class Country {
             }
         }
         boundariesNodes.addAll(goodBoundaries);
+        System.out.println(boundariesNodes.size());
         goodBoundaries = new ArrayList<>();
         angles = new ArrayList<Double>();
         Collections.sort(allBoundaries, Boundary.SortByYDesc);
