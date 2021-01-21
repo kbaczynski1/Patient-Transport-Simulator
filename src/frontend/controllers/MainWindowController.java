@@ -45,6 +45,8 @@ public class MainWindowController {
     }
 
     public void loadMapFromFile(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(null);
         DataBase.clearHospitals();
         DataBase.clearRoads();
         DataBase.clearMonuments();
@@ -52,8 +54,6 @@ public class MainWindowController {
         DataBase.clearIntersections();
         DataBase.clearNodes();
         Country.clearBoundaries();
-        FileChooser fileChooser = new FileChooser();
-        File selectedFile = fileChooser.showOpenDialog(null);
 
 
         if(selectedFile != null){
@@ -84,6 +84,7 @@ public class MainWindowController {
     public void loadPatientsFromFile(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
+        DataBase.clearPatients();
         if(selectedFile != null){
             PatientsLoader patientsLoader = new PatientsLoader();
             patientsLoader.loadDataFromFile(selectedFile.getAbsolutePath());
