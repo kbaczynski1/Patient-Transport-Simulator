@@ -79,7 +79,7 @@ public class IntersectionDetector {
                         this.removeFuture(r, road2);
                     }
                 }
-                this.intersections.add(new Intersection(DataBase.getIntersectionsList().size() + DataBase.getHospitalsList().size(), road1.getId(), road2.getId(), event.getPoint()));
+                this.intersections.add(new Intersection(DataBase.getIntersectionsList().size() + DataBase.getHospitalsList().size() + 1, road1.getId(), road2.getId(), event.getPoint()));
             }
         }
     }

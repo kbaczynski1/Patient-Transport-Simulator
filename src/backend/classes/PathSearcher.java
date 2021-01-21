@@ -11,6 +11,7 @@ public class PathSearcher {
 
     public PathSearcher(Patient patient) {
         this.patient = patient;
+        DataBase.setGraph();
         this.graph = DataBase.getGraph();
     }
 
@@ -66,7 +67,9 @@ public class PathSearcher {
                 id = i;
             }
         }
-        DataBase.getNode(id).setVisited(true);
+        DataBase.getNode(id+1).setCanStop(false);
+        DataBase.getNode(id+1).setVisited(true);
+//        System.out.println(DataBase.getNode(id+1).isVisited());
         hospital = hospitals.get(id); // assign the first nearest hospital
 
     }
@@ -88,7 +91,9 @@ public class PathSearcher {
                     } else {
                         node.setVisited(true);
                         path.add(i);
-                        bestPaths = checkNextNode(i + 1, pathValue + graph[id - 1][i + 1], bestPaths, path);
+                        pathValue += graph[id - 1][i];
+                        bestPaths = checkNextNode(i + 1, pathValue, bestPaths, path);
+                        pathValue -= graph[id - 1][i];
                         path.remove(path.size() - 1);
                         node.setVisited(false);
                     }
@@ -101,19 +106,25 @@ public class PathSearcher {
     // search the next nearest hospital
     public ArrayList<Integer> searchNextHospital() {
         Path[] bestPaths = new Path[graph.length];
+        for (int i=0; i < bestPaths.length; i++){
+            bestPaths[i] = new Path();
+        }
         ArrayList<Integer> path = new ArrayList<>();
         bestPaths = checkNextNode(hospital.getId(), 0.0, bestPaths, path);
         double minVal = Double.POSITIVE_INFINITY;
-        int index = -1;
+        int index = 0;
         for (int i = 0; i < bestPaths.length; i++) {
             if (bestPaths[i].getValue() <= minVal) {
                 minVal = bestPaths[i].getValue();
                 index = i;
             }
         }
+        DataBase.getNode(index+1).setCanStop(false);
         if (minVal < Double.POSITIVE_INFINITY) {
+            hospital = DataBase.getHospital(index+1);
             return bestPaths[index].getNodesList();
         } else {
+            hospital = null;
             return null;
         }
     }

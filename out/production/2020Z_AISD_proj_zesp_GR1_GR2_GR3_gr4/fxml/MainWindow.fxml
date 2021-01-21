@@ -33,7 +33,7 @@
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                          <fx:include fx:id="terminalindow" source="TerminalWindow.fxml" />
-                         <fx:include fx:id="simulationSettingsWindow" source="SimulatorSettingsWindow.fxml" />
+                         <fx:include fx:id="simulatiorSettingsWindow" source="SimulatorSettingsWindow.fxml" />
                      </children>
                   </HBox>
                </children>

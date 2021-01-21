@@ -130,7 +130,7 @@ public class DataBase {
 
     public static void divideRoads(){
         for (Intersection inter : intersectionsList) {
-            Road road = roadsList.get(inter.getRoad1Id());
+            Road road = DataBase.getRoad(inter.getRoad1Id());
             if (road.getFirstNode().getCords().getX() - road.getSecondNode().getCords().getX() != 0){
                 roadsList.add(new Road(roadsList.size() + 1, road.getFirstNodeId(), inter.getId(), road.getDistance() * (road.getFirstNode().getCords().getX() - inter.getCords().getX()) / (double) (road.getFirstNode().getCords().getX() - road.getSecondNode().getCords().getX())));
                 roadsList.add(new Road(roadsList.size() + 1, road.getSecondNodeId(), inter.getId(), road.getDistance() * (road.getSecondNode().getCords().getX() - inter.getCords().getX()) / (double) road.getSecondNode().getCords().getX() - road.getFirstNode().getCords().getX()));
@@ -139,7 +139,7 @@ public class DataBase {
                 roadsList.add(new Road(roadsList.size() + 1, road.getFirstNodeId(), inter.getId(), road.getDistance() * (road.getFirstNode().getCords().getY() - inter.getCords().getY()) / (double) (road.getFirstNode().getCords().getY() - road.getSecondNode().getCords().getY())));
                 roadsList.add(new Road(roadsList.size() + 1, road.getSecondNodeId(), inter.getId(), road.getDistance() * (road.getSecondNode().getCords().getY() - inter.getCords().getY()) / (double) road.getSecondNode().getCords().getY() - road.getFirstNode().getCords().getY()));
             }
-            road = roadsList.get(inter.getRoad2Id());
+            road = DataBase.getRoad(inter.getRoad2Id());
             if (road.getFirstNode().getCords().getX() - road.getSecondNode().getCords().getX() != 0){
                 roadsList.add(new Road(roadsList.size() + 1, road.getFirstNodeId(), inter.getId(), road.getDistance() * (road.getFirstNode().getCords().getX() - inter.getCords().getX()) / (double) (road.getFirstNode().getCords().getX() - road.getSecondNode().getCords().getX())));
                 roadsList.add(new Road(roadsList.size() + 1, road.getSecondNodeId(), inter.getId(), road.getDistance() * (road.getSecondNode().getCords().getX() - inter.getCords().getX()) / (double) road.getSecondNode().getCords().getX() - road.getFirstNode().getCords().getX()));
