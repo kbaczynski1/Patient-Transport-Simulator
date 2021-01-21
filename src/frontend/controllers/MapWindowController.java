@@ -84,36 +84,20 @@ public class MapWindowController {
 
     }
 
-    public void drawPatient(Patient patient, ArrayList<Integer> nodesPath, double speed){
+    public PathTransition drawPatient(Patient patient, ArrayList<Integer> nodesPath, double speed){
         Circle circle = new Circle(patient.getX() * scale, patient.getY() * scale, 5.f, Color.ORANGE);
+        circle.setVisible(false);
         anchorPaneMapWindow.getChildren().add(circle);
         Path path = new Path();
         path.getElements().add(new MoveTo(patient.getX() * scale, patient.getY() * scale));
         for (Integer nodeId : nodesPath){
             path.getElements().add(new LineTo(DataBase.getNode(nodeId).getCords().getX() * scale, DataBase.getNode(nodeId).getCords().getY() * scale));
         }
-
         PathTransition pathTransition = new PathTransition();
         pathTransition.setDuration(Duration.millis(4000/speed));
         pathTransition.setPath(path);
         pathTransition.setNode(circle);
-        pathTransition.setCycleCount(PathTransition.INDEFINITE);
-        pathTransition.play();
+        return pathTransition;
 
-
-        Thread refreshTableThread = new Thread(() -> {
-            int i = 0;
-            while(true) {
-                pathTransition.setDuration(Duration.millis(1000*i));
-                i++;
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        refreshTableThread.setDaemon(true);
-        refreshTableThread.start();
     }
 }

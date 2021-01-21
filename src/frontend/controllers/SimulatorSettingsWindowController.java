@@ -3,6 +3,8 @@ package controllers;
 import classes.DataBase;
 import classes.PathSearcher;
 import classes.Patient;
+import javafx.animation.Animation;
+import javafx.animation.PathTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,6 +24,9 @@ public class SimulatorSettingsWindowController {
     @FXML
     private Button symulationButton;
 
+    @FXML
+    private MapWindowController mapWindowController;
+
     private double simulationSpeed;
     private PathSearcher pathSearcher;
 
@@ -29,9 +34,15 @@ public class SimulatorSettingsWindowController {
     void initialize() {
     }
 
+    public void setMapWindowController(MapWindowController mapWindowController){
+        this.mapWindowController = mapWindowController;
+    }
+
     public void startSimulation(ActionEvent actionEvent){
+        ArrayList<PathTransition> pathList = new ArrayList<>();
         for (Patient patient : DataBase.getPatientsList()){
             pathSearcher = new PathSearcher(patient);
+            System.out.println("NIC");
             if (pathSearcher.checkIfPatientIsInCountry()) {
                 ArrayList<Integer> path = new ArrayList<>();
                 pathSearcher.searchFirstHospital();
@@ -40,17 +51,41 @@ public class SimulatorSettingsWindowController {
                 while (pathSearcher.getCurrentHospital() != null && pathSearcher.getCurrentHospital().getFreeBedsAmount() == 0) {
                     path.addAll(pathSearcher.searchNextHospital());
                 }
-
-                //tu powinna się wywołać funkcja drawPatient z MapWindowController
-
+                pathList.add(mapWindowController.drawPatient(patient, path, speedSlider.getValue()));
                 pathSearcher.getCurrentHospital().setFreeBedsAmount(pathSearcher.getCurrentHospital().getFreeBedsAmount() - 1);
                 if (pathSearcher.getCurrentHospital().getFreeBedsAmount() - 1 == 0)
                     DataBase.getNode(pathSearcher.getCurrentHospital().getId()).setCanStop(false);
                 DataBase.setAllNodesNotVisited();
             }
         }
-//        simulationSpeed = speedSlider.getValue();
-//        System.out.println(simulationSpeed);
+        Thread refreshTerminalThread = new Thread(() -> {
+            int animationCounter = 0;
+            while(animationCounter < pathList.size()) {
+                pathList.get(animationCounter).getNode().setVisible(true);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                pathList.get(animationCounter).play();
+                while(pathList.get(animationCounter).getStatus() == Animation.Status.RUNNING) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                pathList.get(animationCounter).getNode().setVisible(false);
+                animationCounter += 1;
+            }
+        });
+        refreshTerminalThread.setDaemon(true);
+        refreshTerminalThread.start();
     }
 
     public double getSimulationSpeed(){return simulationSpeed;}

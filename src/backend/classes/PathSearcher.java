@@ -18,10 +18,10 @@ public class PathSearcher {
     // check that the patient is on the territory of the country
     public boolean checkIfPatientIsInCountry() {
         // returns true if patient (patient.getX(), patient.getY()) is within the country
-        List<Boundary> boundariesNodes = DataBase.getBoundariesList();
+        List<Boundary> boundariesNodes = Country.getBoundariesNodes();
         boolean sideIsDefined = false;
         boolean side = false;
-        for (int i = 0; i < boundariesNodes.size(); i++) {
+        for (int i = 0; i < boundariesNodes.size() - 1; i++) {
             int j = i + 1;
             double x_i = boundariesNodes.get(i).getCords().getX();
             double y_i = boundariesNodes.get(i).getCords().getY();

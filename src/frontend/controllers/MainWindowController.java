@@ -17,11 +17,12 @@ public class MainWindowController {
     private HospitalsWindowController hospitalsWindowController;
 
     @FXML
-    private SimulatorSettingsWindowController simulatorSettingsWindowController;
+    private SimulatorSettingsWindowController simulationSettingsWindowController;
 
     @FXML
     void initialize() {
         mapWindowController.setMainWindowController(this);
+        simulationSettingsWindowController.setMapWindowController(mapWindowController);
     }
 
     public void doActionsAfterLoadMap(){
