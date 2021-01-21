@@ -6,6 +6,10 @@ import java.util.Collections;
 
 public class Country {
     private static ArrayList<Boundary> boundariesNodes = new ArrayList<Boundary>();
+
+    public static void clearBoundaries() {
+        boundariesNodes.clear();
+    }
 //
     static public ArrayList<Boundary> getBoundariesNodes(){
         return boundariesNodes;

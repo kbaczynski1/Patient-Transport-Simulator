@@ -3,7 +3,6 @@ package controllers;
 import classes.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -15,6 +14,10 @@ public class MainWindowController {
 
     @FXML
     private HospitalsWindowController hospitalsWindowController;
+
+    // TA LINIJKA
+//    @FXML
+//    private SimulatorSettingsWindowController simulatorSettingsWindowController;
 
     @FXML
     void initialize() {
@@ -42,8 +45,16 @@ public class MainWindowController {
     }
 
     public void loadMapFromFile(ActionEvent actionEvent) {
+        DataBase.clearHospitals();
+        DataBase.clearRoads();
+        DataBase.clearMonuments();
+        DataBase.clearBoundaries();
+        DataBase.clearIntersections();
+        DataBase.clearNodes();
+        Country.clearBoundaries();
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
+
 
         if(selectedFile != null){
             MapLoader mapLoader = new MapLoader();
@@ -65,6 +76,8 @@ public class MainWindowController {
             Country.calculateBoundaries(DataBase.getBoundariesList());
             mapWindowController.printMap();
             doActionsAfterLoadMap();
+            // TA LINIJKA
+//            simulatorSettingsWindowController.toggleSimulationButton();
         }
     }
 
