@@ -173,11 +173,19 @@ public class MapWindowController {
         anchorPaneMapWindow.getChildren().add(circle);
         Path path = new Path();
         path.getElements().add(new MoveTo(rescaleX(patient.getX()), rescaleY(patient.getY())));
+        double distance = 10;
+        double x1 = patient.getX();
+        double y1 = patient.getY();
+        System.out.println("distance");
         for (Integer nodeId : nodesPath){
             path.getElements().add(new LineTo(rescaleX(DataBase.getNode(nodeId).getCords().getX()), rescaleY(DataBase.getNode(nodeId).getCords().getY())));
+            distance += Math.hypot(x1-DataBase.getNode(nodeId).getCords().getX(), y1-DataBase.getNode(nodeId).getCords().getY());
+            x1 = DataBase.getNode(nodeId).getCords().getX();
+            y1 = DataBase.getNode(nodeId).getCords().getY();
+            System.out.println(distance);
         }
         PathTransition pathTransition = new PathTransition();
-        pathTransition.setDuration(Duration.millis(4000/speed));
+        pathTransition.setDuration(Duration.millis(50 * distance));
         pathTransition.setPath(path);
         pathTransition.setNode(circle);
         return pathTransition;

@@ -90,6 +90,9 @@ public class SimulatorSettingsWindowController {
                 pathList.get(animationCounter).play();
                 DataBase.addTerminalMessage("Patient " + animationCounter + " taken to hospital");
                 while(pathList.get(animationCounter).getStatus() == Animation.Status.RUNNING) {
+                    for(PathTransition pathTransition : pathList){
+                        pathTransition.setRate(speedSlider.getValue());
+                    }
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
