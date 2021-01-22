@@ -21,8 +21,13 @@ public class PathSearcher {
         List<Boundary> boundariesNodes = Country.getBoundariesNodes();
         boolean sideIsDefined = false;
         boolean side = false;
-        for (int i = 0; i < boundariesNodes.size() - 1; i++) {
-            int j = i + 1;
+        for (int i = 0; i < boundariesNodes.size(); i++) {
+            int j;
+            if (i == boundariesNodes.size() - 1) {
+                j = 0;
+            } else {
+                j = i + 1;
+            }
             double x_i = boundariesNodes.get(i).getCords().getX();
             double y_i = boundariesNodes.get(i).getCords().getY();
             double x_j = boundariesNodes.get(j).getCords().getX();
