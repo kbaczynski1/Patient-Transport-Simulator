@@ -22,8 +22,8 @@ public class MapWindowController {
 
     public AnchorPane anchorPaneMapWindow;
     private MainWindowController mainWindowController;
-    private double scaleX;
-    private double scaleY;
+    private double width;
+    private double height;
     private double minX;
     private double minY;
     private double maxX;
@@ -31,12 +31,15 @@ public class MapWindowController {
 
     @FXML
     void initialize() {
-        scaleX = 1.0;
-        scaleY = 1.0;
-        double minX = Double.MAX_VALUE;
-        double minY = Double.MAX_VALUE;
-        double maxX = Double.MIN_VALUE;
-        double maxY = Double.MIN_VALUE;
+        width = anchorPaneMapWindow.getWidth();
+        height = anchorPaneMapWindow.getHeight();
+//        System.out.println("wymiary okna");
+//        System.out.println(width);
+//        System.out.println(height);
+        minX = Double.MAX_VALUE;
+        minY = Double.MAX_VALUE;
+        maxX = Double.MIN_VALUE;
+        maxY = Double.MIN_VALUE;
 
     }
 
@@ -45,6 +48,12 @@ public class MapWindowController {
     }
 
     private void calculateBoundaries(double[] arrayOfBoundaries) {
+        width = anchorPaneMapWindow.getWidth();
+        height = anchorPaneMapWindow.getHeight();
+//        System.out.println("wymiary");
+//        System.out.println(width);
+//        System.out.println(height);
+
         if (arrayOfBoundaries.length == 0) {
             return;
         }
@@ -69,11 +78,14 @@ public class MapWindowController {
     }
 
     double rescaleX(double x) {
-        return ((x - minX) / (maxX - minX)) * anchorPaneMapWindow.getWidth();
+        return ((x - minX) / (maxX - minX)) * width;
+//        return 3.0 * x;
     }
 
+
     double rescaleY(double y) {
-        return ((y - minY) / (maxY - minY)) * anchorPaneMapWindow.getHeight();
+        return ((y - minY) / (maxY - minY)) * height;
+//        return 3.0 * y;
     }
 
     private void printScale(double[] arrayOfBoundaries) {
