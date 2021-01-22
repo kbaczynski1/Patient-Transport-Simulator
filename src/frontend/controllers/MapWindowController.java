@@ -162,6 +162,11 @@ public class MapWindowController {
 
     }
 
+    public void drawHospitalRed(double x, double y) {
+        Circle circle = new Circle(rescaleX(x), rescaleY(y), 5.f, Color.RED);
+        anchorPaneMapWindow.getChildren().add(circle);
+    }
+
     public PathTransition drawPatient(Patient patient, ArrayList<Integer> nodesPath, double speed){
         Circle circle = new Circle(rescaleX(patient.getX()), rescaleY(patient.getY()), 5.f, Color.ORANGE);
         circle.setVisible(false);

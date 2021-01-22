@@ -39,7 +39,7 @@ public class PathSearcher {
                     }
                     sideIsDefined = true;
                 } // point (patient) have to lie at the same side of all lines
-                else if ((h > 0 && side == false) || (h < 0 && side == true)) {
+                else if ((h > 0 && !side) || (h < 0 && side)) {
                     return false;
                 }
             }

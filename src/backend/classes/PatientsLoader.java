@@ -39,7 +39,7 @@ public class PatientsLoader extends DataLoader implements Loader {
     public boolean vaildateData() {
        Set<Patient> set = new HashSet<Patient>(loadedPatiensList);
         if(set.size() < loadedPatiensList.size()){
-            System.out.println("Dwukrotne wystąpienie pacjenta o takim samym id");
+            DataBase.addTerminalMessage("Dwukrotne wystąpienie pacjenta o takim samym id");
             return false;
         }
         return true;
@@ -73,8 +73,8 @@ public class PatientsLoader extends DataLoader implements Loader {
         if (patientData.length == PATIENT_DATA_SIZE) {
             try {
                 int patientId = parseInt(patientData, PATIENT_ID_INDEX);
-                double patientX = parseInt(patientData, PATIENT_X_INDEX);
-                double patientY = parseInt(patientData, PATIENT_Y_INDEX);
+                double patientX = parseDouble(patientData, PATIENT_X_INDEX);
+                double patientY = parseDouble(patientData, PATIENT_Y_INDEX);
                 loadedPatiensList.add(new Patient(patientId, "", new Point2D.Double(patientX, patientY)));
                 return true;
             } catch (NumberFormatException e) {
@@ -82,7 +82,7 @@ public class PatientsLoader extends DataLoader implements Loader {
             }
 
         } else {
-            System.out.println("Niewłaściwa liczba danych dla pacjenta w linii " + lineNumber +":\n" + loadedLine);
+            DataBase.addTerminalMessage("Niewłaściwa liczba danych dla pacjenta w linii " + lineNumber +":\n" + loadedLine);
         }
         return false;
     }

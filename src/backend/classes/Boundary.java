@@ -3,7 +3,7 @@ package classes;
 import java.awt.geom.Point2D;
 import java.util.Comparator;
 
-public class Boundary {
+public class Boundary implements Comparable<Boundary>{
     protected int id;
     protected String name;
     protected Point2D.Double cords;
@@ -58,4 +58,20 @@ public class Boundary {
         }
     };
 
+
+    @Override
+     public int compareTo(Boundary b) {
+        return Integer.compare(this.getId(), b.getId());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(((Boundary)o).getId() == this.id) return true;
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }

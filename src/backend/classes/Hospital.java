@@ -28,5 +28,4 @@ public class Hospital extends Boundary{
     public String toString() {
         return "[" + id + "] " + name + "\tCords: " + cords.getX() + "\t" + cords.getY() + "\tBeds: " + (bedsAmount - freeBedsAmount) + "/"+ bedsAmount;
     }
-
 }

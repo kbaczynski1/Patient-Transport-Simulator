@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -44,7 +46,9 @@ public class SimulatorSettingsWindowController {
     }
 
     public void startSimulation(ActionEvent actionEvent){
+        DataBase.addTerminalMessage("Starting simulation");
         ArrayList<PathTransition> pathList = new ArrayList<>();
+        int patientsNotInBoundaries = 0;
         for (Patient patient : DataBase.getPatientsList()){
             pathSearcher = new PathSearcher(patient);
             if (pathSearcher.checkIfPatientIsInCountry()) {
@@ -56,12 +60,23 @@ public class SimulatorSettingsWindowController {
                 }
                 pathList.add(mapWindowController.drawPatient(patient, path, speedSlider.getValue()));
                 pathSearcher.getCurrentHospital().setFreeBedsAmount(pathSearcher.getCurrentHospital().getFreeBedsAmount() - 1);
-                if (pathSearcher.getCurrentHospital().getFreeBedsAmount() - 1 == 0)
+                if (pathSearcher.getCurrentHospital().getFreeBedsAmount() - 1 == 0) {
                     DataBase.getNode(pathSearcher.getCurrentHospital().getId()).setCanStop(false);
+                    mapWindowController.drawHospitalRed(
+                            pathSearcher.getCurrentHospital().getCords().getX(),
+                            pathSearcher.getCurrentHospital().getCords().getY());
+
+                }
                 DataBase.setAllNodesNotVisited();
+            } else {
+                patientsNotInBoundaries++;
             }
         }
-        Thread refreshTerminalThread = new Thread(() -> {
+        if (patientsNotInBoundaries != 0) {
+            DataBase.addTerminalMessage( patientsNotInBoundaries + " patients were not in country. Ommiting.");
+        }
+
+        Thread refreshSimulationThread = new Thread(() -> {
             int animationCounter = 0;
             while(animationCounter < pathList.size()) {
                 pathList.get(animationCounter).getNode().setVisible(true);
@@ -71,6 +86,7 @@ public class SimulatorSettingsWindowController {
                     e.printStackTrace();
                 }
                 pathList.get(animationCounter).play();
+                DataBase.addTerminalMessage("Patient " + animationCounter + " taken to hospital");
                 while(pathList.get(animationCounter).getStatus() == Animation.Status.RUNNING) {
                     try {
                         Thread.sleep(100);
@@ -87,8 +103,9 @@ public class SimulatorSettingsWindowController {
                 animationCounter += 1;
             }
         });
-        refreshTerminalThread.setDaemon(true);
-        refreshTerminalThread.start();
+        refreshSimulationThread.setDaemon(true);
+        refreshSimulationThread.start();
+        DataBase.addTerminalMessage("Simulation complete!");
     }
 
     public double getSimulationSpeed(){return simulationSpeed;}

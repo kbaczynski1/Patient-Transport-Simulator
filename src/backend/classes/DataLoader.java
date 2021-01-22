@@ -36,7 +36,7 @@ public class DataLoader {
             in.close();
             return true;
         } catch (IOException e) {
-            System.out.println("Plik \"" +filePath + "\" nie istnieje");
+            DataBase.addTerminalMessage("Plik \"" +filePath + "\" nie istnieje");
             return false;
         }
     }
@@ -51,13 +51,24 @@ public class DataLoader {
         }
     }
 
-    protected static void printParseIntError(String[] data, int dataIndex){
-        System.out.println("Błąd danych wejściowych w linii " + lineNumber + ":\n" + loadedLine);
-        for(int i = 0; i < dataIndex; i++)
-            for(int j = 0; j < data[i].length() + 3; j++)
-                System.out.print(" ");
+    protected static double parseDouble(String[] data, int dataIndex) throws NumberFormatException {
+        try {
+            return Double.parseDouble(data[dataIndex]);
+        } catch (NumberFormatException e) {
+            printParseDoubleError(data, dataIndex);
+            throw e;
+        }
+    }
 
-        System.out.println("|");
-        System.out.println("Wymagana wartość liczbowa typu całkowitego");
+    protected static void printParseIntError(String[] data, int dataIndex){
+        DataBase.addTerminalMessage("Błąd danych wejściowych, pole: \""+ data[dataIndex] + "\" w linii "
+                + lineNumber + ":\n" + loadedLine);
+        DataBase.addTerminalMessage("Wymagana wartość liczbowa typu całkowitego");
+    }
+
+    protected static void printParseDoubleError(String[] data, int dataIndex){
+        DataBase.addTerminalMessage("Błąd danych wejściowych, pole: \""+ data[dataIndex] + "\" w linii "
+                + lineNumber + ":\n" + loadedLine);
+        DataBase.addTerminalMessage("Wymagana wartość liczbowa");
     }
 }

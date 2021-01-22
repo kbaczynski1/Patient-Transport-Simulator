@@ -4,6 +4,9 @@ import interfaces.Loader;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class MapLoader extends DataLoader implements Loader {
 
@@ -63,6 +66,39 @@ public class MapLoader extends DataLoader implements Loader {
 
     @Override
     public boolean vaildateData() {
+        Set<Hospital> hospitalSet = new HashSet<Hospital>(loadedHospitalsList);
+        Set<Monument> monumentSet = new HashSet<Monument>(loadedMonumentList);
+        Set<Road> roadSet = new HashSet<Road>(loadedRoadsList);
+        if(hospitalSet.size() < loadedHospitalsList.size()){
+            DataBase.addTerminalMessage("Dwukrotne wystąpienie szpitala o takim samym id");
+            return false;
+        }
+        else if(monumentSet.size() < loadedMonumentList.size()){
+            DataBase.addTerminalMessage("Dwukrotne wystąpienie pomnika o takim samym id");
+            return false;
+        }
+        else if(roadSet.size() < loadedRoadsList.size()){
+            DataBase.addTerminalMessage("Dwukrotne wystąpienie drogi o takim samym id");
+            return false;
+        }
+        else {
+            for (Road road: loadedRoadsList) {
+                List<Road> roadListCopy = new ArrayList<Road>(loadedRoadsList);
+                roadListCopy.remove(road);
+                for (Road roadFromCopy: roadListCopy) {
+                    if (((road.getFirstNodeId() == roadFromCopy.getFirstNodeId()) &&
+                            (road.getSecondNodeId() == roadFromCopy.getSecondNodeId())) ||
+                            ((road.getFirstNodeId() == roadFromCopy.getSecondNodeId()) &&
+                                    (road.getSecondNodeId() == roadFromCopy.getFirstNodeId()))) {
+                        DataBase.addTerminalMessage("Błąd w danych wejściowych.\n" +
+                                "Ponowne wystąpienie drogi między szpitalem o id=" + road.getFirstNodeId() +
+                                "\na szpitalem o id=" + road.getSecondNodeId());
+                        return false;
+                    }
+
+                }
+            }
+        }
         return true;
     }
 
@@ -109,10 +145,18 @@ public class MapLoader extends DataLoader implements Loader {
             try {
                 int hospitalId = parseInt(hospitalData, HOSPITAL_ID_INDEX);
                 String hospitalName = hospitalData[HOSPITAL_NAME_INDEX];
-                double hospitalX = parseInt(hospitalData, HOSPITAL_X_INDEX);
-                double hospitalY = parseInt(hospitalData, HOSPITAL_Y_INDEX);
+                double hospitalX = parseDouble(hospitalData, HOSPITAL_X_INDEX);
+                double hospitalY = parseDouble(hospitalData, HOSPITAL_Y_INDEX);
                 int hospitalBedsAmount = parseInt(hospitalData, HOSPITAL_BEDS_AMOUNT_INDEX);
+                if (hospitalBedsAmount<0) {
+                    DataBase.addTerminalMessage("Niedozwolona wartosc ujemna: " + hospitalBedsAmount);
+                    return false;
+                }
                 int hospitalFreeBedsAmount = parseInt(hospitalData, HOSPITAL_FREE_BEDS_AMOUNT_INDEX);
+                if (hospitalFreeBedsAmount<0) {
+                    DataBase.addTerminalMessage("Niedozwolona wartosc ujemna: " +hospitalFreeBedsAmount);
+                    return false;
+                }
                 loadedHospitalsList.add(new Hospital(hospitalId, hospitalName, new Point2D.Double(hospitalX, hospitalY), hospitalBedsAmount, hospitalFreeBedsAmount));
                 return true;
             } catch (NumberFormatException e) {
@@ -120,7 +164,7 @@ public class MapLoader extends DataLoader implements Loader {
             }
 
         } else {
-            System.out.println("Niewłaściwa liczba danych dla szpitala w linii " + lineNumber +":\n" + loadedLine);
+            DataBase.addTerminalMessage("Niewłaściwa liczba danych dla szpitala w linii " + lineNumber +":\n" + loadedLine);
         }
         return false;
     }
@@ -131,8 +175,8 @@ public class MapLoader extends DataLoader implements Loader {
             try {
                 int boundaryId = parseInt(monumentData, MONUMENT_ID_INDEX);
                 String boundaryName = monumentData[MONUMENT_NAME_INDEX];
-                double boundaryX = parseInt(monumentData, MONUMENT_X_INDEX);
-                double boundaryY = parseInt(monumentData, MONUMENT_Y_INDEX);
+                double boundaryX = parseDouble(monumentData, MONUMENT_X_INDEX);
+                double boundaryY = parseDouble(monumentData, MONUMENT_Y_INDEX);
                 loadedMonumentList.add(new Monument(boundaryId, boundaryName, new Point2D.Double(boundaryX, boundaryY)));
                 return true;
             } catch (NumberFormatException e) {
@@ -140,7 +184,7 @@ public class MapLoader extends DataLoader implements Loader {
             }
 
         } else {
-            System.out.println("Niewłaściwa liczba danych dla objetków w linii " + lineNumber +":\n" + loadedLine);
+            DataBase.addTerminalMessage("Niewłaściwa liczba danych dla objetku w linii " + lineNumber +":\n" + loadedLine);
         }
         return false;
     }
@@ -152,7 +196,21 @@ public class MapLoader extends DataLoader implements Loader {
                 int roadId = parseInt(roadData, ROAD_ID_INDEX);
                 int roadFirstNodeId = parseInt(roadData, ROAD_FIRST_HOSPITAL_ID_INDEX);
                 int roadSecondNodeId = parseInt(roadData, ROAD_SECOND_HOSPITAL_ID_INDEX);
-                double roadDistance = parseInt(roadData, ROAD_DISTANCE_INDEX);
+                double roadDistance = parseDouble(roadData, ROAD_DISTANCE_INDEX);
+                if (roadDistance<0) {
+                    DataBase.addTerminalMessage("Niedozwolona wartosc ujemna: " +roadDistance);
+                    return false;
+                }
+                if(!loadedHospitalsList.contains(new Hospital(roadFirstNodeId,
+                        "h",new Point2D.Double(0,0),0,0))) {
+                    DataBase.addTerminalMessage("Szpital o id=" + roadFirstNodeId + " nie istnieje");
+                    return false;
+                }
+                else if (!loadedHospitalsList.contains(new Hospital(roadSecondNodeId,
+                        "h",new Point2D.Double(0,0),0,0))) {
+                    DataBase.addTerminalMessage("Szpital o id=" + roadSecondNodeId + " nie istnieje");
+                    return false;
+                }
                 loadedRoadsList.add(new Road(roadId, roadFirstNodeId, roadSecondNodeId, roadDistance));
                 return true;
             } catch (NumberFormatException e) {
@@ -160,7 +218,7 @@ public class MapLoader extends DataLoader implements Loader {
             }
 
         } else {
-            System.out.println("Niewłaściwa liczba danych dla drogi w linii " + lineNumber +":\n" + loadedLine);
+            DataBase.addTerminalMessage("Niewłaściwa liczba danych dla drogi w linii " + lineNumber +":\n" + loadedLine);
         }
         return false;
     }

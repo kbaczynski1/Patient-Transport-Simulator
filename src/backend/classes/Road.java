@@ -154,5 +154,14 @@ public class Road  implements Comparable<Road>{
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if(((Road)o).getId() == this.id) return true;
+        return false;
+    }
 
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }
