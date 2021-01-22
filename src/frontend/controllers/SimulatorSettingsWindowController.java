@@ -59,15 +59,17 @@ public class SimulatorSettingsWindowController {
                     path.addAll(pathSearcher.searchNextHospital());
                 }
                 pathList.add(mapWindowController.drawPatient(patient, path, speedSlider.getValue()));
-                pathSearcher.getCurrentHospital().setFreeBedsAmount(pathSearcher.getCurrentHospital().getFreeBedsAmount() - 1);
-                if (pathSearcher.getCurrentHospital().getFreeBedsAmount() - 1 == 0) {
-                    DataBase.getNode(pathSearcher.getCurrentHospital().getId()).setCanStop(false);
-                    mapWindowController.drawHospitalRed(
-                            pathSearcher.getCurrentHospital().getCords().getX(),
-                            pathSearcher.getCurrentHospital().getCords().getY());
+                if(pathSearcher.getCurrentHospital() != null){
+                    pathSearcher.getCurrentHospital().setFreeBedsAmount(pathSearcher.getCurrentHospital().getFreeBedsAmount() - 1);
+                    if (pathSearcher.getCurrentHospital().getFreeBedsAmount() == 0) {
+                        DataBase.getNode(pathSearcher.getCurrentHospital().getId()).setCanStop(false);
+                        mapWindowController.drawHospitalRed(
+                                pathSearcher.getCurrentHospital().getCords().getX(),
+                                pathSearcher.getCurrentHospital().getCords().getY());
 
+                    }
                 }
-                DataBase.setAllNodesNotVisited();
+                DataBase.checkIfCanStop();
             } else {
                 patientsNotInBoundaries++;
             }

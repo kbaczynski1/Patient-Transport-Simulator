@@ -89,8 +89,9 @@ public class PathSearcher {
                         path.remove(path.size() - 1);
                         pathValue -= graph[id - 1][i];
                     } else {
-                        node.setVisited(true);
-                        path.add(i);
+                        if (node.getId() <= DataBase.getHospitalsList().size())
+                            node.setVisited(true);
+                        path.add(i+1);
                         pathValue += graph[id - 1][i];
                         bestPaths = checkNextNode(i + 1, pathValue, bestPaths, path);
                         pathValue -= graph[id - 1][i];
@@ -121,11 +122,12 @@ public class PathSearcher {
         }
         if (minVal < Double.POSITIVE_INFINITY) {
             hospital = DataBase.getHospital(index+1);
-            DataBase.getNode(index+1).setVisited(true);
+            DataBase.getNode(index+1).setCanStop(false);
             return bestPaths[index].getNodesList();
         } else {
             hospital = null;
-            return null;
+            ArrayList<Integer> temp = new ArrayList<>();
+            return temp;
         }
     }
 

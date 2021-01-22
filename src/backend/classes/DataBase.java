@@ -51,9 +51,10 @@ public class DataBase {
                 .orElse(null);
     }
 
-    public static void setAllNodesNotVisited(){
-        for (Node node : nodesList){
-            node.setVisited(false);
+    public static void checkIfCanStop(){
+        for (Hospital hospital : hospitalsList){
+            if (hospital.getFreeBedsAmount() != 0)
+                getNode(hospital.getId()).setCanStop(true);
         }
     }
 
